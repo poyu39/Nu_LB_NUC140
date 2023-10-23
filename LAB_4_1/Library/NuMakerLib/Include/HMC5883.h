@@ -1,0 +1,65 @@
+#ifndef __HMC5883_H__
+#define __HMC5883_H__
+
+#define HMC5883_I2C_SLA          0x3C
+#define HMC5883_I2C_PORT         I2C1
+
+// REGISTERS
+typedef enum
+{
+	HMC5883_MAG_CRA_REG_M             = 0x00,
+	HMC5883_MAG_CRB_REG_M             = 0x01,
+	HMC5883_MAG_MR_REG_M              = 0x02,
+	HMC5883_MAG_OUT_X_H_M             = 0x03,
+	HMC5883_MAG_OUT_X_L_M             = 0x04,
+	HMC5883_MAG_OUT_Z_H_M             = 0x05,
+	HMC5883_MAG_OUT_Z_L_M             = 0x06,
+	HMC5883_MAG_OUT_Y_H_M             = 0x07,
+	HMC5883_MAG_OUT_Y_L_M             = 0x08,
+	HMC5883_MAG_SR_REG_Mg             = 0x09,
+	HMC5883_MAG_IRA_REG_M             = 0x0A,
+	HMC5883_MAG_IRB_REG_M             = 0x0B,
+	HMC5883_MAG_IRC_REG_M             = 0x0C,
+	HMC5883_MAG_TEMP_OUT_H_M          = 0x31,
+	HMC5883_MAG_TEMP_OUT_L_M          = 0x32
+} hmc5883MagRegisters_t;
+
+// MAGNETOMETER GAIN SETTINGS
+typedef enum
+{
+	HMC5883_MAGGAIN_1_3                        = 0x20,  // +/- 1.3
+	HMC5883_MAGGAIN_1_9                        = 0x40,  // +/- 1.9
+	HMC5883_MAGGAIN_2_5                        = 0x60,  // +/- 2.5
+	HMC5883_MAGGAIN_4_0                        = 0x80,  // +/- 4.0
+	HMC5883_MAGGAIN_4_7                        = 0xA0,  // +/- 4.7
+	HMC5883_MAGGAIN_5_6                        = 0xC0,  // +/- 5.6
+	HMC5883_MAGGAIN_8_1                        = 0xE0   // +/- 8.1
+ } hmc5883MagGain;	
+
+// INTERNAL MAGNETOMETER DATA TYPE
+typedef struct hmc5883MagData_s
+{
+	float x;
+	float y;
+	float z;
+	float orientation;
+} hmc5883MagData;
+
+ //   CHIP ID
+#define HMC5883_ID                     (0b11010100)
+
+// sensor driver for the magnetometer
+
+extern void init_HMC5883(void);
+extern void HMC5883_setMagGain(hmc5883MagGain gain);
+extern bool HMC5883_getEvent(sensors_event_t*);
+extern void HMC5883_getSensor(sensor_t*);
+
+void HMC5883MagGain(uint8_t _magGain);
+void HMC5883MagData(uint8_t _magData);     // Last read magnetometer data will be available here
+int32_t _sensorID;
+    
+void    HMC5883_write(uint8_t reg, uint8_t value);
+uint8_t HMC5883_read(uint8_t reg);
+
+#endif
