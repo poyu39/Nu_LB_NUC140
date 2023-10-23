@@ -1,0 +1,17 @@
+--cpu Cortex-M0
+".\obj\system_nuc100series.o"
+".\obj\startup_nuc100series.o"
+".\obj\clk.o"
+".\obj\spi.o"
+".\obj\uart.o"
+".\obj\gpio.o"
+".\obj\sys.o"
+".\obj\lcd.o"
+".\obj\main.o"
+".\obj\sys_init.o"
+".\obj\scankey.o"
+".\obj\seven_segment.o"
+--library_type=microlib --ro-base 0x00000000 --entry 0x00000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict
+--map --first='startup_NUC100Series.o(RESET)' --datacompressor=off --info=inline --entry Reset_Handler --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\lst\Sample.map" -o .\obj\Sample.axf
