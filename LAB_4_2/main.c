@@ -148,7 +148,7 @@ int main(void) {
 					line_index = 0;
 				}
 
-				if (keyin == 9) {
+				if (keyin == 9 && line_index < 4) {
 					if (input_pwd == rand_pwd && input_pwd != 0) {
 						strcat(line_text, "PASS");
 						led_F2R();
