@@ -21946,7 +21946,7 @@ extern __declspec(__nothrow) void _membitmovewb(void *  , const void *  , int  ,
 
 
 
-int show_7seg (int PC_values[], uint8_t index_7seg, int limit_buzzer) {
+int show_7seg(int PC_values[], uint8_t index_7seg, int limit_buzzer) {
 	if (index_7seg == 4) index_7seg = 0;
 	while (PC_values[index_7seg] == 16) {
 		index_7seg++;
@@ -21999,37 +21999,43 @@ void update_result(int result[], int x, int y) {
 	}
 }
 
-void show_lcd(int x, int y, int math_op_index, int result[], char lcd_buffer[3][17]) {
-	int i, j;
-	char line_text[3][17];
+void update_lcd_buffer(int x, int y, int math_op_index, int result[], char lcd_buffer[3][17]) {
+	int i;
 	for (i = 0; i < 3; i++) {
 		int index = math_op_index + i;
 		if (index < 5) {
-			sprintf(line_text[i], "%2d %c %2d = %4d   ", x, "+-*/%^^"[index], y, result[index]);
+			sprintf(lcd_buffer[i], "%2d %c %2d = %4d  ", x, "+-*/%^^"[index], y, result[index]);
 		} else if (index == 5) {
-			sprintf(line_text[i], "%2d %c %2d = %4d   ", x, "+-*/%^^"[index], 2, result[index]);
+			sprintf(lcd_buffer[i], "%2d %c %2d = %4d  ", x, "+-*/%^^"[index], 2, result[index]);
 		} else if (index == 6) {
-			sprintf(line_text[i], "%2d %c %2d = %4d   ", y, "+-*/%^^"[index], 2, result[index]);
+			sprintf(lcd_buffer[i], "%2d %c %2d = %4d  ", y, "+-*/%^^"[index], 2, result[index]);
 		} else if (index == 7) {
-			sprintf(line_text[i], "END             ");
-		}
-	}
-	for (i = 0; i < 3; i++) {
-		for (j = 0; j < 16; j++) {
-			if (lcd_buffer[i][j] != line_text[i][j]) {
-				lcd_buffer[i][j] = line_text[i][j];
-				printC(j * 8, (i + 1) * 16, lcd_buffer[i][j]);
-			}
+			sprintf(lcd_buffer[i], "END             ");
 		}
 	}
 }
 
+void show_lcd(int lcd_x, int lcd_y, char lcd_buffer[3][17], char lcd_now[3][17]) {
+	
+	
+	
+	
+	
+	
+	
+	if (lcd_buffer[lcd_y][lcd_x] != lcd_now[lcd_y][lcd_x]) {
+		lcd_now[lcd_y][lcd_x] = lcd_buffer[lcd_y][lcd_x];
+		printC(lcd_x * 8, (lcd_y + 1) * 16, lcd_now[lcd_y][lcd_x]);
+	}
+}
+
 int main(void) {
-	uint8_t keyin=0, isPressed=1, index_7seg=0;
+	uint8_t keyin=0, isPressed=1, index_7seg=0, lcd_x=0, lcd_y, update_lcd=0;
 	int x=0, y=0, temp_x, math_op_index=0, limit_buzzer=0;
 	int PC_values[4] = {16, 16, 16, 16};
 	int result[7];
 	char lcd_buffer[3][17] = {"                ", "                ", "                "};
+	char lcd_now[3][17] = {"                ", "                ", "                "};
 	SYS_Init();
 	init_LCD();
 	clear_LCD();
@@ -22040,7 +22046,7 @@ int main(void) {
 		keyin = ScanKey();
 		
 		if (keyin != 0) {
-			if (isPressed == 1) goto show_7seg;
+			if (isPressed == 1) goto display;
 			isPressed = 1;
 		}
 		switch (keyin) {
@@ -22092,9 +22098,31 @@ int main(void) {
 		}
 		if (isPressed == 1) {
 			update_7seg(PC_values, x, y);
-			show_lcd(x, y, math_op_index, result, lcd_buffer);
+			update_lcd_buffer(x, y, math_op_index, result, lcd_buffer);
+			update_lcd = 1;
 		}
-		show_7seg:
+		display:
+		if (update_lcd == 1) {
+			
+			
+			
+			
+			
+			show_lcd(lcd_x, lcd_y, lcd_buffer, lcd_now);
+			if (lcd_y < 3) {
+				if (lcd_x < 16) {
+					lcd_x++;
+				} else {
+					lcd_x = 0;
+					lcd_y++;
+				}
+			}
+			if (lcd_y == 3) {
+				lcd_x = 0;
+				lcd_y = 0;
+				update_lcd = 0;
+			}
+		}
 		if (limit_buzzer > 0) (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((11)<<2)))) = 0;
 		if (x != 0 && y != 0)
 			index_7seg = show_7seg(PC_values, index_7seg, limit_buzzer);
