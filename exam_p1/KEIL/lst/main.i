@@ -22685,6 +22685,9 @@ __declspec(__nothrow) long double rintl(long double );
 
 
 
+
+
+
 void init_GPIO(void){
     GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0080)), 0x00001000, 0x1UL);
     GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0080)), 0x00002000, 0x1UL);
@@ -22693,101 +22696,74 @@ void init_GPIO(void){
 	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((12)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((13)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((14)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((15)<<2)))) = 1;
 }
 
-void show_7_seg (int PC7_value, int PC6_value, int PC5_value, int PC4_value, int index_7seg) {
-	switch (index_7seg) {
-	case 0:
-		if (PC7_value != 0) {
-			CloseSevenSegment();
-			if (PC7_value != 8){
-				ShowSevenSegment(3, PC7_value);
-				CLK_SysTickDelay(5000);
-			}
-		}
-		break;
-	case 1:
-		if (PC6_value != 0) {
-			CloseSevenSegment();
-			if (PC6_value != 8) {
-				ShowSevenSegment(2, PC6_value);
-				CLK_SysTickDelay(5000);
-			}
-		}
-	case 2:
-		if (PC5_value != 0) {
-			CloseSevenSegment();
-			if (PC5_value != 8) {
-				ShowSevenSegment(1, PC5_value);
-				CLK_SysTickDelay(5000);
-			}
-		}
-	case 3:
-		if (PC4_value != 0) {
-			CloseSevenSegment();
-			if (PC4_value != 8 || PC4_value != -1) {
-				ShowSevenSegment(0, PC4_value);
-				CLK_SysTickDelay(5000);
-			}
-		}
-		break;
-	default:
-		break;
+int show_7_seg (int PC_values[], int index_7seg) {
+	if (index_7seg == 4) index_7seg = 0;
+	while (PC_values[index_7seg] == 0) {
+		index_7seg++;
+		if (index_7seg == 4) index_7seg = 0;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	if (PC_values[index_7seg] != 0) {
+		CloseSevenSegment();
+		ShowSevenSegment(index_7seg, PC_values[index_7seg]);
+		CLK_SysTickDelay(5000);
+	}
+	index_7seg++;
+	return index_7seg;
 }
 
 int math(int x, int y, int i) {
 	switch (i) {
 	case 0:
 		return x + y;
-		break;
 	case 1:
 		return x - y;
-		break;
 	case 2:
 		return x * y;
-		break;
 	case 3:
 		return x / y;
-		break;
+	case 4:
+		return x % y;
+	case 5:
+		return pow(x, 2);
+	case 6:
+		return pow(x, 2);
 	default:
-		break;
+		return 0;
 	}
 }
 
+void show_lcd(int x, int y, int math_op_index) {
+	int i;
+	print_Line(0, "D1009212");
+	for (i = 0; i < 3; i++) {
+		char line_text[16];
+		int result = 0;
+		int index = (math_op_index + i) % 7;
+		if (index < 5) {
+			result = math(x, y, index % 7);
+			sprintf(line_text, "%d %c %d = %d", x, "+-*/%^^"[index], y, result);
+		} else if (index == 5) {
+			result = math(x, 2, index % 7);
+			sprintf(line_text, "%d %c %d = %d", x, "+-*/%^^"[index], 2, result);
+		} else if (index == 6) {
+			result = math(y, 2, index % 7);
+			sprintf(line_text, "%d %c %d = %d", y, "+-*/%^^"[index], 2, result);
+		}
+		print_Line(1 + i, line_text);
+	}
+}
+
+void update_7seg(int *PC_values, int x, int y) {
+	PC_values[3] = x / 10;
+	PC_values[2] = x % 10;
+	PC_values[1] = y / 10;
+	PC_values[0] = y % 10;
+}
+
 int main(void) {
-	uint8_t keyin = 0;
-	uint8_t isPressed = 1;
-	uint8_t num_ctr = 0;
-	uint8_t index_7seg = 0;
-	int x=0, y=0, i;
-	char math_op[4] = {'+', '-', '*', '/'};
+	uint8_t keyin=0, isPressed=1, index_7seg=0;
+	int x=0, y=0, temp_x, math_op_index=0;
+	int PC_values[4] = {0, 0, 0, 0};
 	SYS_Init();
 	init_LCD();
 	init_GPIO();
@@ -22797,34 +22773,49 @@ int main(void) {
 	while (1) {
 		keyin = ScanKey();
 		if (keyin != 0) {
-			if (isPressed == 0) {
-				if (num_ctr == 0) {
-					x = keyin;
-					num_ctr++;
-					isPressed = 1;
-				} else {
-					y = keyin;
-					num_ctr++;
-					isPressed = 1;
-				}
+			if (isPressed == 1) goto show_7_seg;
+			isPressed = 1;
+			switch (keyin) {
+			case 2:
+				
+				math_op_index = (math_op_index--) % 7;
+				if (math_op_index < 0) math_op_index += 7;
+				break;
+			case 4:
+				
+				temp_x = x;
+				x = (x % 10 * 10) + y / 10;
+				y = (y % 10 * 10) + temp_x / 10;
+				break;
+			case 5:
+				
+				x = rand() % 99 + 1;
+				y = rand() % 99 + 1;
+				break;
+			case 6:
+				
+				temp_x = x;
+				x = (x / 10) + (y % 10 * 10);
+				y = (y / 10) + (temp_x % 10 * 10);
+				break;
+			case 8:
+				
+				math_op_index = (math_op_index++) % 7;
+				break;
+			default:
+				break;
 			}
+			update_7seg(PC_values, x, y);
+			clear_LCD();
+			show_lcd(x, y, math_op_index);
 		} else {
 			isPressed = 0;
 		}
-		if (num_ctr == 2) {
-			clear_LCD();
-			for (i = 0; i < 4; i++) {
-				char line_text[16];
-				sprintf(line_text, "%d %c %d = %d", x, math_op[i], y, math(x, y, i));
-				print_Line(i, line_text);
-			}
-			num_ctr = 0;
+
+		show_7_seg:
+		if (x != 0 && y != 0) {
+			index_7seg = show_7_seg(PC_values, index_7seg);
 		}
-		show_7_seg(x, 0, 0, y, index_7seg);
-		if (index_7seg < 4)
-			index_7seg++;
-		else
-			index_7seg = 0;
 	}
 }
 
