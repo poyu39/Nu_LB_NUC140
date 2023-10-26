@@ -93,32 +93,34 @@ Section Cross References
     lcd.o(i.printS_5x7) refers to strlen.o(.text) for strlen
     lcd.o(i.print_Line) refers to lcd.o(i.printC) for printC
     lcd.o(i.print_Line) refers to strlen.o(.text) for strlen
-    main.o(i.init_GPIO) refers to gpio.o(i.GPIO_SetMode) for GPIO_SetMode
+    main.o(i.CLK_SysTickDelay) refers to system_nuc100series.o(.data) for CyclesPerUs
     main.o(i.main) refers to sys_init.o(i.SYS_Init) for SYS_Init
     main.o(i.main) refers to lcd.o(i.init_LCD) for init_LCD
-    main.o(i.main) refers to main.o(i.init_GPIO) for init_GPIO
     main.o(i.main) refers to lcd.o(i.clear_LCD) for clear_LCD
     main.o(i.main) refers to scankey.o(i.OpenKeyPad) for OpenKeyPad
+    main.o(i.main) refers to lcd.o(i.print_Line) for print_Line
     main.o(i.main) refers to scankey.o(i.ScanKey) for ScanKey
     main.o(i.main) refers to main.o(i.__ARM_common_switch8) for __ARM_common_switch8
     main.o(i.main) refers to idiv.o(.text) for __aeabi_idivmod
+    main.o(i.main) refers to main.o(i.update_result) for update_result
     main.o(i.main) refers to rand.o(.text) for rand
     main.o(i.main) refers to main.o(i.update_7seg) for update_7seg
     main.o(i.main) refers to main.o(i.show_lcd) for show_lcd
-    main.o(i.main) refers to main.o(i.show_7_seg) for show_7_seg
+    main.o(i.main) refers to main.o(i.show_7seg) for show_7seg
+    main.o(i.main) refers to main.o(i.CLK_SysTickDelay) for CLK_SysTickDelay
+    main.o(i.main) refers to main.o(.constdata) for .constdata
     main.o(i.math) refers to main.o(i.__ARM_common_switch8) for __ARM_common_switch8
     main.o(i.math) refers to idiv.o(.text) for __aeabi_idivmod
     main.o(i.math) refers to dflti.o(.text) for __aeabi_i2d
     main.o(i.math) refers to pow.o(i.pow) for pow
     main.o(i.math) refers to dfixi.o(.text) for __aeabi_d2iz
-    main.o(i.show_7_seg) refers to seven_segment.o(i.CloseSevenSegment) for CloseSevenSegment
-    main.o(i.show_7_seg) refers to seven_segment.o(i.ShowSevenSegment) for ShowSevenSegment
-    main.o(i.show_7_seg) refers to system_nuc100series.o(.data) for CyclesPerUs
+    main.o(i.show_7seg) refers to seven_segment.o(i.CloseSevenSegment) for CloseSevenSegment
+    main.o(i.show_7seg) refers to seven_segment.o(i.ShowSevenSegment) for ShowSevenSegment
+    main.o(i.show_7seg) refers to main.o(i.CLK_SysTickDelay) for CLK_SysTickDelay
+    main.o(i.show_lcd) refers to printf6.o(i.__0sprintf$6) for __2sprintf
     main.o(i.show_lcd) refers to lcd.o(i.print_Line) for print_Line
-    main.o(i.show_lcd) refers to idiv.o(.text) for __aeabi_idivmod
-    main.o(i.show_lcd) refers to main.o(i.math) for math
-    main.o(i.show_lcd) refers to printf3.o(i.__0sprintf$3) for __2sprintf
     main.o(i.update_7seg) refers to idiv.o(.text) for __aeabi_idivmod
+    main.o(i.update_result) refers to main.o(i.math) for math
     sys_init.o(i.SYS_Init) refers to clk.o(i.CLK_EnableXtalRC) for CLK_EnableXtalRC
     sys_init.o(i.SYS_Init) refers to clk.o(i.CLK_WaitClockReady) for CLK_WaitClockReady
     sys_init.o(i.SYS_Init) refers to clk.o(i.CLK_SetCoreClock) for CLK_SetCoreClock
@@ -588,35 +590,35 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     RESET                                    0x00000000   Section      192  startup_nuc100series.o(RESET)
-    ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
-    ../clib/microlib/division.c              0x00000000   Number         0  idiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  idiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
     ../clib/microlib/errno.c                 0x00000000   Number         0  errno.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
     ../clib/microlib/printf/stubs.s          0x00000000   Number         0  stubs.o ABSOLUTE
@@ -625,8 +627,8 @@ Image Symbol Table
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
     ../clib/microlib/stdlib/rand.c           0x00000000   Number         0  rand.o ABSOLUTE
     ../clib/microlib/string/strlen.c         0x00000000   Number         0  strlen.o ABSOLUTE
-    ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusesemip.o ABSOLUTE
+    ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
     ../fplib/microlib/fpdiv.c                0x00000000   Number         0  ddiv.o ABSOLUTE
     ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
@@ -639,8 +641,8 @@ Image Symbol Table
     ../mathlib/dunder.c                      0x00000000   Number         0  dunder.o ABSOLUTE
     ../mathlib/fpclassify.c                  0x00000000   Number         0  fpclassify.o ABSOLUTE
     ../mathlib/poly.c                        0x00000000   Number         0  poly.o ABSOLUTE
-    ../mathlib/pow.c                         0x00000000   Number         0  pow_x.o ABSOLUTE
     ../mathlib/pow.c                         0x00000000   Number         0  pow.o ABSOLUTE
+    ../mathlib/pow.c                         0x00000000   Number         0  pow_x.o ABSOLUTE
     ../mathlib/qnan.c                        0x00000000   Number         0  qnan.o ABSOLUTE
     ../mathlib/sqrt.c                        0x00000000   Number         0  sqrt_x.o ABSOLUTE
     ../mathlib/sqrt.c                        0x00000000   Number         0  sqrt.o ABSOLUTE
@@ -690,8 +692,8 @@ Image Symbol Table
     .text                                    0x000001a8   Section        0  dflti.o(.text)
     .text                                    0x000001d0   Section        0  dfixi.o(.text)
     .text                                    0x00000218   Section        0  llushr.o(.text)
-    .text                                    0x0000023a   Section        0  depilogue.o(.text)
     .text                                    0x0000023a   Section        0  iusefp.o(.text)
+    .text                                    0x0000023a   Section        0  depilogue.o(.text)
     .text                                    0x000002f8   Section        0  dadd.o(.text)
     .text                                    0x0000045c   Section        0  dmul.o(.text)
     .text                                    0x0000052c   Section        0  ddiv.o(.text)
@@ -710,59 +712,66 @@ Image Symbol Table
     i.CLK_SetCoreClock                       0x000009bc   Section        0  clk.o(i.CLK_SetCoreClock)
     i.CLK_SetHCLK                            0x00000a34   Section        0  clk.o(i.CLK_SetHCLK)
     i.CLK_SetModuleClock                     0x00000a7c   Section        0  clk.o(i.CLK_SetModuleClock)
-    i.CLK_WaitClockReady                     0x00000b48   Section        0  clk.o(i.CLK_WaitClockReady)
-    i.CloseSevenSegment                      0x00000b74   Section        0  seven_segment.o(i.CloseSevenSegment)
-    i.GPIO_SetMode                           0x00000b88   Section        0  gpio.o(i.GPIO_SetMode)
-    i.OpenKeyPad                             0x00000bb0   Section        0  scankey.o(i.OpenKeyPad)
-    i.SPI_DisableAutoSS                      0x00000bf8   Section        0  spi.o(i.SPI_DisableAutoSS)
-    i.SPI_Open                               0x00000c04   Section        0  spi.o(i.SPI_Open)
-    i.SYS_Init                               0x00000d70   Section        0  sys_init.o(i.SYS_Init)
-    i.ScanKey                                0x00000de4   Section        0  scankey.o(i.ScanKey)
-    i.ShowSevenSegment                       0x00000e70   Section        0  seven_segment.o(i.ShowSevenSegment)
-    i.SystemCoreClockUpdate                  0x00000f24   Section        0  system_nuc100series.o(i.SystemCoreClockUpdate)
-    i.SystemInit                             0x00000fb4   Section        0  system_nuc100series.o(i.SystemInit)
-    i.__0sprintf$3                           0x00000fb8   Section        0  printf3.o(i.__0sprintf$3)
-    i.__ARM_clz                              0x00000fe0   Section        0  depilogue.o(i.__ARM_clz)
-    i.__ARM_common_switch8                   0x0000100e   Section        0  main.o(i.__ARM_common_switch8)
-    i.__ARM_fpclassify                       0x00001028   Section        0  fpclassify.o(i.__ARM_fpclassify)
-    i.__kernel_poly                          0x00001054   Section        0  poly.o(i.__kernel_poly)
-    i.__mathlib_dbl_divzero                  0x00001100   Section        0  dunder.o(i.__mathlib_dbl_divzero)
-    i.__mathlib_dbl_infnan2                  0x00001114   Section        0  dunder.o(i.__mathlib_dbl_infnan2)
-    i.__mathlib_dbl_invalid                  0x0000111c   Section        0  dunder.o(i.__mathlib_dbl_invalid)
-    i.__mathlib_dbl_overflow                 0x0000112c   Section        0  dunder.o(i.__mathlib_dbl_overflow)
-    i.__mathlib_dbl_underflow                0x00001140   Section        0  dunder.o(i.__mathlib_dbl_underflow)
-    i.__scatterload_copy                     0x00001154   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x00001162   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x00001164   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i.__set_errno                            0x00001174   Section        0  errno.o(i.__set_errno)
-    i._printf_core                           0x00001180   Section        0  printf3.o(i._printf_core)
-    _printf_core                             0x00001181   Thumb Code   456  printf3.o(i._printf_core)
-    i._sputc                                 0x0000134c   Section        0  printf3.o(i._sputc)
-    _sputc                                   0x0000134d   Thumb Code    10  printf3.o(i._sputc)
-    i.clear_LCD                              0x00001358   Section        0  lcd.o(i.clear_LCD)
-    i.init_GPIO                              0x000013ac   Section        0  main.o(i.init_GPIO)
-    i.init_LCD                               0x000013f0   Section        0  lcd.o(i.init_LCD)
-    i.init_SPI3                              0x00001418   Section        0  lcd.o(i.init_SPI3)
-    i.lcdSetAddr                             0x0000143c   Section        0  lcd.o(i.lcdSetAddr)
-    i.lcdWriteCommand                        0x000014ac   Section        0  lcd.o(i.lcdWriteCommand)
-    i.lcdWriteData                           0x000014d4   Section        0  lcd.o(i.lcdWriteData)
-    i.main                                   0x00001500   Section        0  main.o(i.main)
-    i.math                                   0x0000160a   Section        0  main.o(i.math)
-    i.pow                                    0x00001650   Section        0  pow.o(i.pow)
-    i.printC                                 0x0000204c   Section        0  lcd.o(i.printC)
-    i.print_Line                             0x000020a8   Section        0  lcd.o(i.print_Line)
-    i.show_7_seg                             0x000020cc   Section        0  main.o(i.show_7_seg)
-    i.show_lcd                               0x00002120   Section        0  main.o(i.show_lcd)
-    i.sqrt                                   0x000021d4   Section        0  sqrt.o(i.sqrt)
-    i.update_7seg                            0x0000221c   Section        0  main.o(i.update_7seg)
-    .constdata                               0x00002240   Section       56  clk.o(.constdata)
-    .constdata                               0x00002278   Section      136  pow.o(.constdata)
-    bp                                       0x00002278   Data          16  pow.o(.constdata)
-    dp_h                                     0x00002288   Data          16  pow.o(.constdata)
-    dp_l                                     0x00002298   Data          16  pow.o(.constdata)
-    L                                        0x000022a8   Data          48  pow.o(.constdata)
-    P                                        0x000022d8   Data          40  pow.o(.constdata)
-    .constdata                               0x00002300   Section        8  qnan.o(.constdata)
+    i.CLK_SysTickDelay                       0x00000b48   Section        0  main.o(i.CLK_SysTickDelay)
+    CLK_SysTickDelay                         0x00000b49   Thumb Code    28  main.o(i.CLK_SysTickDelay)
+    i.CLK_WaitClockReady                     0x00000b6c   Section        0  clk.o(i.CLK_WaitClockReady)
+    i.CloseSevenSegment                      0x00000b98   Section        0  seven_segment.o(i.CloseSevenSegment)
+    i.GPIO_SetMode                           0x00000bac   Section        0  gpio.o(i.GPIO_SetMode)
+    i.OpenKeyPad                             0x00000bd4   Section        0  scankey.o(i.OpenKeyPad)
+    i.SPI_DisableAutoSS                      0x00000c1c   Section        0  spi.o(i.SPI_DisableAutoSS)
+    i.SPI_Open                               0x00000c28   Section        0  spi.o(i.SPI_Open)
+    i.SYS_Init                               0x00000d94   Section        0  sys_init.o(i.SYS_Init)
+    i.ScanKey                                0x00000e08   Section        0  scankey.o(i.ScanKey)
+    i.ShowSevenSegment                       0x00000e94   Section        0  seven_segment.o(i.ShowSevenSegment)
+    i.SystemCoreClockUpdate                  0x00000f48   Section        0  system_nuc100series.o(i.SystemCoreClockUpdate)
+    i.SystemInit                             0x00000fd8   Section        0  system_nuc100series.o(i.SystemInit)
+    i.__0sprintf$6                           0x00000fdc   Section        0  printf6.o(i.__0sprintf$6)
+    i.__ARM_clz                              0x00001004   Section        0  depilogue.o(i.__ARM_clz)
+    i.__ARM_common_switch8                   0x00001032   Section        0  main.o(i.__ARM_common_switch8)
+    i.__ARM_fpclassify                       0x0000104c   Section        0  fpclassify.o(i.__ARM_fpclassify)
+    i.__kernel_poly                          0x00001078   Section        0  poly.o(i.__kernel_poly)
+    i.__mathlib_dbl_divzero                  0x00001124   Section        0  dunder.o(i.__mathlib_dbl_divzero)
+    i.__mathlib_dbl_infnan2                  0x00001138   Section        0  dunder.o(i.__mathlib_dbl_infnan2)
+    i.__mathlib_dbl_invalid                  0x00001140   Section        0  dunder.o(i.__mathlib_dbl_invalid)
+    i.__mathlib_dbl_overflow                 0x00001150   Section        0  dunder.o(i.__mathlib_dbl_overflow)
+    i.__mathlib_dbl_underflow                0x00001164   Section        0  dunder.o(i.__mathlib_dbl_underflow)
+    i.__scatterload_copy                     0x00001178   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x00001186   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x00001188   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.__set_errno                            0x00001198   Section        0  errno.o(i.__set_errno)
+    i._printf_core                           0x000011a4   Section        0  printf6.o(i._printf_core)
+    _printf_core                             0x000011a5   Thumb Code   768  printf6.o(i._printf_core)
+    i._printf_post_padding                   0x000014a8   Section        0  printf6.o(i._printf_post_padding)
+    _printf_post_padding                     0x000014a9   Thumb Code    32  printf6.o(i._printf_post_padding)
+    i._printf_pre_padding                    0x000014c8   Section        0  printf6.o(i._printf_pre_padding)
+    _printf_pre_padding                      0x000014c9   Thumb Code    44  printf6.o(i._printf_pre_padding)
+    i._sputc                                 0x000014f4   Section        0  printf6.o(i._sputc)
+    _sputc                                   0x000014f5   Thumb Code    10  printf6.o(i._sputc)
+    i.clear_LCD                              0x00001500   Section        0  lcd.o(i.clear_LCD)
+    i.init_LCD                               0x00001554   Section        0  lcd.o(i.init_LCD)
+    i.init_SPI3                              0x0000157c   Section        0  lcd.o(i.init_SPI3)
+    i.lcdSetAddr                             0x000015a0   Section        0  lcd.o(i.lcdSetAddr)
+    i.lcdWriteCommand                        0x00001610   Section        0  lcd.o(i.lcdWriteCommand)
+    i.lcdWriteData                           0x00001638   Section        0  lcd.o(i.lcdWriteData)
+    i.main                                   0x00001664   Section        0  main.o(i.main)
+    i.math                                   0x000017f8   Section        0  main.o(i.math)
+    i.pow                                    0x00001844   Section        0  pow.o(i.pow)
+    i.printC                                 0x00002240   Section        0  lcd.o(i.printC)
+    i.print_Line                             0x0000229c   Section        0  lcd.o(i.print_Line)
+    i.show_7seg                              0x000022c0   Section        0  main.o(i.show_7seg)
+    i.show_lcd                               0x0000230c   Section        0  main.o(i.show_lcd)
+    i.sqrt                                   0x000023ac   Section        0  sqrt.o(i.sqrt)
+    i.update_7seg                            0x000023f4   Section        0  main.o(i.update_7seg)
+    i.update_result                          0x00002416   Section        0  main.o(i.update_result)
+    .constdata                               0x00002438   Section       56  clk.o(.constdata)
+    .constdata                               0x00002470   Section       16  main.o(.constdata)
+    .constdata                               0x00002480   Section      136  pow.o(.constdata)
+    bp                                       0x00002480   Data          16  pow.o(.constdata)
+    dp_h                                     0x00002490   Data          16  pow.o(.constdata)
+    dp_l                                     0x000024a0   Data          16  pow.o(.constdata)
+    L                                        0x000024b0   Data          48  pow.o(.constdata)
+    P                                        0x000024e0   Data          40  pow.o(.constdata)
+    .constdata                               0x00002508   Section        8  qnan.o(.constdata)
     .data                                    0x20000000   Section       44  system_nuc100series.o(.data)
     .data                                    0x2000002c   Section     2000  lcd.o(.data)
     Font5x7                                  0x2000002c   Data         480  lcd.o(.data)
@@ -909,52 +918,52 @@ Image Symbol Table
     CLK_SetCoreClock                         0x000009bd   Thumb Code   112  clk.o(i.CLK_SetCoreClock)
     CLK_SetHCLK                              0x00000a35   Thumb Code    66  clk.o(i.CLK_SetHCLK)
     CLK_SetModuleClock                       0x00000a7d   Thumb Code   180  clk.o(i.CLK_SetModuleClock)
-    CLK_WaitClockReady                       0x00000b49   Thumb Code    34  clk.o(i.CLK_WaitClockReady)
-    CloseSevenSegment                        0x00000b75   Thumb Code    14  seven_segment.o(i.CloseSevenSegment)
-    GPIO_SetMode                             0x00000b89   Thumb Code    40  gpio.o(i.GPIO_SetMode)
-    OpenKeyPad                               0x00000bb1   Thumb Code    66  scankey.o(i.OpenKeyPad)
-    SPI_DisableAutoSS                        0x00000bf9   Thumb Code    10  spi.o(i.SPI_DisableAutoSS)
-    SPI_Open                                 0x00000c05   Thumb Code   348  spi.o(i.SPI_Open)
-    SYS_Init                                 0x00000d71   Thumb Code   104  sys_init.o(i.SYS_Init)
-    ScanKey                                  0x00000de5   Thumb Code   136  scankey.o(i.ScanKey)
-    ShowSevenSegment                         0x00000e71   Thumb Code   172  seven_segment.o(i.ShowSevenSegment)
-    SystemCoreClockUpdate                    0x00000f25   Thumb Code   118  system_nuc100series.o(i.SystemCoreClockUpdate)
-    SystemInit                               0x00000fb5   Thumb Code     2  system_nuc100series.o(i.SystemInit)
-    __0sprintf$3                             0x00000fb9   Thumb Code    36  printf3.o(i.__0sprintf$3)
-    __1sprintf$3                             0x00000fb9   Thumb Code     0  printf3.o(i.__0sprintf$3)
-    __2sprintf                               0x00000fb9   Thumb Code     0  printf3.o(i.__0sprintf$3)
-    __ARM_clz                                0x00000fe1   Thumb Code    46  depilogue.o(i.__ARM_clz)
-    __ARM_common_switch8                     0x0000100f   Thumb Code    26  main.o(i.__ARM_common_switch8)
-    __ARM_fpclassify                         0x00001029   Thumb Code    40  fpclassify.o(i.__ARM_fpclassify)
-    __kernel_poly                            0x00001055   Thumb Code   172  poly.o(i.__kernel_poly)
-    __mathlib_dbl_divzero                    0x00001101   Thumb Code    16  dunder.o(i.__mathlib_dbl_divzero)
-    __mathlib_dbl_infnan2                    0x00001115   Thumb Code     8  dunder.o(i.__mathlib_dbl_infnan2)
-    __mathlib_dbl_invalid                    0x0000111d   Thumb Code    16  dunder.o(i.__mathlib_dbl_invalid)
-    __mathlib_dbl_overflow                   0x0000112d   Thumb Code    16  dunder.o(i.__mathlib_dbl_overflow)
-    __mathlib_dbl_underflow                  0x00001141   Thumb Code    14  dunder.o(i.__mathlib_dbl_underflow)
-    __scatterload_copy                       0x00001155   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x00001163   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x00001165   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    __set_errno                              0x00001175   Thumb Code     6  errno.o(i.__set_errno)
-    clear_LCD                                0x00001359   Thumb Code    78  lcd.o(i.clear_LCD)
-    init_GPIO                                0x000013ad   Thumb Code    58  main.o(i.init_GPIO)
-    init_LCD                                 0x000013f1   Thumb Code    38  lcd.o(i.init_LCD)
-    init_SPI3                                0x00001419   Thumb Code    28  lcd.o(i.init_SPI3)
-    lcdSetAddr                               0x0000143d   Thumb Code   106  lcd.o(i.lcdSetAddr)
-    lcdWriteCommand                          0x000014ad   Thumb Code    36  lcd.o(i.lcdWriteCommand)
-    lcdWriteData                             0x000014d5   Thumb Code    40  lcd.o(i.lcdWriteData)
-    main                                     0x00001501   Thumb Code   266  main.o(i.main)
-    math                                     0x0000160b   Thumb Code    70  main.o(i.math)
-    pow                                      0x00001651   Thumb Code  2548  pow.o(i.pow)
-    printC                                   0x0000204d   Thumb Code    88  lcd.o(i.printC)
-    print_Line                               0x000020a9   Thumb Code    36  lcd.o(i.print_Line)
-    show_7_seg                               0x000020cd   Thumb Code    70  main.o(i.show_7_seg)
-    show_lcd                                 0x00002121   Thumb Code   142  main.o(i.show_lcd)
-    sqrt                                     0x000021d5   Thumb Code    66  sqrt.o(i.sqrt)
-    update_7seg                              0x0000221d   Thumb Code    34  main.o(i.update_7seg)
-    __mathlib_zero                           0x00002300   Data           8  qnan.o(.constdata)
-    Region$$Table$$Base                      0x00002308   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00002328   Number         0  anon$$obj.o(Region$$Table)
+    CLK_WaitClockReady                       0x00000b6d   Thumb Code    34  clk.o(i.CLK_WaitClockReady)
+    CloseSevenSegment                        0x00000b99   Thumb Code    14  seven_segment.o(i.CloseSevenSegment)
+    GPIO_SetMode                             0x00000bad   Thumb Code    40  gpio.o(i.GPIO_SetMode)
+    OpenKeyPad                               0x00000bd5   Thumb Code    66  scankey.o(i.OpenKeyPad)
+    SPI_DisableAutoSS                        0x00000c1d   Thumb Code    10  spi.o(i.SPI_DisableAutoSS)
+    SPI_Open                                 0x00000c29   Thumb Code   348  spi.o(i.SPI_Open)
+    SYS_Init                                 0x00000d95   Thumb Code   104  sys_init.o(i.SYS_Init)
+    ScanKey                                  0x00000e09   Thumb Code   136  scankey.o(i.ScanKey)
+    ShowSevenSegment                         0x00000e95   Thumb Code   172  seven_segment.o(i.ShowSevenSegment)
+    SystemCoreClockUpdate                    0x00000f49   Thumb Code   118  system_nuc100series.o(i.SystemCoreClockUpdate)
+    SystemInit                               0x00000fd9   Thumb Code     2  system_nuc100series.o(i.SystemInit)
+    __0sprintf$6                             0x00000fdd   Thumb Code    36  printf6.o(i.__0sprintf$6)
+    __1sprintf$6                             0x00000fdd   Thumb Code     0  printf6.o(i.__0sprintf$6)
+    __2sprintf                               0x00000fdd   Thumb Code     0  printf6.o(i.__0sprintf$6)
+    __ARM_clz                                0x00001005   Thumb Code    46  depilogue.o(i.__ARM_clz)
+    __ARM_common_switch8                     0x00001033   Thumb Code    26  main.o(i.__ARM_common_switch8)
+    __ARM_fpclassify                         0x0000104d   Thumb Code    40  fpclassify.o(i.__ARM_fpclassify)
+    __kernel_poly                            0x00001079   Thumb Code   172  poly.o(i.__kernel_poly)
+    __mathlib_dbl_divzero                    0x00001125   Thumb Code    16  dunder.o(i.__mathlib_dbl_divzero)
+    __mathlib_dbl_infnan2                    0x00001139   Thumb Code     8  dunder.o(i.__mathlib_dbl_infnan2)
+    __mathlib_dbl_invalid                    0x00001141   Thumb Code    16  dunder.o(i.__mathlib_dbl_invalid)
+    __mathlib_dbl_overflow                   0x00001151   Thumb Code    16  dunder.o(i.__mathlib_dbl_overflow)
+    __mathlib_dbl_underflow                  0x00001165   Thumb Code    14  dunder.o(i.__mathlib_dbl_underflow)
+    __scatterload_copy                       0x00001179   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x00001187   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x00001189   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    __set_errno                              0x00001199   Thumb Code     6  errno.o(i.__set_errno)
+    clear_LCD                                0x00001501   Thumb Code    78  lcd.o(i.clear_LCD)
+    init_LCD                                 0x00001555   Thumb Code    38  lcd.o(i.init_LCD)
+    init_SPI3                                0x0000157d   Thumb Code    28  lcd.o(i.init_SPI3)
+    lcdSetAddr                               0x000015a1   Thumb Code   106  lcd.o(i.lcdSetAddr)
+    lcdWriteCommand                          0x00001611   Thumb Code    36  lcd.o(i.lcdWriteCommand)
+    lcdWriteData                             0x00001639   Thumb Code    40  lcd.o(i.lcdWriteData)
+    main                                     0x00001665   Thumb Code   378  main.o(i.main)
+    math                                     0x000017f9   Thumb Code    74  main.o(i.math)
+    pow                                      0x00001845   Thumb Code  2548  pow.o(i.pow)
+    printC                                   0x00002241   Thumb Code    88  lcd.o(i.printC)
+    print_Line                               0x0000229d   Thumb Code    36  lcd.o(i.print_Line)
+    show_7seg                                0x000022c1   Thumb Code    70  main.o(i.show_7seg)
+    show_lcd                                 0x0000230d   Thumb Code   112  main.o(i.show_lcd)
+    sqrt                                     0x000023ad   Thumb Code    66  sqrt.o(i.sqrt)
+    update_7seg                              0x000023f5   Thumb Code    34  main.o(i.update_7seg)
+    update_result                            0x00002417   Thumb Code    32  main.o(i.update_result)
+    __mathlib_zero                           0x00002508   Data           8  qnan.o(.constdata)
+    Region$$Table$$Base                      0x00002510   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00002530   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_nuc100series.o(.data)
     CyclesPerUs                              0x20000004   Data           4  system_nuc100series.o(.data)
     PllClock                                 0x20000008   Data           4  system_nuc100series.o(.data)
@@ -972,42 +981,42 @@ Memory Map of the image
 
   Image Entry point : 0x000000d5
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00002b3c, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00002d44, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00002328, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00002530, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x00000000   0x00000000   0x000000c0   Data   RO          114    RESET               startup_nuc100series.o
-    0x000000c0   0x000000c0   0x00000000   Code   RO         1046  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
-    0x000000c0   0x000000c0   0x00000004   Code   RO         1348    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
-    0x000000c4   0x000000c4   0x00000004   Code   RO         1351    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
-    0x000000c8   0x000000c8   0x00000000   Code   RO         1353    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
-    0x000000c8   0x000000c8   0x00000000   Code   RO         1355    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
-    0x000000c8   0x000000c8   0x00000008   Code   RO         1356    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
-    0x000000d0   0x000000d0   0x00000000   Code   RO         1358    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
-    0x000000d0   0x000000d0   0x00000000   Code   RO         1360    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
-    0x000000d0   0x000000d0   0x00000004   Code   RO         1349    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x000000c0   0x000000c0   0x00000000   Code   RO         1049  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x000000c0   0x000000c0   0x00000004   Code   RO         1351    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x000000c4   0x000000c4   0x00000004   Code   RO         1354    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO         1356    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO         1358    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x000000c8   0x000000c8   0x00000008   Code   RO         1359    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO         1361    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO         1363    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x000000d0   0x000000d0   0x00000004   Code   RO         1352    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
     0x000000d4   0x000000d4   0x0000004c   Code   RO          115  * .text               startup_nuc100series.o
-    0x00000120   0x00000120   0x0000002c   Code   RO         1047    .text               mc_p.l(uidiv.o)
-    0x0000014c   0x0000014c   0x00000028   Code   RO         1049    .text               mc_p.l(idiv.o)
-    0x00000174   0x00000174   0x00000024   Code   RO         1051    .text               mc_p.l(rand.o)
-    0x00000198   0x00000198   0x0000000e   Code   RO         1054    .text               mc_p.l(strlen.o)
+    0x00000120   0x00000120   0x0000002c   Code   RO         1050    .text               mc_p.l(uidiv.o)
+    0x0000014c   0x0000014c   0x00000028   Code   RO         1052    .text               mc_p.l(idiv.o)
+    0x00000174   0x00000174   0x00000024   Code   RO         1054    .text               mc_p.l(rand.o)
+    0x00000198   0x00000198   0x0000000e   Code   RO         1057    .text               mc_p.l(strlen.o)
     0x000001a6   0x000001a6   0x00000002   PAD
-    0x000001a8   0x000001a8   0x00000028   Code   RO         1317    .text               mf_p.l(dflti.o)
-    0x000001d0   0x000001d0   0x00000048   Code   RO         1319    .text               mf_p.l(dfixi.o)
-    0x00000218   0x00000218   0x00000022   Code   RO         1367    .text               mc_p.l(llushr.o)
-    0x0000023a   0x0000023a   0x00000000   Code   RO         1376    .text               mc_p.l(iusefp.o)
-    0x0000023a   0x0000023a   0x000000be   Code   RO         1377    .text               mf_p.l(depilogue.o)
-    0x000002f8   0x000002f8   0x00000164   Code   RO         1381    .text               mf_p.l(dadd.o)
-    0x0000045c   0x0000045c   0x000000d0   Code   RO         1383    .text               mf_p.l(dmul.o)
-    0x0000052c   0x0000052c   0x000000f0   Code   RO         1385    .text               mf_p.l(ddiv.o)
-    0x0000061c   0x0000061c   0x0000002c   Code   RO         1387    .text               mf_p.l(dscalb.o)
-    0x00000648   0x00000648   0x00000028   Code   RO         1391    .text               mf_p.l(cdrcmple.o)
-    0x00000670   0x00000670   0x00000024   Code   RO         1393    .text               mc_p.l(init.o)
-    0x00000694   0x00000694   0x00000020   Code   RO         1396    .text               mc_p.l(llshl.o)
-    0x000006b4   0x000006b4   0x00000026   Code   RO         1398    .text               mc_p.l(llsshr.o)
-    0x000006da   0x000006da   0x000000a2   Code   RO         1401    .text               mf_p.l(dsqrt.o)
+    0x000001a8   0x000001a8   0x00000028   Code   RO         1320    .text               mf_p.l(dflti.o)
+    0x000001d0   0x000001d0   0x00000048   Code   RO         1322    .text               mf_p.l(dfixi.o)
+    0x00000218   0x00000218   0x00000022   Code   RO         1370    .text               mc_p.l(llushr.o)
+    0x0000023a   0x0000023a   0x00000000   Code   RO         1379    .text               mc_p.l(iusefp.o)
+    0x0000023a   0x0000023a   0x000000be   Code   RO         1380    .text               mf_p.l(depilogue.o)
+    0x000002f8   0x000002f8   0x00000164   Code   RO         1384    .text               mf_p.l(dadd.o)
+    0x0000045c   0x0000045c   0x000000d0   Code   RO         1386    .text               mf_p.l(dmul.o)
+    0x0000052c   0x0000052c   0x000000f0   Code   RO         1388    .text               mf_p.l(ddiv.o)
+    0x0000061c   0x0000061c   0x0000002c   Code   RO         1390    .text               mf_p.l(dscalb.o)
+    0x00000648   0x00000648   0x00000028   Code   RO         1394    .text               mf_p.l(cdrcmple.o)
+    0x00000670   0x00000670   0x00000024   Code   RO         1396    .text               mc_p.l(init.o)
+    0x00000694   0x00000694   0x00000020   Code   RO         1399    .text               mc_p.l(llshl.o)
+    0x000006b4   0x000006b4   0x00000026   Code   RO         1401    .text               mc_p.l(llsshr.o)
+    0x000006da   0x000006da   0x000000a2   Code   RO         1404    .text               mf_p.l(dsqrt.o)
     0x0000077c   0x0000077c   0x00000030   Code   RO          127    i.CLK_EnableModuleClock  clk.o
     0x000007ac   0x000007ac   0x00000198   Code   RO          128    i.CLK_EnablePLL     clk.o
     0x00000944   0x00000944   0x00000010   Code   RO          130    i.CLK_EnableXtalRC  clk.o
@@ -1016,78 +1025,83 @@ Memory Map of the image
     0x000009bc   0x000009bc   0x00000078   Code   RO          138    i.CLK_SetCoreClock  clk.o
     0x00000a34   0x00000a34   0x00000048   Code   RO          139    i.CLK_SetHCLK       clk.o
     0x00000a7c   0x00000a7c   0x000000cc   Code   RO          140    i.CLK_SetModuleClock  clk.o
-    0x00000b48   0x00000b48   0x0000002c   Code   RO          142    i.CLK_WaitClockReady  clk.o
-    0x00000b74   0x00000b74   0x00000014   Code   RO         1003    i.CloseSevenSegment  seven_segment.o
-    0x00000b88   0x00000b88   0x00000028   Code   RO          515    i.GPIO_SetMode      gpio.o
-    0x00000bb0   0x00000bb0   0x00000048   Code   RO          968    i.OpenKeyPad        scankey.o
-    0x00000bf8   0x00000bf8   0x0000000a   Code   RO          277    i.SPI_DisableAutoSS  spi.o
-    0x00000c02   0x00000c02   0x00000002   PAD
-    0x00000c04   0x00000c04   0x0000016c   Code   RO          286    i.SPI_Open          spi.o
-    0x00000d70   0x00000d70   0x00000074   Code   RO          942    i.SYS_Init          sys_init.o
-    0x00000de4   0x00000de4   0x0000008c   Code   RO          969    i.ScanKey           scankey.o
-    0x00000e70   0x00000e70   0x000000b4   Code   RO         1005    i.ShowSevenSegment  seven_segment.o
-    0x00000f24   0x00000f24   0x00000090   Code   RO            3    i.SystemCoreClockUpdate  system_nuc100series.o
-    0x00000fb4   0x00000fb4   0x00000002   Code   RO            4    i.SystemInit        system_nuc100series.o
-    0x00000fb6   0x00000fb6   0x00000002   PAD
-    0x00000fb8   0x00000fb8   0x00000028   Code   RO         1147    i.__0sprintf$3      mc_p.l(printf3.o)
-    0x00000fe0   0x00000fe0   0x0000002e   Code   RO         1379    i.__ARM_clz         mf_p.l(depilogue.o)
-    0x0000100e   0x0000100e   0x0000001a   Code   RO          870    i.__ARM_common_switch8  main.o
-    0x00001028   0x00001028   0x0000002c   Code   RO         1335    i.__ARM_fpclassify  m_ps.l(fpclassify.o)
-    0x00001054   0x00001054   0x000000ac   Code   RO         1337    i.__kernel_poly     m_ps.l(poly.o)
-    0x00001100   0x00001100   0x00000014   Code   RO         1321    i.__mathlib_dbl_divzero  m_ps.l(dunder.o)
-    0x00001114   0x00001114   0x00000008   Code   RO         1323    i.__mathlib_dbl_infnan2  m_ps.l(dunder.o)
-    0x0000111c   0x0000111c   0x00000010   Code   RO         1324    i.__mathlib_dbl_invalid  m_ps.l(dunder.o)
-    0x0000112c   0x0000112c   0x00000014   Code   RO         1325    i.__mathlib_dbl_overflow  m_ps.l(dunder.o)
-    0x00001140   0x00001140   0x00000014   Code   RO         1327    i.__mathlib_dbl_underflow  m_ps.l(dunder.o)
-    0x00001154   0x00001154   0x0000000e   Code   RO         1407    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x00001162   0x00001162   0x00000002   Code   RO         1408    i.__scatterload_null  mc_p.l(handlers.o)
-    0x00001164   0x00001164   0x0000000e   Code   RO         1409    i.__scatterload_zeroinit  mc_p.l(handlers.o)
-    0x00001172   0x00001172   0x00000002   PAD
-    0x00001174   0x00001174   0x0000000c   Code   RO         1371    i.__set_errno       mc_p.l(errno.o)
-    0x00001180   0x00001180   0x000001cc   Code   RO         1152    i._printf_core      mc_p.l(printf3.o)
-    0x0000134c   0x0000134c   0x0000000a   Code   RO         1154    i._sputc            mc_p.l(printf3.o)
-    0x00001356   0x00001356   0x00000002   PAD
-    0x00001358   0x00001358   0x00000054   Code   RO          622    i.clear_LCD         lcd.o
-    0x000013ac   0x000013ac   0x00000044   Code   RO          825    i.init_GPIO         main.o
-    0x000013f0   0x000013f0   0x00000026   Code   RO          641    i.init_LCD          lcd.o
-    0x00001416   0x00001416   0x00000002   PAD
-    0x00001418   0x00001418   0x00000024   Code   RO          642    i.init_SPI3         lcd.o
-    0x0000143c   0x0000143c   0x00000070   Code   RO          643    i.lcdSetAddr        lcd.o
-    0x000014ac   0x000014ac   0x00000028   Code   RO          644    i.lcdWriteCommand   lcd.o
-    0x000014d4   0x000014d4   0x0000002c   Code   RO          645    i.lcdWriteData      lcd.o
-    0x00001500   0x00001500   0x0000010a   Code   RO          826    i.main              main.o
-    0x0000160a   0x0000160a   0x00000046   Code   RO          827    i.math              main.o
-    0x00001650   0x00001650   0x000009fc   Code   RO         1037    i.pow               m_ps.l(pow.o)
-    0x0000204c   0x0000204c   0x0000005c   Code   RO          646    i.printC            lcd.o
-    0x000020a8   0x000020a8   0x00000024   Code   RO          650    i.print_Line        lcd.o
-    0x000020cc   0x000020cc   0x00000054   Code   RO          828    i.show_7_seg        main.o
-    0x00002120   0x00002120   0x000000b4   Code   RO          829    i.show_lcd          main.o
-    0x000021d4   0x000021d4   0x00000048   Code   RO         1341    i.sqrt              m_ps.l(sqrt.o)
-    0x0000221c   0x0000221c   0x00000022   Code   RO          830    i.update_7seg       main.o
-    0x0000223e   0x0000223e   0x00000002   PAD
-    0x00002240   0x00002240   0x00000038   Data   RO          143    .constdata          clk.o
-    0x00002278   0x00002278   0x00000088   Data   RO         1038    .constdata          m_ps.l(pow.o)
-    0x00002300   0x00002300   0x00000008   Data   RO         1339    .constdata          m_ps.l(qnan.o)
-    0x00002308   0x00002308   0x00000020   Data   RO         1405    Region$$Table       anon$$obj.o
+    0x00000b48   0x00000b48   0x00000024   Code   RO          825    i.CLK_SysTickDelay  main.o
+    0x00000b6c   0x00000b6c   0x0000002c   Code   RO          142    i.CLK_WaitClockReady  clk.o
+    0x00000b98   0x00000b98   0x00000014   Code   RO         1006    i.CloseSevenSegment  seven_segment.o
+    0x00000bac   0x00000bac   0x00000028   Code   RO          515    i.GPIO_SetMode      gpio.o
+    0x00000bd4   0x00000bd4   0x00000048   Code   RO          971    i.OpenKeyPad        scankey.o
+    0x00000c1c   0x00000c1c   0x0000000a   Code   RO          277    i.SPI_DisableAutoSS  spi.o
+    0x00000c26   0x00000c26   0x00000002   PAD
+    0x00000c28   0x00000c28   0x0000016c   Code   RO          286    i.SPI_Open          spi.o
+    0x00000d94   0x00000d94   0x00000074   Code   RO          945    i.SYS_Init          sys_init.o
+    0x00000e08   0x00000e08   0x0000008c   Code   RO          972    i.ScanKey           scankey.o
+    0x00000e94   0x00000e94   0x000000b4   Code   RO         1008    i.ShowSevenSegment  seven_segment.o
+    0x00000f48   0x00000f48   0x00000090   Code   RO            3    i.SystemCoreClockUpdate  system_nuc100series.o
+    0x00000fd8   0x00000fd8   0x00000002   Code   RO            4    i.SystemInit        system_nuc100series.o
+    0x00000fda   0x00000fda   0x00000002   PAD
+    0x00000fdc   0x00000fdc   0x00000028   Code   RO         1216    i.__0sprintf$6      mc_p.l(printf6.o)
+    0x00001004   0x00001004   0x0000002e   Code   RO         1382    i.__ARM_clz         mf_p.l(depilogue.o)
+    0x00001032   0x00001032   0x0000001a   Code   RO          875    i.__ARM_common_switch8  main.o
+    0x0000104c   0x0000104c   0x0000002c   Code   RO         1338    i.__ARM_fpclassify  m_ps.l(fpclassify.o)
+    0x00001078   0x00001078   0x000000ac   Code   RO         1340    i.__kernel_poly     m_ps.l(poly.o)
+    0x00001124   0x00001124   0x00000014   Code   RO         1324    i.__mathlib_dbl_divzero  m_ps.l(dunder.o)
+    0x00001138   0x00001138   0x00000008   Code   RO         1326    i.__mathlib_dbl_infnan2  m_ps.l(dunder.o)
+    0x00001140   0x00001140   0x00000010   Code   RO         1327    i.__mathlib_dbl_invalid  m_ps.l(dunder.o)
+    0x00001150   0x00001150   0x00000014   Code   RO         1328    i.__mathlib_dbl_overflow  m_ps.l(dunder.o)
+    0x00001164   0x00001164   0x00000014   Code   RO         1330    i.__mathlib_dbl_underflow  m_ps.l(dunder.o)
+    0x00001178   0x00001178   0x0000000e   Code   RO         1410    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x00001186   0x00001186   0x00000002   Code   RO         1411    i.__scatterload_null  mc_p.l(handlers.o)
+    0x00001188   0x00001188   0x0000000e   Code   RO         1412    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x00001196   0x00001196   0x00000002   PAD
+    0x00001198   0x00001198   0x0000000c   Code   RO         1374    i.__set_errno       mc_p.l(errno.o)
+    0x000011a4   0x000011a4   0x00000304   Code   RO         1221    i._printf_core      mc_p.l(printf6.o)
+    0x000014a8   0x000014a8   0x00000020   Code   RO         1222    i._printf_post_padding  mc_p.l(printf6.o)
+    0x000014c8   0x000014c8   0x0000002c   Code   RO         1223    i._printf_pre_padding  mc_p.l(printf6.o)
+    0x000014f4   0x000014f4   0x0000000a   Code   RO         1225    i._sputc            mc_p.l(printf6.o)
+    0x000014fe   0x000014fe   0x00000002   PAD
+    0x00001500   0x00001500   0x00000054   Code   RO          622    i.clear_LCD         lcd.o
+    0x00001554   0x00001554   0x00000026   Code   RO          641    i.init_LCD          lcd.o
+    0x0000157a   0x0000157a   0x00000002   PAD
+    0x0000157c   0x0000157c   0x00000024   Code   RO          642    i.init_SPI3         lcd.o
+    0x000015a0   0x000015a0   0x00000070   Code   RO          643    i.lcdSetAddr        lcd.o
+    0x00001610   0x00001610   0x00000028   Code   RO          644    i.lcdWriteCommand   lcd.o
+    0x00001638   0x00001638   0x0000002c   Code   RO          645    i.lcdWriteData      lcd.o
+    0x00001664   0x00001664   0x00000194   Code   RO          826    i.main              main.o
+    0x000017f8   0x000017f8   0x0000004a   Code   RO          827    i.math              main.o
+    0x00001842   0x00001842   0x00000002   PAD
+    0x00001844   0x00001844   0x000009fc   Code   RO         1040    i.pow               m_ps.l(pow.o)
+    0x00002240   0x00002240   0x0000005c   Code   RO          646    i.printC            lcd.o
+    0x0000229c   0x0000229c   0x00000024   Code   RO          650    i.print_Line        lcd.o
+    0x000022c0   0x000022c0   0x0000004c   Code   RO          828    i.show_7seg         main.o
+    0x0000230c   0x0000230c   0x000000a0   Code   RO          829    i.show_lcd          main.o
+    0x000023ac   0x000023ac   0x00000048   Code   RO         1344    i.sqrt              m_ps.l(sqrt.o)
+    0x000023f4   0x000023f4   0x00000022   Code   RO          830    i.update_7seg       main.o
+    0x00002416   0x00002416   0x00000020   Code   RO          831    i.update_result     main.o
+    0x00002436   0x00002436   0x00000002   PAD
+    0x00002438   0x00002438   0x00000038   Data   RO          143    .constdata          clk.o
+    0x00002470   0x00002470   0x00000010   Data   RO          832    .constdata          main.o
+    0x00002480   0x00002480   0x00000088   Data   RO         1041    .constdata          m_ps.l(pow.o)
+    0x00002508   0x00002508   0x00000008   Data   RO         1342    .constdata          m_ps.l(qnan.o)
+    0x00002510   0x00002510   0x00000020   Data   RO         1408    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00002328, Size: 0x00000814, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00002530, Size: 0x00000814, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x00002328   0x0000002c   Data   RW            5    .data               system_nuc100series.o
-    0x2000002c   0x00002354   0x000007d0   Data   RW          652    .data               lcd.o
-    0x200007fc   0x00002b24   0x00000010   Data   RW         1006    .data               seven_segment.o
-    0x2000080c   0x00002b34   0x00000004   Data   RW         1052    .data               mc_p.l(rand.o)
-    0x20000810   0x00002b38   0x00000004   Data   RW         1372    .data               mc_p.l(errno.o)
+    0x20000000   0x00002530   0x0000002c   Data   RW            5    .data               system_nuc100series.o
+    0x2000002c   0x0000255c   0x000007d0   Data   RW          652    .data               lcd.o
+    0x200007fc   0x00002d2c   0x00000010   Data   RW         1009    .data               seven_segment.o
+    0x2000080c   0x00002d3c   0x00000004   Data   RW         1055    .data               mc_p.l(rand.o)
+    0x20000810   0x00002d40   0x00000004   Data   RW         1375    .data               mc_p.l(errno.o)
 
 
-    Execution Region ER_ZI (Exec base: 0x20000814, Load base: 0x00002b3c, Size: 0x00000804, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000814, Load base: 0x00002d44, Size: 0x00000804, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000814        -       0x00000400   Zero   RW          651    .bss                lcd.o
-    0x20000c14   0x00002b3c   0x00000004   PAD
+    0x20000c14   0x00002d44   0x00000004   PAD
     0x20000c18        -       0x00000400   Zero   RW          112    STACK               startup_nuc100series.o
 
 
@@ -1098,21 +1112,21 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       928        126         56          0          0       6608   clk.o
+       928        126         56          0          0       6616   clk.o
         40          0          0          0          0       1007   gpio.o
-       482         32          0       2000       1024       6028   lcd.o
-       728         82          0          0          0      23476   main.o
+       482         32          0       2000       1024       6040   lcd.o
+       842        110         16          0          0       5723   main.o
        212         10          0          0          0       1299   scankey.o
-       200         34          0         16          0       2473   seven_segment.o
-       462         34          0          0          0       2939   spi.o
+       200         34          0         16          0       2481   seven_segment.o
+       462         34          0          0          0       2947   spi.o
         76         32        192          0       1024        732   startup_nuc100series.o
-       116         12          0          0          0      35047   sys_init.o
-       146         26          0         44          0     118055   system_nuc100series.o
+       116         12          0          0          0      35051   sys_init.o
+       146         26          0         44          0     118059   system_nuc100series.o
 
     ----------------------------------------------------------------------
-      3398        388        280       2060       2052     197664   Object Totals
+      3514        416        296       2060       2052     179955   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-         8          0          0          0          4          0   (incl. Padding)
+        10          0          0          0          4          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1140,7 +1154,7 @@ Image component sizes
         32          0          0          0          0         68   llshl.o
         38          0          0          0          0         68   llsshr.o
         34          0          0          0          0         68   llushr.o
-       510          8          0          0          0        228   printf3.o
+       898          8          0          0          0        384   printf6.o
         36         12          0          4          0        120   rand.o
         14          0          0          0          0         60   strlen.o
         44          0          0          0          0         72   uidiv.o
@@ -1155,7 +1169,7 @@ Image component sizes
        162          0          0          0          0         80   dsqrt.o
 
     ----------------------------------------------------------------------
-      5178        296        144          8          0       2564   Library Totals
+      5566        296        144          8          0       2720   Library Totals
          6          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
@@ -1163,11 +1177,11 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
 
       2928        220        144          0          0        792   m_ps.l
-       846         42          0          8          0        884   mc_p.l
+      1234         42          0          8          0       1040   mc_p.l
       1398         34          0          0          0        888   mf_p.l
 
     ----------------------------------------------------------------------
-      5178        296        144          8          0       2564   Library Totals
+      5566        296        144          8          0       2720   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -1176,15 +1190,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      8576        684        424       2068       2052     197688   Grand Totals
-      8576        684        424       2068       2052     197688   ELF Image Totals
-      8576        684        424       2068          0          0   ROM Totals
+      9080        712        440       2068       2052     180003   Grand Totals
+      9080        712        440       2068       2052     180003   ELF Image Totals
+      9080        712        440       2068          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 9000 (   8.79kB)
+    Total RO  Size (Code + RO Data)                 9520 (   9.30kB)
     Total RW  Size (RW Data + ZI Data)              4120 (   4.02kB)
-    Total ROM Size (Code + RO Data + RW Data)      11068 (  10.81kB)
+    Total ROM Size (Code + RO Data + RW Data)      11588 (  11.32kB)
 
 ==============================================================================
 
