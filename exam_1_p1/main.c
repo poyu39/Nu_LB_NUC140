@@ -6,7 +6,6 @@
 #include "LCD.h"
 #include "Scankey.h"
 #include "Seven_Segment.h"
-#include <string.h>
 
 #define DELAY_7SEG 5000
 #define DELAY_BUZZER 1500
@@ -85,13 +84,6 @@ void update_lcd_buffer(int x, int y, int math_op_index, int result[], char lcd_b
 }
 
 void show_lcd(int lcd_x, int lcd_y, char lcd_buffer[3][17], char lcd_now[3][17]) {
-	// int i;
-	// for (i = 0; i < 16; i++) {
-	// 	if (lcd_buffer[lcd_line_index][i] != lcd_now[lcd_line_index][i]) {
-	// 		lcd_now[lcd_line_index][i] = lcd_buffer[lcd_line_index][i];
-	// 		printC(i * 8, (lcd_line_index + 1) * 16, lcd_now[lcd_line_index][i]);
-	// 	}
-	// }
 	if (lcd_buffer[lcd_y][lcd_x] != lcd_now[lcd_y][lcd_x]) {
 		lcd_now[lcd_y][lcd_x] = lcd_buffer[lcd_y][lcd_x];
 		printC(lcd_x * 8, (lcd_y + 1) * 16, lcd_now[lcd_y][lcd_x]);
@@ -171,12 +163,7 @@ int main(void) {
 			update_lcd = 1;
 		}
 		display:
-		if (update_lcd == 1) {
-			// for (lcd_line_index = 0; lcd_line_index < 3; lcd_line_index++) {
-			// 	print_Line(lcd_line_index + 1, lcd_buffer[lcd_line_index]);
-			// 	show_lcd(lcd_buffer, lcd_now, lcd_line_index);
-			// }
-			// update_lcd = 0;
+		if (update_lcd == 1 && x != 0 && y != 0) {
 			show_lcd(lcd_x, lcd_y, lcd_buffer, lcd_now);
 			if (lcd_y < 3) {
 				if (lcd_x < 16) {
