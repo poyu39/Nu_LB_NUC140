@@ -1,8 +1,3 @@
-//
-// LCD_keypad : 3x3 keypad input and display on LCD
-//
-// EVB : Nu-LB-NUC140
-// MCU : NUC140VE3CN  (LQPF-100)
 #include <stdio.h>
 #include "NUC100Series.h"
 #include "MCU_init.h"
@@ -10,8 +5,6 @@
 #include "LCD.h"
 #include "Scankey.h"
 #include "Seven_Segment.h"
-#include <stdlib.h>
-#include <string.h>
 #include <math.h>
 
 #define DELAY_7SEG 5000
@@ -19,15 +12,7 @@
 #define NID "D1009212"
 #define MATH_SYMBOLS "+-*/%^^"
 
-void init_GPIO(void){
-    GPIO_SetMode(PC, BIT12, GPIO_MODE_OUTPUT);
-    GPIO_SetMode(PC, BIT13, GPIO_MODE_OUTPUT);
-    GPIO_SetMode(PC, BIT14, GPIO_MODE_OUTPUT);
-    GPIO_SetMode(PC, BIT15, GPIO_MODE_OUTPUT);
-	PC12 = 1; PC13 = 1; PC14 = 1; PC15 = 1;
-}
-
-int show_7_seg (int PC_values[], int index_7seg) {
+int show_7seg (int PC_values[], int index_7seg) {
 	if (index_7seg == 4) index_7seg = 0;
 	while (PC_values[index_7seg] == 0) {
 		index_7seg++;
@@ -105,7 +90,7 @@ int main(void) {
 		keyin = ScanKey();
 		if (keyin != 0) {
 			// 用 goto 節省每次迴圈執行
-			if (isPressed == 1) goto show_7_seg;
+			if (isPressed == 1) goto show_7seg;
 			isPressed = 1;
 			switch (keyin) {
 			case 2:
@@ -143,9 +128,9 @@ int main(void) {
 		} else {
 			isPressed = 0;
 		}
-		show_7_seg:
+		show_7seg:
 		if (x != 0 && y != 0) {
-			index_7seg = show_7_seg(PC_values, index_7seg);
+			index_7seg = show_7seg(PC_values, index_7seg);
 		}
 	}
 }
