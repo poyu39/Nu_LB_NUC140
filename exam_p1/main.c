@@ -14,7 +14,7 @@
 
 int show_7seg (int PC_values[], int index_7seg) {
 	if (index_7seg == 4) index_7seg = 0;
-	while (PC_values[index_7seg] == 0) {
+	while (PC_values[index_7seg] == 16) {
 		index_7seg++;
 		if (index_7seg == 4) index_7seg = 0;
 	}
@@ -79,7 +79,7 @@ void update_7seg(int *PC_values, int x, int y) {
 int main(void) {
 	uint8_t keyin=0, isPressed=1, index_7seg=0;
 	int x=0, y=0, temp_x, math_op_index=0;
-	int PC_values[4] = {0, 0, 0, 0};
+	int PC_values[4] = {16, 16, 16, 16};
 	SYS_Init();
 	init_LCD();
 	init_GPIO();
