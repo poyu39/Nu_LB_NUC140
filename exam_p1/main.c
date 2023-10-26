@@ -6,10 +6,12 @@
 #include "LCD.h"
 #include "Scankey.h"
 #include "Seven_Segment.h"
+#include <string.h>
 
 #define DELAY_7SEG 5000
 #define DELAY_BUZZER 1500
 
+#define LCD_SPACE "                " // 16 空白
 #define NID "D1009212"
 #define MATH_SYMBOLS "+-*/%^^"
 
@@ -66,21 +68,28 @@ void update_result(int result[], int x, int y) {
 	}
 }
 
-void show_lcd(int x, int y, int math_op_index, int result[]) {
-	int i;
+void show_lcd(int x, int y, int math_op_index, int result[], char lcd_buffer[3][17]) {
+	int i, j;
+	char line_text[3][17];
 	for (i = 0; i < 3; i++) {
-		char line_text[16];
 		int index = math_op_index + i;
 		if (index < 5) {
-			sprintf(line_text, "%2d %c %2d = %4d  ", x, MATH_SYMBOLS[index], y, result[index]);
+			sprintf(line_text[i], "%2d %c %2d = %4d   ", x, MATH_SYMBOLS[index], y, result[index]);
 		} else if (index == 5) {
-			sprintf(line_text, "%2d %c %2d = %4d  ", x, MATH_SYMBOLS[index], 2, result[index]);
+			sprintf(line_text[i], "%2d %c %2d = %4d   ", x, MATH_SYMBOLS[index], 2, result[index]);
 		} else if (index == 6) {
-			sprintf(line_text, "%2d %c %2d = %4d  ", y, MATH_SYMBOLS[index], 2, result[index]);
+			sprintf(line_text[i], "%2d %c %2d = %4d   ", y, MATH_SYMBOLS[index], 2, result[index]);
 		} else if (index == 7) {
-			sprintf(line_text, "END             ");
+			sprintf(line_text[i], "END             ");
 		}
-		print_Line(1 + i, line_text);
+	}
+	for (i = 0; i < 3; i++) {
+		for (j = 0; j < 16; j++) {
+			if (lcd_buffer[i][j] != line_text[i][j]) {
+				lcd_buffer[i][j] = line_text[i][j];
+				printC(j * 8, (i + 1) * 16, lcd_buffer[i][j]);
+			}
+		}
 	}
 }
 
@@ -89,6 +98,7 @@ int main(void) {
 	int x=0, y=0, temp_x, math_op_index=0, limit_buzzer=0;
 	int PC_values[4] = {16, 16, 16, 16};
 	int result[7];
+	char lcd_buffer[3][17] = {LCD_SPACE, LCD_SPACE, LCD_SPACE};
 	SYS_Init();
 	init_LCD();
 	clear_LCD();
@@ -151,7 +161,7 @@ int main(void) {
 		}
 		if (isPressed == 1) {
 			update_7seg(PC_values, x, y);
-			show_lcd(x, y, math_op_index, result);
+			show_lcd(x, y, math_op_index, result, lcd_buffer);
 		}
 		show_7seg:
 		if (limit_buzzer > 0) PB11 = 0;
