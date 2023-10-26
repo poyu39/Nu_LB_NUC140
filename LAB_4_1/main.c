@@ -1,8 +1,3 @@
-//
-// LCD_keypad : 3x3 keypad input and display on LCD
-//
-// EVB : Nu-LB-NUC140
-// MCU : NUC140VE3CN  (LQPF-100)
 #include <stdio.h>
 #include "NUC100Series.h"
 #include "MCU_init.h"
