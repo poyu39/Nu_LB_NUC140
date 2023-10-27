@@ -176,12 +176,12 @@ int main(void) {
 				update_lcd = 0;
 			}
 		}
-		if (limit_buzzer > 0 && loop_count % BUZZER_UPDATE_TICK == 0) PB11 = 0;
 		if (x != 0 && y != 0 && loop_count % SEVEN_SEG_UPDATE_TICK == 0) {
 			show_seven_seg(PC_values, index_seven_seg, limit_buzzer);
 			index_seven_seg++;
 			if (index_seven_seg == 4) index_seven_seg = 0;
 		}
+		if (limit_buzzer > 0 && loop_count % BUZZER_UPDATE_TICK == 0) PB11 = 0;
 		if (limit_buzzer > 0 && loop_count % BUZZER_UPDATE_TICK * 2 == 0) {
 			PB11 = 1;
 			limit_buzzer--;
