@@ -7,8 +7,10 @@
 #include "Scankey.h"
 #include "Seven_Segment.h"
 
-#define DELAY_7SEG 5000
-#define DELAY_BUZZER 1500
+// DEFINE
+#define BUZZER_UPDATE_TICK  1		// 蜂鳴器更新頻率 1ms
+#define SEVEN_SEG_UPDATE_TCIK 5		// 七段顯示器更新頻率 5ms
+#define TICK_PER_MS 1000			// 迴圈速度 1ms
 
 #define LCD_SPACE "                " // 16 空白
 #define NID "D1009212"
@@ -23,11 +25,6 @@ int show_7seg(int PC_values[], uint8_t index_7seg, int limit_buzzer) {
 	if (PC_values[index_7seg] != 0) {
 		CloseSevenSegment();
 		ShowSevenSegment(index_7seg, PC_values[index_7seg]);
-		if (limit_buzzer == 0) {
-			CLK_SysTickDelay(DELAY_7SEG);
-		} else {
-			CLK_SysTickDelay(DELAY_BUZZER);
-		}
 	}
 	index_7seg++;
 	return index_7seg;
@@ -98,6 +95,8 @@ int main(void) {
 	int result[7];
 	char lcd_buffer[3][17] = {LCD_SPACE, LCD_SPACE, LCD_SPACE};
 	char lcd_now[3][17] = {LCD_SPACE, LCD_SPACE, LCD_SPACE};
+	int loop_count = 0;
+
 	SYS_Init();
 	init_LCD();
 	clear_LCD();
@@ -180,15 +179,16 @@ int main(void) {
 				update_lcd = 0;
 			}
 		}
-		if (limit_buzzer > 0) PB11 = 0;
+		if (limit_buzzer > 0 && loop_count % 2 == 0) PB11 = 0;
 		if (x != 0 && y != 0)
 			index_7seg = show_7seg(PC_values, index_7seg, limit_buzzer);
-		if (limit_buzzer > 0) {
+		if (limit_buzzer > 0 && loop_count % 4 == 0) {
 			PB11 = 1;
-			CLK_SysTickDelay(DELAY_BUZZER * 2);
-			CLK_SysTickDelay(DELAY_7SEG - DELAY_BUZZER * 3);
 			limit_buzzer--;
 		}
+		if ((loop_count + 1)> INT32_MAX) loop_count = 0;
+		loop_count++;
+		CLK_SysTickDelay(TICK_PER_MS);
 	}
 }
 

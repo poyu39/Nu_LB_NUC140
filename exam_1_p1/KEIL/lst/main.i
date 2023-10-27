@@ -21523,6 +21523,8 @@ extern void CloseSevenSegment(void);
 
 
 
+
+
 int show_7seg(int PC_values[], uint8_t index_7seg, int limit_buzzer) {
 	if (index_7seg == 4) index_7seg = 0;
 	while (PC_values[index_7seg] == 16) {
@@ -21532,11 +21534,6 @@ int show_7seg(int PC_values[], uint8_t index_7seg, int limit_buzzer) {
 	if (PC_values[index_7seg] != 0) {
 		CloseSevenSegment();
 		ShowSevenSegment(index_7seg, PC_values[index_7seg]);
-		if (limit_buzzer == 0) {
-			CLK_SysTickDelay(5000);
-		} else {
-			CLK_SysTickDelay(1500);
-		}
 	}
 	index_7seg++;
 	return index_7seg;
@@ -21607,6 +21604,8 @@ int main(void) {
 	int result[7];
 	char lcd_buffer[3][17] = {"                ", "                ", "                "};
 	char lcd_now[3][17] = {"                ", "                ", "                "};
+	int loop_count = 0;
+
 	SYS_Init();
 	init_LCD();
 	clear_LCD();
@@ -21689,15 +21688,16 @@ int main(void) {
 				update_lcd = 0;
 			}
 		}
-		if (limit_buzzer > 0) (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((11)<<2)))) = 0;
+		if (limit_buzzer > 0 && loop_count % 2 == 0) (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((11)<<2)))) = 0;
 		if (x != 0 && y != 0)
 			index_7seg = show_7seg(PC_values, index_7seg, limit_buzzer);
-		if (limit_buzzer > 0) {
+		if (limit_buzzer > 0 && loop_count % 4 == 0) {
 			(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((11)<<2)))) = 1;
-			CLK_SysTickDelay(1500 * 2);
-			CLK_SysTickDelay(5000 - 1500 * 3);
 			limit_buzzer--;
 		}
+		if ((loop_count + 1)> 2147483647) loop_count = 0;
+		loop_count++;
+		CLK_SysTickDelay(1000);
 	}
 }
 
