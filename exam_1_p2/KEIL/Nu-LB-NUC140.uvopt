@@ -22,7 +22,7 @@
   </DaveTm>
 
   <Target>
-    <TargetName>LAB_4_1</TargetName>
+    <TargetName>EXAM_1_P2</TargetName>
     <ToolsetNumber>0x4</ToolsetNumber>
     <ToolsetName>ARM-ADS</ToolsetName>
     <TargetOption>

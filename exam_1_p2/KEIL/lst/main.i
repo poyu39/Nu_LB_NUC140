@@ -1,9 +1,4 @@
 #line 1 "..\\main.c"
-
-
-
-
-
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdio.h"
  
  
@@ -903,7 +898,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
  
 
-#line 7 "..\\main.c"
+#line 2 "..\\main.c"
 #line 1 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
  
 
@@ -20325,7 +20320,7 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
 
-#line 8 "..\\main.c"
+#line 3 "..\\main.c"
 #line 1 "..\\MCU_init.h"
 
 
@@ -20333,7 +20328,7 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
 
-#line 9 "..\\main.c"
+#line 4 "..\\main.c"
 #line 1 "..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
 
 
@@ -20703,7 +20698,7 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 extern void SYS_Init(void);
 
-#line 10 "..\\main.c"
+#line 5 "..\\main.c"
 #line 1 "..\\Library\\Nu-LB-NUC140\\Include\\LCD.h"
  
 
@@ -20747,7 +20742,7 @@ extern void draw_Pixel(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor)
 extern void draw_LCD(unsigned char *buffer);
 
 
-#line 11 "..\\main.c"
+#line 6 "..\\main.c"
 #line 1 "..\\Library\\Nu-LB-NUC140\\Include\\Scankey.h"
 
 
@@ -20758,7 +20753,7 @@ uint8_t ScanKey(void);
 
 
 
-#line 12 "..\\main.c"
+#line 7 "..\\main.c"
 #line 1 "..\\Library\\Nu-LB-NUC140\\Include\\Seven_Segment.h"
 
 
@@ -20766,1168 +20761,7 @@ uint8_t ScanKey(void);
 extern void OpenSevenSegment(void);
 extern void ShowSevenSegment(uint8_t no, uint8_t number);
 extern void CloseSevenSegment(void);
-#line 13 "..\\main.c"
-#line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
- 
- 
- 
-
-
-
-
- 
- 
-
-
-
- 
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
- 
-
-
-
-
-
-
-
-
-#line 54 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
-
-
-  
-
-
-
-    typedef unsigned int size_t;    
-#line 70 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
-
-
-
-
-
-
-    
-
-
-
-    typedef unsigned short wchar_t;  
-#line 91 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
-
-typedef struct div_t { int quot, rem; } div_t;
-    
-typedef struct ldiv_t { long int quot, rem; } ldiv_t;
-    
-
-typedef struct lldiv_t { long long quot, rem; } lldiv_t;
-    
-
-
-#line 112 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
-   
-
-
-
- 
-
-   
-
-
-
-
- 
-#line 131 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
-   
-
-
- 
-extern __declspec(__nothrow) int __aeabi_MB_CUR_MAX(void);
-
-   
-
-
-
-
- 
-
-   
-
-
-
-
- 
-
-
-
-
-extern __declspec(__nothrow) double atof(const char *  ) __attribute__((__nonnull__(1)));
-   
-
-
-
- 
-extern __declspec(__nothrow) int atoi(const char *  ) __attribute__((__nonnull__(1)));
-   
-
-
-
- 
-extern __declspec(__nothrow) long int atol(const char *  ) __attribute__((__nonnull__(1)));
-   
-
-
-
- 
-
-extern __declspec(__nothrow) long long atoll(const char *  ) __attribute__((__nonnull__(1)));
-   
-
-
-
- 
-
-
-extern __declspec(__nothrow) double strtod(const char * __restrict  , char ** __restrict  ) __attribute__((__nonnull__(1)));
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) float strtof(const char * __restrict  , char ** __restrict  ) __attribute__((__nonnull__(1)));
-extern __declspec(__nothrow) long double strtold(const char * __restrict  , char ** __restrict  ) __attribute__((__nonnull__(1)));
-   
-
- 
-
-extern __declspec(__nothrow) long int strtol(const char * __restrict  ,
-                        char ** __restrict  , int  ) __attribute__((__nonnull__(1)));
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) unsigned long int strtoul(const char * __restrict  ,
-                                       char ** __restrict  , int  ) __attribute__((__nonnull__(1)));
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
- 
-extern __declspec(__nothrow) long long strtoll(const char * __restrict  ,
-                                  char ** __restrict  , int  )
-                          __attribute__((__nonnull__(1)));
-   
-
-
-
-
- 
-extern __declspec(__nothrow) unsigned long long strtoull(const char * __restrict  ,
-                                            char ** __restrict  , int  )
-                                   __attribute__((__nonnull__(1)));
-   
-
-
-
- 
-
-extern __declspec(__nothrow) int rand(void);
-   
-
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) void srand(unsigned int  );
-   
-
-
-
-
-
-
- 
-
-struct _rand_state { int __x[57]; };
-extern __declspec(__nothrow) int _rand_r(struct _rand_state *);
-extern __declspec(__nothrow) void _srand_r(struct _rand_state *, unsigned int);
-struct _ANSI_rand_state { int __x[1]; };
-extern __declspec(__nothrow) int _ANSI_rand_r(struct _ANSI_rand_state *);
-extern __declspec(__nothrow) void _ANSI_srand_r(struct _ANSI_rand_state *, unsigned int);
-   
-
-
- 
-
-extern __declspec(__nothrow) void *calloc(size_t  , size_t  );
-   
-
-
-
- 
-extern __declspec(__nothrow) void free(void *  );
-   
-
-
-
-
-
- 
-extern __declspec(__nothrow) void *malloc(size_t  );
-   
-
-
-
- 
-extern __declspec(__nothrow) void *realloc(void *  , size_t  );
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) int posix_memalign(void **  , size_t  , size_t  );
-   
-
-
-
-
-
-
-
-
-
- 
-
-typedef int (*__heapprt)(void *, char const *, ...);
-extern __declspec(__nothrow) void __heapstats(int (*  )(void *  ,
-                                           char const *  , ...),
-                        void *  ) __attribute__((__nonnull__(1)));
-   
-
-
-
-
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) int __heapvalid(int (*  )(void *  ,
-                                           char const *  , ...),
-                       void *  , int  ) __attribute__((__nonnull__(1)));
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) __declspec(__noreturn) void abort(void);
-   
-
-
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) int atexit(void (*  )(void)) __attribute__((__nonnull__(1)));
-   
-
-
-
-
- 
-#line 436 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
-
-
-extern __declspec(__nothrow) __declspec(__noreturn) void exit(int  );
-   
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) __declspec(__noreturn) void _Exit(int  );
-   
-
-
-
-
-
-
-
-      
-
-extern __declspec(__nothrow) char *getenv(const char *  ) __attribute__((__nonnull__(1)));
-   
-
-
-
-
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) int  system(const char *  );
-   
-
-
-
-
-
-
-
-
-
- 
-
-extern  void *bsearch(const void *  , const void *  ,
-              size_t  , size_t  ,
-              int (*  )(const void *, const void *)) __attribute__((__nonnull__(1,2,5)));
-   
-
-
-
-
-
-
-
-
-
-
-
-
- 
-#line 524 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
-
-
-extern  void qsort(void *  , size_t  , size_t  ,
-           int (*  )(const void *, const void *)) __attribute__((__nonnull__(1,4)));
-   
-
-
-
-
-
-
-
-
-
- 
-
-#line 553 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
-
-extern __declspec(__nothrow) __attribute__((const)) int abs(int  );
-   
-
-
-
- 
-
-extern __declspec(__nothrow) __attribute__((const)) div_t div(int  , int  );
-   
-
-
-
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) __attribute__((const)) long int labs(long int  );
-   
-
-
-
- 
-
-
-
-
-extern __declspec(__nothrow) __attribute__((const)) ldiv_t ldiv(long int  , long int  );
-   
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-extern __declspec(__nothrow) __attribute__((const)) long long llabs(long long  );
-   
-
-
-
- 
-
-
-
-
-extern __declspec(__nothrow) __attribute__((const)) lldiv_t lldiv(long long  , long long  );
-   
-
-
-
-
-
-
-
-
-
-
-
- 
-#line 634 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
-
-
-
-
- 
-typedef struct __sdiv32by16 { int quot, rem; } __sdiv32by16;
-typedef struct __udiv32by16 { unsigned int quot, rem; } __udiv32by16;
-    
-typedef struct __sdiv64by32 { int rem, quot; } __sdiv64by32;
-
-__value_in_regs extern __declspec(__nothrow) __attribute__((const)) __sdiv32by16 __rt_sdiv32by16(
-     int  ,
-     short int  );
-   
-
- 
-__value_in_regs extern __declspec(__nothrow) __attribute__((const)) __udiv32by16 __rt_udiv32by16(
-     unsigned int  ,
-     unsigned short  );
-   
-
- 
-__value_in_regs extern __declspec(__nothrow) __attribute__((const)) __sdiv64by32 __rt_sdiv64by32(
-     int  , unsigned int  ,
-     int  );
-   
-
- 
-
-
-
-
- 
-extern __declspec(__nothrow) unsigned int __fp_status(unsigned int  , unsigned int  );
-   
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) int mblen(const char *  , size_t  );
-   
-
-
-
-
-
-
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) int mbtowc(wchar_t * __restrict  ,
-                   const char * __restrict  , size_t  );
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) int wctomb(char *  , wchar_t  );
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
- 
-extern __declspec(__nothrow) size_t mbstowcs(wchar_t * __restrict  ,
-                      const char * __restrict  , size_t  ) __attribute__((__nonnull__(2)));
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) size_t wcstombs(char * __restrict  ,
-                      const wchar_t * __restrict  , size_t  ) __attribute__((__nonnull__(2)));
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) void __use_realtime_heap(void);
-extern __declspec(__nothrow) void __use_realtime_division(void);
-extern __declspec(__nothrow) void __use_two_region_memory(void);
-extern __declspec(__nothrow) void __use_no_heap(void);
-extern __declspec(__nothrow) void __use_no_heap_region(void);
-
-extern __declspec(__nothrow) char const *__C_library_version_string(void);
-extern __declspec(__nothrow) int __C_library_version_number(void);
-
-
-
-
-
-
-
-
-
-
-
-#line 892 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
-
-
-
-
-
- 
-#line 14 "..\\main.c"
-#line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\string.h"
- 
- 
- 
- 
-
-
-
-
- 
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-#line 38 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\string.h"
-
-
-  
-
-
-
-    typedef unsigned int size_t;    
-#line 54 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\string.h"
-
-
-
-
-extern __declspec(__nothrow) void *memcpy(void * __restrict  ,
-                    const void * __restrict  , size_t  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
- 
-extern __declspec(__nothrow) void *memmove(void *  ,
-                    const void *  , size_t  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) char *strcpy(char * __restrict  , const char * __restrict  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
- 
-extern __declspec(__nothrow) char *strncpy(char * __restrict  , const char * __restrict  , size_t  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) char *strcat(char * __restrict  , const char * __restrict  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
- 
-extern __declspec(__nothrow) char *strncat(char * __restrict  , const char * __restrict  , size_t  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
-
-
- 
-
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) int memcmp(const void *  , const void *  , size_t  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
-
- 
-extern __declspec(__nothrow) int strcmp(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
- 
-extern __declspec(__nothrow) int strncmp(const char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) int strcasecmp(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
-
- 
-extern __declspec(__nothrow) int strncasecmp(const char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
-
-
- 
-extern __declspec(__nothrow) int strcoll(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) size_t strxfrm(char * __restrict  , const char * __restrict  , size_t  ) __attribute__((__nonnull__(2)));
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-#line 193 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\string.h"
-extern __declspec(__nothrow) void *memchr(const void *  , int  , size_t  ) __attribute__((__nonnull__(1)));
-
-   
-
-
-
-
-
- 
-
-#line 209 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\string.h"
-extern __declspec(__nothrow) char *strchr(const char *  , int  ) __attribute__((__nonnull__(1)));
-
-   
-
-
-
-
- 
-
-extern __declspec(__nothrow) size_t strcspn(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
- 
-
-#line 232 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\string.h"
-extern __declspec(__nothrow) char *strpbrk(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
-
-   
-
-
-
-
- 
-
-#line 247 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\string.h"
-extern __declspec(__nothrow) char *strrchr(const char *  , int  ) __attribute__((__nonnull__(1)));
-
-   
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) size_t strspn(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
- 
-
-#line 270 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\string.h"
-extern __declspec(__nothrow) char *strstr(const char *  , const char *  ) __attribute__((__nonnull__(1,2)));
-
-   
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) char *strtok(char * __restrict  , const char * __restrict  ) __attribute__((__nonnull__(2)));
-extern __declspec(__nothrow) char *_strtok_r(char *  , const char *  , char **  ) __attribute__((__nonnull__(2,3)));
-
-extern __declspec(__nothrow) char *strtok_r(char *  , const char *  , char **  ) __attribute__((__nonnull__(2,3)));
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) void *memset(void *  , int  , size_t  ) __attribute__((__nonnull__(1)));
-   
-
-
-
- 
-extern __declspec(__nothrow) char *strerror(int  );
-   
-
-
-
-
-
- 
-extern __declspec(__nothrow) size_t strlen(const char *  ) __attribute__((__nonnull__(1)));
-   
-
-
-
- 
-
-extern __declspec(__nothrow) size_t strlcpy(char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) size_t strlcat(char *  , const char *  , size_t  ) __attribute__((__nonnull__(1,2)));
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-extern __declspec(__nothrow) void _membitcpybl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-extern __declspec(__nothrow) void _membitcpybb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-extern __declspec(__nothrow) void _membitcpyhl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-extern __declspec(__nothrow) void _membitcpyhb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-extern __declspec(__nothrow) void _membitcpywl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-extern __declspec(__nothrow) void _membitcpywb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-extern __declspec(__nothrow) void _membitmovebl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-extern __declspec(__nothrow) void _membitmovebb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-extern __declspec(__nothrow) void _membitmovehl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-extern __declspec(__nothrow) void _membitmovehb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-extern __declspec(__nothrow) void _membitmovewl(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-extern __declspec(__nothrow) void _membitmovewb(void *  , const void *  , int  , int  , size_t  ) __attribute__((__nonnull__(1,2)));
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-#line 502 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\string.h"
-
-
-
- 
-
-#line 15 "..\\main.c"
+#line 8 "..\\main.c"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\math.h"
 
 
@@ -22680,90 +21514,128 @@ __declspec(__nothrow) long double rintl(long double );
 
 
  
-#line 16 "..\\main.c"
+#line 9 "..\\main.c"
 
-
-
-
-
-
+#line 17 "..\\main.c"
 
 void init_GPIO(void){
     GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0080)), 0x00001000, 0x1UL);
     GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0080)), 0x00002000, 0x1UL);
     GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0080)), 0x00004000, 0x1UL);
     GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0080)), 0x00008000, 0x1UL);
-	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((12)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((13)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((14)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((15)<<2)))) = 1;
+	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((12)<<2))))=1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((13)<<2))))=1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((14)<<2))))=1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((15)<<2))))=1;
 }
 
-int show_7_seg (int PC_values[], int index_7seg) {
-	if (index_7seg == 4) index_7seg = 0;
-	while (PC_values[index_7seg] == 0) {
-		index_7seg++;
-		if (index_7seg == 4) index_7seg = 0;
+void PC_control(int pin, int v) {
+	switch (pin) {
+	case 12:
+		(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((12)<<2)))) = v;
+		break;
+	case 13:
+		(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((13)<<2)))) = v;
+		break;
+	case 14:
+		(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((14)<<2)))) = v;
+		break;
+	case 15:
+		(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((15)<<2)))) = v;
+		break;
+	default:
+		break;
 	}
-	if (PC_values[index_7seg] != 0) {
+}
+
+void win_led(void) {
+    int i;
+	for (i = 0; i < 4; i++) {
+		PC_control(12 + i, 0);
+		CLK_SysTickDelay(250000);
+		PC_control(12 + i, 1);
+	}
+	for (i = 0; i < 4; i++) {
+		PC_control(15 - i, 0);
+		CLK_SysTickDelay(250000);
+		PC_control(15 - i, 1);
+	}
+}
+
+void update_seven_seg(int seven_seg_buffer[], uint16_t rand_pwd) {
+	seven_seg_buffer[3] = rand_pwd / 1000;
+	seven_seg_buffer[2] = (rand_pwd % 1000) / 100;
+	seven_seg_buffer[1] = (rand_pwd % 100) / 10;
+	seven_seg_buffer[0] = rand_pwd % 10;
+}
+
+int show_seven_seg(int seven_seg_buffer[], int seven_seg_index) {
+	if (seven_seg_index == 4) seven_seg_index = 0;
+	while (seven_seg_buffer[seven_seg_index] == 16) {
+		seven_seg_index++;
+		if (seven_seg_index == 4) seven_seg_index = 0;
+	}
+	if (seven_seg_buffer[seven_seg_index] != 0) {
 		CloseSevenSegment();
-		ShowSevenSegment(index_7seg, PC_values[index_7seg]);
+		ShowSevenSegment(seven_seg_index, seven_seg_buffer[seven_seg_index]);
 		CLK_SysTickDelay(5000);
 	}
-	index_7seg++;
-	return index_7seg;
+	seven_seg_index++;
+	return seven_seg_index;
 }
 
-int math(int x, int y, int i) {
-	switch (i) {
-	case 0:
-		return x + y;
-	case 1:
-		return x - y;
-	case 2:
-		return x * y;
-	case 3:
-		return x / y;
-	case 4:
-		return x % y;
-	case 5:
-		return pow(x, 2);
-	case 6:
-		return pow(x, 2);
-	default:
-		return 0;
-	}
-}
-
-void show_lcd(int x, int y, int math_op_index) {
+int get_ans(int input_pwd, int rand_pwd, int line_index, int win_line_index, char lcd_buffer[3][17]) {
+	uint8_t a=0, b=0;
 	int i;
-	print_Line(0, "D1009212");
-	for (i = 0; i < 3; i++) {
-		char line_text[16];
-		int result = 0;
-		int index = (math_op_index + i) % 7;
-		if (index < 5) {
-			result = math(x, y, index % 7);
-			sprintf(line_text, "%d %c %d = %d", x, "+-*/%^^"[index], y, result);
-		} else if (index == 5) {
-			result = math(x, 2, index % 7);
-			sprintf(line_text, "%d %c %d = %d", x, "+-*/%^^"[index], 2, result);
-		} else if (index == 6) {
-			result = math(y, 2, index % 7);
-			sprintf(line_text, "%d %c %d = %d", y, "+-*/%^^"[index], 2, result);
+	int temp_input_pwd = input_pwd;
+	int temp_rand_pwd = rand_pwd;
+	if (input_pwd == rand_pwd && input_pwd != 0) {
+		sprintf(lcd_buffer[line_index], "%4d%s%4s", input_pwd, "        ", "WIN");
+		win_line_index = line_index;
+	} else if (input_pwd == 0) {
+		sprintf(lcd_buffer[line_index], "%s%4s", "            ", "NULL");
+		win_line_index = -1;
+	} else if (input_pwd != rand_pwd) {
+		for (i = 0; i < 4; i++) {
+			if (temp_input_pwd % 10 == temp_rand_pwd % 10)
+				a++;
+			else
+				b++;
+			temp_input_pwd /= 10;
+			temp_rand_pwd /= 10;
 		}
-		print_Line(1 + i, line_text);
+		sprintf(lcd_buffer[line_index], "%4d%s%dA%dB", input_pwd, "        ", a, b);
+		win_line_index = -1;
+	}
+	return win_line_index;
+}
+
+void show_lcd(int lcd_x, int lcd_y, char lcd_buffer[3][17], char lcd_now[3][17]) {
+	if (lcd_buffer[lcd_y][lcd_x] != lcd_now[lcd_y][lcd_x]) {
+		lcd_now[lcd_y][lcd_x] = lcd_buffer[lcd_y][lcd_x];
+		printC(lcd_x * 8, lcd_y* 16, lcd_now[lcd_y][lcd_x]);
 	}
 }
 
-void update_7seg(int *PC_values, int x, int y) {
-	PC_values[3] = x / 10;
-	PC_values[2] = x % 10;
-	PC_values[1] = y / 10;
-	PC_values[0] = y % 10;
+int get_rand_pwd() {
+	int rand_pwd=0, i;
+	for (i = 0; i < 4; i++)
+		rand_pwd = rand_pwd * 10 + rand() % 6 + 1;
+	return rand_pwd;
 }
 
 int main(void) {
-	uint8_t keyin=0, isPressed=1, index_7seg=0;
-	int x=0, y=0, temp_x, math_op_index=0;
-	int PC_values[4] = {0, 0, 0, 0};
+	uint8_t keyin = 0,
+			isPressed = 1,
+			input_pwd_index = 0,
+			line_index = 0,
+			nid_index = 0,
+			seven_seg_index = 0,
+			win_line_index = 4,
+			update_lcd = 0;
+	uint16_t input_pwd = 0, rand_pwd = 0;
+	char lcd_buffer[3][17] = {"                ", "                ", "                "};
+	char lcd_now[3][17] = {"                ", "                ", "                "};
+	int seven_seg_buffer[4] = {16, 16, 16, 16};
+	int lcd_x = 0, lcd_y = 0;
+
 	SYS_Init();
 	init_LCD();
 	init_GPIO();
@@ -22773,48 +21645,67 @@ int main(void) {
 	while (1) {
 		keyin = ScanKey();
 		if (keyin != 0) {
-			if (isPressed == 1) goto show_7_seg;
+			if (isPressed == 1) goto display;
 			isPressed = 1;
-			switch (keyin) {
-			case 2:
-				
-				math_op_index = (math_op_index--) % 7;
-				if (math_op_index < 0) math_op_index += 7;
-				break;
-			case 4:
-				
-				temp_x = x;
-				x = (x % 10 * 10) + y / 10;
-				y = (y % 10 * 10) + temp_x / 10;
-				break;
-			case 5:
-				
-				x = rand() % 99 + 1;
-				y = rand() % 99 + 1;
-				break;
-			case 6:
-				
-				temp_x = x;
-				x = (x / 10) + (y % 10 * 10);
-				y = (y / 10) + (temp_x % 10 * 10);
-				break;
-			case 8:
-				
-				math_op_index = (math_op_index++) % 7;
-				break;
-			default:
-				break;
-			}
-			update_7seg(PC_values, x, y);
-			clear_LCD();
-			show_lcd(x, y, math_op_index);
-		} else {
-			isPressed = 0;
 		}
-
-		show_7_seg:
-		if (x != 0 && y != 0) {
-			index_7seg = show_7_seg(PC_values, index_7seg);
+		switch (keyin) {
+		case 0:
+			isPressed = 0;
+			break;
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+			if (input_pwd_index < 4) {
+				input_pwd = input_pwd * 10 + keyin;
+				input_pwd_index++;
+				sprintf(lcd_buffer[line_index], "%4d%s", input_pwd, "            ");
+				update_lcd = 1;
+			}
+			break;
+		case 7:
+			
+			rand_pwd = get_rand_pwd();
+			update_seven_seg(seven_seg_buffer, rand_pwd);
+			break;
+		case 8:
+			
+			clear_LCD();
+			input_pwd_index = 0;
+			input_pwd = 0;
+			line_index = 0;
+			break;
+		case 9:
+			
+			win_line_index = get_ans(input_pwd, rand_pwd, line_index, win_line_index, lcd_buffer);
+			line_index++;
+			input_pwd_index = 0;
+			input_pwd = 0;
+			update_lcd = 1;
+			break;
+		default:
+			break;
+		}
+		display:
+		if (rand_pwd != 0)
+			seven_seg_index = show_seven_seg(seven_seg_buffer, seven_seg_index);
+		if (update_lcd == 1) {
+			show_lcd(lcd_x, lcd_y, lcd_buffer, lcd_now);
+			if (lcd_y < 3) {
+				if (lcd_x < 16) {
+					lcd_x++;
+				} else {
+					lcd_x = 0;
+					lcd_y++;
+				}
+			}
+			if (lcd_y == 3) {
+				lcd_x = 0;
+				lcd_y = 0;
+				update_lcd = 0;
+			}
 		}
 	}
 }
