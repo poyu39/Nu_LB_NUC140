@@ -7,6 +7,7 @@
 #include "Seven_Segment.h"
 #include <math.h>
 
+#define NID_UPDARE_TICK 500
 #define LED_UPDATE_TICK 250
 #define SEVEN_SEG_UPDATE_TICK 5
 #define TICK_PER_MS 1000
@@ -198,10 +199,12 @@ int main(void) {
 			win_led(led_index);
 			led_index++;
 			if (led_index == 11) led_index = 0;
-			win_show_nid(win_line_index, nid_index, lcd_buffer);
-			update_lcd = 1;
-			nid_index++;
-			if (nid_index == 8) nid_index = 0;
+			if (loop_count % NID_UPDARE_TICK == 0) {
+				win_show_nid(win_line_index, nid_index, lcd_buffer);
+				update_lcd = 1;
+				nid_index++;
+				if (nid_index == 8) nid_index = 0;
+			}
 		}
 
 		if (rand_pwd != 0 && loop_count % SEVEN_SEG_UPDATE_TICK == 0) {

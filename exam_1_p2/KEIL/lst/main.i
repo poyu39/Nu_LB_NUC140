@@ -21516,9 +21516,7 @@ __declspec(__nothrow) long double rintl(long double );
  
 #line 9 "..\\main.c"
 
-
 #line 17 "..\\main.c"
-
 
 const uint8_t led_mode[11][4] = {
 	{0, 1, 1, 1},
@@ -21534,7 +21532,6 @@ const uint8_t led_mode[11][4] = {
 	{1, 1, 1, 1}
 };
 
-
 void init_GPIO(void){
     GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0080)), 0x00001000, 0x1UL);
     GPIO_SetMode(((GPIO_T *) (((( uint32_t)0x50000000) + 0x4000) + 0x0080)), 0x00002000, 0x1UL);
@@ -21543,9 +21540,6 @@ void init_GPIO(void){
 	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((12)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((13)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((14)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((15)<<2)))) = 1;
 }
 
-
-
-
 void win_led(uint8_t led_index) {
 	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((12)<<2)))) = led_mode[led_index][0];
 	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((13)<<2)))) = led_mode[led_index][1];
@@ -21553,17 +21547,12 @@ void win_led(uint8_t led_index) {
 	(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((15)<<2)))) = led_mode[led_index][3];
 }
 
-
 void update_seven_seg(int seven_seg_buffer[], uint16_t rand_pwd) {
 	seven_seg_buffer[3] = rand_pwd / 1000;
 	seven_seg_buffer[2] = (rand_pwd % 1000) / 100;
 	seven_seg_buffer[1] = (rand_pwd % 100) / 10;
 	seven_seg_buffer[0] = rand_pwd % 10;
 }
-
-
-
-
 
 void show_seven_seg(int seven_seg_buffer[], int seven_seg_index) {
 	if (seven_seg_index == 4) seven_seg_index = 0;
@@ -21576,7 +21565,6 @@ void show_seven_seg(int seven_seg_buffer[], int seven_seg_index) {
 		ShowSevenSegment(seven_seg_index, seven_seg_buffer[seven_seg_index]);
 	}
 }
-
 
 int get_ans(int input_pwd, int rand_pwd, int line_index, int win_line_index, char lcd_buffer[4][17]) {
 	uint8_t a=0, b=0;
@@ -21614,19 +21602,12 @@ void win_show_nid(uint8_t win_line_index, uint8_t nid_index, char lcd_buffer[4][
 	lcd_buffer[win_line_index][14] = "D1009212"[nid_index];
 }
 
-
-
-
-
-
-
 void show_lcd(int lcd_x, int lcd_y, char lcd_buffer[4][17], char lcd_now[4][17]) {
 	if (lcd_buffer[lcd_y][lcd_x] != lcd_now[lcd_y][lcd_x]) {
 		lcd_now[lcd_y][lcd_x] = lcd_buffer[lcd_y][lcd_x];
 		printC(lcd_x * 8, lcd_y* 16, lcd_now[lcd_y][lcd_x]);
 	}
 }
-
 
 int get_rand_pwd() {
 	int rand_pwd=0, i;
@@ -21635,7 +21616,6 @@ int get_rand_pwd() {
 	return rand_pwd;
 }
 
-
 void clear_lcd_buffer(char lcd_buffer[4][17]) {
 	int i;
 	for (i = 0; i < 4; i++) {
@@ -21643,35 +21623,23 @@ void clear_lcd_buffer(char lcd_buffer[4][17]) {
 	}
 }
 
-
 int main(void) {
-	uint8_t keyin = 0,				
-			isPressed = 1,			
-			input_pwd_index = 0,	
-			line_index = 0,			
-			seven_seg_index = 0,	
-			win_line_index = 4,		
-			led_index = 0,			
-			nid_index = 0,			
-			update_lcd = 0;			
-
-	
+	uint8_t keyin = 0,
+			isPressed = 1,
+			input_pwd_index = 0,
+			line_index = 0,
+			seven_seg_index = 0,
+			win_line_index = 4,
+			led_index = 0,
+			nid_index = 0,
+			update_lcd = 0;
 	int input_pwd = 0, rand_pwd = 0;
-
-	
 	char lcd_buffer[4][17] = {"                ", "                ", "                ", "                "};
 	char lcd_now[4][17] = {"                ", "                ", "                ", "                "};
-
-	
 	int seven_seg_buffer[4] = {16, 16, 16, 16};
-
-	
 	int lcd_x = 0, lcd_y = 0;
-
-	
 	int loop_count = 0;
 
-	
 	SYS_Init();
 	init_LCD();
 	init_GPIO();
@@ -21680,14 +21648,10 @@ int main(void) {
 
 	while (1) {
 		keyin = ScanKey();
-		
 		if (keyin != 0) {
-			
-			
 			if (isPressed == 1) goto display;
 			isPressed = 1;
 		}
-		
 		switch (keyin) {
 		case 0:
 			isPressed = 0;
@@ -21698,7 +21662,6 @@ int main(void) {
 		case 4:
 		case 5:
 		case 6:
-			
 			if (input_pwd_index < 4 && line_index < 4) {
 				input_pwd = input_pwd * 10 + keyin;
 				input_pwd_index++;
@@ -21707,12 +21670,10 @@ int main(void) {
 			}
 			break;
 		case 7:
-			
 			rand_pwd = get_rand_pwd();
 			update_seven_seg(seven_seg_buffer, rand_pwd);
 			break;
 		case 8:
-			
 			clear_lcd_buffer(lcd_buffer);
 			update_lcd = 1;
 			input_pwd_index = 0;
@@ -21720,10 +21681,8 @@ int main(void) {
 			line_index = 0;
 			break;
 		case 9:
-			
 			if (line_index < 4) {
 				win_line_index = get_ans(input_pwd, rand_pwd, line_index, win_line_index, lcd_buffer);
-				
 				if (win_line_index == 4) {
 					(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((12)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((13)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((14)<<2)))) = 1; (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(2))) + ((15)<<2)))) = 1;
 					led_index = 0;
@@ -21739,32 +21698,26 @@ int main(void) {
 		}
 
 		display:
-		
 		if (win_line_index != 4 && loop_count % 250 == 0) {
-			
 			win_led(led_index);
 			led_index++;
 			if (led_index == 11) led_index = 0;
-
-			win_show_nid(win_line_index, nid_index, lcd_buffer);
-			update_lcd = 1;
-			nid_index++;
-			if (nid_index == 8) nid_index = 0;
+			if (loop_count % 500 == 0) {
+				win_show_nid(win_line_index, nid_index, lcd_buffer);
+				update_lcd = 1;
+				nid_index++;
+				if (nid_index == 8) nid_index = 0;
+			}
 		}
 
-		
 		if (rand_pwd != 0 && loop_count % 5 == 0) {
-			
 			show_seven_seg(seven_seg_buffer, seven_seg_index);
 			seven_seg_index++;
 			if (seven_seg_index == 4) seven_seg_index = 0;
 		}
 
-		
 		if (update_lcd == 1) {
-			
 			show_lcd(lcd_x, lcd_y, lcd_buffer, lcd_now);
-			
 			if (lcd_y < 4) {
 				if (lcd_x < 16) {
 					lcd_x++;
@@ -21780,7 +21733,6 @@ int main(void) {
 			}
 		}
 
-		
 		if ((loop_count + 1) > 2147483647) loop_count = 0;
 		loop_count++;
 		CLK_SysTickDelay(1000);
