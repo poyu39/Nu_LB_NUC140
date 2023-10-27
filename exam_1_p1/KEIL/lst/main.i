@@ -21524,22 +21524,19 @@ extern void CloseSevenSegment(void);
 
 
 
-
-int show_7seg(int PC_values[], uint8_t index_7seg, int limit_buzzer) {
-	if (index_7seg == 4) index_7seg = 0;
-	while (PC_values[index_7seg] == 16) {
-		index_7seg++;
-		if (index_7seg == 4) index_7seg = 0;
+void show_seven_seg(int PC_values[], uint8_t index_seven_seg, int limit_buzzer) {
+	if (index_seven_seg == 4) index_seven_seg = 0;
+	while (PC_values[index_seven_seg] == 16) {
+		index_seven_seg++;
+		if (index_seven_seg == 4) index_seven_seg = 0;
 	}
-	if (PC_values[index_7seg] != 0) {
+	if (PC_values[index_seven_seg] != 0) {
 		CloseSevenSegment();
-		ShowSevenSegment(index_7seg, PC_values[index_7seg]);
+		ShowSevenSegment(index_seven_seg, PC_values[index_seven_seg]);
 	}
-	index_7seg++;
-	return index_7seg;
 }
 
-void update_7seg(int PC_values[], int x, int y) {
+void update_seven_seg(int PC_values[], int x, int y) {
 	PC_values[3] = x / 10;
 	PC_values[2] = x % 10;
 	PC_values[1] = y / 10;
@@ -21598,8 +21595,8 @@ void show_lcd(int lcd_x, int lcd_y, char lcd_buffer[3][17], char lcd_now[3][17])
 }
 
 int main(void) {
-	uint8_t keyin=0, isPressed=1, index_7seg=0, lcd_x=0, lcd_y, update_lcd=0;
-	int x=0, y=0, temp_x, math_op_index=0, limit_buzzer=0;
+	uint8_t keyin = 0, isPressed = 1, index_seven_seg = 0, lcd_x = 0, lcd_y = 0, update_lcd = 0;
+	int x = 0, y = 0, temp_x, math_op_index = 0, limit_buzzer = 0;
 	int PC_values[4] = {16, 16, 16, 16};
 	int result[7];
 	char lcd_buffer[3][17] = {"                ", "                ", "                "};
@@ -21667,7 +21664,7 @@ int main(void) {
 			break;
 		}
 		if (isPressed == 1) {
-			update_7seg(PC_values, x, y);
+			update_seven_seg(PC_values, x, y);
 			update_lcd_buffer(x, y, math_op_index, result, lcd_buffer);
 			update_lcd = 1;
 		}
@@ -21688,10 +21685,13 @@ int main(void) {
 				update_lcd = 0;
 			}
 		}
-		if (limit_buzzer > 0 && loop_count % 2 == 0) (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((11)<<2)))) = 0;
-		if (x != 0 && y != 0)
-			index_7seg = show_7seg(PC_values, index_7seg, limit_buzzer);
-		if (limit_buzzer > 0 && loop_count % 4 == 0) {
+		if (limit_buzzer > 0 && loop_count % 1 == 0) (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((11)<<2)))) = 0;
+		if (x != 0 && y != 0 && loop_count % 5 == 0) {
+			show_seven_seg(PC_values, index_seven_seg, limit_buzzer);
+			index_seven_seg++;
+			if (index_seven_seg == 4) index_seven_seg = 0;
+		}
+		if (limit_buzzer > 0 && loop_count % 1 * 2 == 0) {
 			(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((11)<<2)))) = 1;
 			limit_buzzer--;
 		}

@@ -7,30 +7,27 @@
 #include "Scankey.h"
 #include "Seven_Segment.h"
 
-// DEFINE
-#define BUZZER_UPDATE_TICK  1		// 蜂鳴器更新頻率 1ms
-#define SEVEN_SEG_UPDATE_TCIK 5		// 七段顯示器更新頻率 5ms
-#define TICK_PER_MS 1000			// 迴圈速度 1ms
+#define BUZZER_UPDATE_TICK 1
+#define SEVEN_SEG_UPDATE_TICK 5
+#define TICK_PER_MS 1000
 
-#define LCD_SPACE "                " // 16 空白
+#define LCD_SPACE "                "
 #define NID "D1009212"
 #define MATH_SYMBOLS "+-*/%^^"
 
-int show_7seg(int PC_values[], uint8_t index_7seg, int limit_buzzer) {
-	if (index_7seg == 4) index_7seg = 0;
-	while (PC_values[index_7seg] == 16) {
-		index_7seg++;
-		if (index_7seg == 4) index_7seg = 0;
+void show_seven_seg(int PC_values[], uint8_t index_seven_seg, int limit_buzzer) {
+	if (index_seven_seg == 4) index_seven_seg = 0;
+	while (PC_values[index_seven_seg] == 16) {
+		index_seven_seg++;
+		if (index_seven_seg == 4) index_seven_seg = 0;
 	}
-	if (PC_values[index_7seg] != 0) {
+	if (PC_values[index_seven_seg] != 0) {
 		CloseSevenSegment();
-		ShowSevenSegment(index_7seg, PC_values[index_7seg]);
+		ShowSevenSegment(index_seven_seg, PC_values[index_seven_seg]);
 	}
-	index_7seg++;
-	return index_7seg;
 }
 
-void update_7seg(int PC_values[], int x, int y) {
+void update_seven_seg(int PC_values[], int x, int y) {
 	PC_values[3] = x / 10;
 	PC_values[2] = x % 10;
 	PC_values[1] = y / 10;
@@ -89,8 +86,8 @@ void show_lcd(int lcd_x, int lcd_y, char lcd_buffer[3][17], char lcd_now[3][17])
 }
 
 int main(void) {
-	uint8_t keyin=0, isPressed=1, index_7seg=0, lcd_x=0, lcd_y, update_lcd=0;
-	int x=0, y=0, temp_x, math_op_index=0, limit_buzzer=0;
+	uint8_t keyin = 0, isPressed = 1, index_seven_seg = 0, lcd_x = 0, lcd_y = 0, update_lcd = 0;
+	int x = 0, y = 0, temp_x, math_op_index = 0, limit_buzzer = 0;
 	int PC_values[4] = {16, 16, 16, 16};
 	int result[7];
 	char lcd_buffer[3][17] = {LCD_SPACE, LCD_SPACE, LCD_SPACE};
@@ -158,7 +155,7 @@ int main(void) {
 			break;
 		}
 		if (isPressed == 1) {
-			update_7seg(PC_values, x, y);
+			update_seven_seg(PC_values, x, y);
 			update_lcd_buffer(x, y, math_op_index, result, lcd_buffer);
 			update_lcd = 1;
 		}
@@ -179,10 +176,13 @@ int main(void) {
 				update_lcd = 0;
 			}
 		}
-		if (limit_buzzer > 0 && loop_count % 2 == 0) PB11 = 0;
-		if (x != 0 && y != 0)
-			index_7seg = show_7seg(PC_values, index_7seg, limit_buzzer);
-		if (limit_buzzer > 0 && loop_count % 4 == 0) {
+		if (limit_buzzer > 0 && loop_count % BUZZER_UPDATE_TICK == 0) PB11 = 0;
+		if (x != 0 && y != 0 && loop_count % SEVEN_SEG_UPDATE_TICK == 0) {
+			show_seven_seg(PC_values, index_seven_seg, limit_buzzer);
+			index_seven_seg++;
+			if (index_seven_seg == 4) index_seven_seg = 0;
+		}
+		if (limit_buzzer > 0 && loop_count % BUZZER_UPDATE_TICK * 2 == 0) {
 			PB11 = 1;
 			limit_buzzer--;
 		}
