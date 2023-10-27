@@ -23,16 +23,17 @@ int show_7seg(int PC_values[], uint8_t index_7seg, int limit_buzzer) {
 	if (PC_values[index_7seg] != 0) {
 		CloseSevenSegment();
 		ShowSevenSegment(index_7seg, PC_values[index_7seg]);
-		if (limit_buzzer == 0)
+		if (limit_buzzer == 0) {
 			CLK_SysTickDelay(DELAY_7SEG);
-		else
-			CLK_SysTickDelay(DELAY_7SEG - DELAY_BUZZER * 3);
+		} else {
+			CLK_SysTickDelay(DELAY_BUZZER);
+		}
 	}
 	index_7seg++;
 	return index_7seg;
 }
 
-void update_7seg(int *PC_values, int x, int y) {
+void update_7seg(int PC_values[], int x, int y) {
 	PC_values[3] = x / 10;
 	PC_values[2] = x % 10;
 	PC_values[1] = y / 10;
@@ -148,7 +149,7 @@ int main(void) {
 		case 8:
 			// 運算式向下滾動
 			if (x == 0 && y == 0) break;
-			math_op_index = math_op_index++;
+			math_op_index++;
 			if (math_op_index > 5) {
 				math_op_index = 5;
 				limit_buzzer = 50;
@@ -185,6 +186,7 @@ int main(void) {
 		if (limit_buzzer > 0) {
 			PB11 = 1;
 			CLK_SysTickDelay(DELAY_BUZZER * 2);
+			CLK_SysTickDelay(DELAY_7SEG - DELAY_BUZZER * 3);
 			limit_buzzer--;
 		}
 	}
