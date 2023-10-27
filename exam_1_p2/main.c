@@ -8,7 +8,7 @@
 #include <math.h>
 
 #define LED_UPDATE_TICK 250
-#define SEVEN_SEG_UPDATE_TCIK 5
+#define SEVEN_SEG_UPDATE_TICK 5
 #define TICK_PER_MS 1000
 #define SPACE_16 "                "
 #define SPACE_12 "            "
@@ -204,7 +204,7 @@ int main(void) {
 			if (nid_index == 8) nid_index = 0;
 		}
 
-		if (rand_pwd != 0 && loop_count % SEVEN_SEG_UPDATE_TCIK == 0) {
+		if (rand_pwd != 0 && loop_count % SEVEN_SEG_UPDATE_TICK == 0) {
 			show_seven_seg(seven_seg_buffer, seven_seg_index);
 			seven_seg_index++;
 			if (seven_seg_index == 4) seven_seg_index = 0;

@@ -9,7 +9,7 @@
 
 // DEFINE
 #define LED_UPDATE_TICK 250			// LED 更新頻率 250ms
-#define SEVEN_SEG_UPDATE_TCIK 5		// 七段顯示器更新頻率 5ms
+#define SEVEN_SEG_UPDATE_TICK 5		// 七段顯示器更新頻率 5ms
 #define TICK_PER_MS 1000			// 迴圈速度 1ms
 #define SPACE_16 "                "	// 16 個空白
 #define SPACE_12 "            "		// 12 個空白
@@ -250,7 +250,7 @@ int main(void) {
 		}
 
 		// 七段顯示器更新
-		if (rand_pwd != 0 && loop_count % SEVEN_SEG_UPDATE_TCIK == 0) {
+		if (rand_pwd != 0 && loop_count % SEVEN_SEG_UPDATE_TICK == 0) {
 			// 用 loop_count mod SEVEN_SEG_UPDATE_TCIK 來控制顯示頻率
 			show_seven_seg(seven_seg_buffer, seven_seg_index);
 			seven_seg_index++;
