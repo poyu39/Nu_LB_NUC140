@@ -1652,7 +1652,7 @@ __declspec(__nothrow) long double rintl(long double );
 
  
 #line 3 "..\\main.c"
-#line 1 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
  
 
 
@@ -1764,7 +1764,7 @@ typedef enum IRQn
    
 
 
-#line 1 "..\\Library\\CMSIS\\Include\\core_cm0.h"
+#line 1 "..\\..\\Library\\CMSIS\\Include\\core_cm0.h"
  
 
 
@@ -1837,7 +1837,7 @@ typedef enum IRQn
 
 
 
-#line 89 "..\\Library\\CMSIS\\Include\\core_cm0.h"
+#line 89 "..\\..\\Library\\CMSIS\\Include\\core_cm0.h"
 
 
  
@@ -1848,7 +1848,7 @@ typedef enum IRQn
 
 
 
-#line 114 "..\\Library\\CMSIS\\Include\\core_cm0.h"
+#line 114 "..\\..\\Library\\CMSIS\\Include\\core_cm0.h"
 
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdint.h"
  
@@ -2106,8 +2106,8 @@ typedef unsigned     long long uintmax_t;
 
 
  
-#line 116 "..\\Library\\CMSIS\\Include\\core_cm0.h"
-#line 1 "..\\Library\\CMSIS\\Include\\core_cmInstr.h"
+#line 116 "..\\..\\Library\\CMSIS\\Include\\core_cm0.h"
+#line 1 "..\\..\\Library\\CMSIS\\Include\\core_cmInstr.h"
  
 
 
@@ -2257,18 +2257,18 @@ __attribute__((section(".revsh_text"))) static __inline __asm int32_t __REVSH(in
 
 
 
-#line 268 "..\\Library\\CMSIS\\Include\\core_cmInstr.h"
+#line 268 "..\\..\\Library\\CMSIS\\Include\\core_cmInstr.h"
 
 
 
-#line 619 "..\\Library\\CMSIS\\Include\\core_cmInstr.h"
-
-   
+#line 619 "..\\..\\Library\\CMSIS\\Include\\core_cmInstr.h"
 
    
 
-#line 117 "..\\Library\\CMSIS\\Include\\core_cm0.h"
-#line 1 "..\\Library\\CMSIS\\Include\\core_cmFunc.h"
+   
+
+#line 117 "..\\..\\Library\\CMSIS\\Include\\core_cm0.h"
+#line 1 "..\\..\\Library\\CMSIS\\Include\\core_cmFunc.h"
  
 
 
@@ -2458,19 +2458,19 @@ static __inline void __set_PRIMASK(uint32_t priMask)
 }
 
 
-#line 260 "..\\Library\\CMSIS\\Include\\core_cmFunc.h"
+#line 260 "..\\..\\Library\\CMSIS\\Include\\core_cmFunc.h"
 
 
-#line 296 "..\\Library\\CMSIS\\Include\\core_cmFunc.h"
+#line 296 "..\\..\\Library\\CMSIS\\Include\\core_cmFunc.h"
 
 
-#line 615 "..\\Library\\CMSIS\\Include\\core_cmFunc.h"
+#line 615 "..\\..\\Library\\CMSIS\\Include\\core_cmFunc.h"
 
  
 
    
 
-#line 118 "..\\Library\\CMSIS\\Include\\core_cm0.h"
+#line 118 "..\\..\\Library\\CMSIS\\Include\\core_cm0.h"
 
 
 
@@ -2480,7 +2480,7 @@ static __inline void __set_PRIMASK(uint32_t priMask)
 
 
  
-#line 143 "..\\Library\\CMSIS\\Include\\core_cm0.h"
+#line 143 "..\\..\\Library\\CMSIS\\Include\\core_cm0.h"
 
  
 
@@ -2490,7 +2490,7 @@ static __inline void __set_PRIMASK(uint32_t priMask)
 
 
  
-#line 159 "..\\Library\\CMSIS\\Include\\core_cm0.h"
+#line 159 "..\\..\\Library\\CMSIS\\Include\\core_cm0.h"
 
  
 
@@ -3003,8 +3003,8 @@ static __inline uint32_t SysTick_Config(uint32_t ticks)
 
    
 
-#line 113 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\system_NUC100Series.h"
+#line 113 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\system_NUC100Series.h"
  
 
 
@@ -3069,7 +3069,7 @@ extern void SystemCoreClockUpdate(void);
 
 
 
-#line 114 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 114 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
 
 
 #pragma anon_unions
@@ -13690,7 +13690,7 @@ typedef struct
 
 
  
-#line 10743 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 10743 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
 
 
 
@@ -13733,7 +13733,7 @@ typedef struct
 
 
 
-#line 10794 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 10794 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
 
 
 
@@ -13759,7 +13759,7 @@ typedef struct
 
 
  
-#line 10826 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 10826 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
 
 
 
@@ -13802,7 +13802,7 @@ typedef struct
 
 
 
-#line 10877 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 10877 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
 
 
 
@@ -13981,7 +13981,7 @@ typedef volatile unsigned long  vu32;
 
 
  
-#line 11087 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 11087 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
 
  
 
@@ -14002,7 +14002,7 @@ typedef volatile unsigned long  vu32;
  
  
  
-#line 1 "..\\Library\\StdDriver\\inc\\SYS.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\SYS.h"
  
 
 
@@ -14038,13 +14038,13 @@ typedef volatile unsigned long  vu32;
  
  
  
-#line 62 "..\\Library\\StdDriver\\inc\\SYS.h"
+#line 62 "..\\..\\Library\\StdDriver\\inc\\SYS.h"
 
 
  
  
  
-#line 73 "..\\Library\\StdDriver\\inc\\SYS.h"
+#line 73 "..\\..\\Library\\StdDriver\\inc\\SYS.h"
 
 
  
@@ -15541,8 +15541,8 @@ void SYS_DisableBOD(void);
 
 
  
-#line 11108 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\ADC.h"
+#line 11108 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\ADC.h"
  
 
 
@@ -15612,7 +15612,7 @@ void SYS_DisableBOD(void);
  
  
  
-#line 76 "..\\Library\\StdDriver\\inc\\ADC.h"
+#line 76 "..\\..\\Library\\StdDriver\\inc\\ADC.h"
 
  
  
@@ -15782,7 +15782,7 @@ void SYS_DisableBOD(void);
 
 
  
-#line 254 "..\\Library\\StdDriver\\inc\\ADC.h"
+#line 254 "..\\..\\Library\\StdDriver\\inc\\ADC.h"
 
 
 
@@ -15807,7 +15807,7 @@ void SYS_DisableBOD(void);
 
 
  
-#line 287 "..\\Library\\StdDriver\\inc\\ADC.h"
+#line 287 "..\\..\\Library\\StdDriver\\inc\\ADC.h"
 
 
 
@@ -15883,8 +15883,8 @@ void ADC_DisableInt(ADC_T *adc, uint32_t u32Mask);
 
 
  
-#line 11109 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\FMC.h"
+#line 11109 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\FMC.h"
  
 
 
@@ -15938,7 +15938,7 @@ void ADC_DisableInt(ADC_T *adc, uint32_t u32Mask);
  
  
  
-#line 61 "..\\Library\\StdDriver\\inc\\FMC.h"
+#line 61 "..\\..\\Library\\StdDriver\\inc\\FMC.h"
 
 
    
@@ -16334,8 +16334,8 @@ extern uint32_t FMC_ReadDataFlashBaseAddr(void);
 
 
 
-#line 11110 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\GPIO.h"
+#line 11110 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\GPIO.h"
  
 
 
@@ -16401,7 +16401,7 @@ extern uint32_t FMC_ReadDataFlashBaseAddr(void);
 
 
 
-#line 82 "..\\Library\\StdDriver\\inc\\GPIO.h"
+#line 82 "..\\..\\Library\\StdDriver\\inc\\GPIO.h"
 
 
 
@@ -16418,7 +16418,7 @@ extern uint32_t FMC_ReadDataFlashBaseAddr(void);
 
 
  
-#line 183 "..\\Library\\StdDriver\\inc\\GPIO.h"
+#line 183 "..\\..\\Library\\StdDriver\\inc\\GPIO.h"
 
 
    
@@ -16677,8 +16677,8 @@ void GPIO_DisableInt(GPIO_T *port, uint32_t u32Pin);
 
 
  
-#line 11111 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\I2C.h"
+#line 11111 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\I2C.h"
  
 
 
@@ -16715,7 +16715,7 @@ void GPIO_DisableInt(GPIO_T *port, uint32_t u32Pin);
  
  
  
-#line 46 "..\\Library\\StdDriver\\inc\\I2C.h"
+#line 46 "..\\..\\Library\\StdDriver\\inc\\I2C.h"
 
 
 
@@ -16872,8 +16872,8 @@ void I2C_SetData(I2C_T *i2c, uint8_t u8Data);
 
    
 
-#line 11112 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\PWM.h"
+#line 11112 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\PWM.h"
  
 
 
@@ -16904,7 +16904,7 @@ void I2C_SetData(I2C_T *i2c, uint8_t u8Data);
 
 
  
-#line 43 "..\\Library\\StdDriver\\inc\\PWM.h"
+#line 43 "..\\..\\Library\\StdDriver\\inc\\PWM.h"
  
  
  
@@ -16932,7 +16932,7 @@ void I2C_SetData(I2C_T *i2c, uint8_t u8Data);
 
 
  
-#line 79 "..\\Library\\StdDriver\\inc\\PWM.h"
+#line 79 "..\\..\\Library\\StdDriver\\inc\\PWM.h"
 
 
 
@@ -17032,7 +17032,7 @@ void I2C_SetData(I2C_T *i2c, uint8_t u8Data);
 
 
  
-#line 186 "..\\Library\\StdDriver\\inc\\PWM.h"
+#line 186 "..\\..\\Library\\StdDriver\\inc\\PWM.h"
 
 
 uint32_t PWM_ConfigCaptureChannel(PWM_T *pwm,
@@ -17084,8 +17084,8 @@ uint32_t PWM_GetPeriodIntFlag(PWM_T *pwm, uint32_t u32ChannelNum);
 
 
  
-#line 11113 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\SPI.h"
+#line 11113 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\SPI.h"
  
 
 
@@ -17131,7 +17131,7 @@ uint32_t PWM_GetPeriodIntFlag(PWM_T *pwm, uint32_t u32ChannelNum);
 
 
 
-#line 52 "..\\Library\\StdDriver\\inc\\SPI.h"
+#line 52 "..\\..\\Library\\StdDriver\\inc\\SPI.h"
 
 
 
@@ -17464,8 +17464,8 @@ uint32_t SPI_GetStatus(SPI_T *spi, uint32_t u32Mask);
 
 
 
-#line 11114 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\CRC.h"
+#line 11114 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\CRC.h"
  
 
 
@@ -17625,8 +17625,8 @@ uint32_t CRC_GetChecksum(void);
 
 
  
-#line 11115 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\TIMER.h"
+#line 11115 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\TIMER.h"
  
 
 
@@ -17658,7 +17658,7 @@ uint32_t CRC_GetChecksum(void);
 
  
 
-#line 43 "..\\Library\\StdDriver\\inc\\TIMER.h"
+#line 43 "..\\..\\Library\\StdDriver\\inc\\TIMER.h"
 
    
 
@@ -18010,8 +18010,8 @@ uint32_t TIMER_GetModuleClock(TIMER_T *timer);
 
 
  
-#line 11116 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\WDT.h"
+#line 11116 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\WDT.h"
  
 
 
@@ -18045,7 +18045,7 @@ uint32_t TIMER_GetModuleClock(TIMER_T *timer);
  
  
  
-#line 42 "..\\Library\\StdDriver\\inc\\WDT.h"
+#line 42 "..\\..\\Library\\StdDriver\\inc\\WDT.h"
 
  
  
@@ -18205,8 +18205,8 @@ void WDT_Open(uint32_t u32TimeoutInterval, uint32_t u32ResetDelay, uint32_t u32E
 
 
  
-#line 11117 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\WWDT.h"
+#line 11117 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\WWDT.h"
  
 
 
@@ -18240,7 +18240,7 @@ void WDT_Open(uint32_t u32TimeoutInterval, uint32_t u32ResetDelay, uint32_t u32E
  
  
  
-#line 50 "..\\Library\\StdDriver\\inc\\WWDT.h"
+#line 50 "..\\..\\Library\\StdDriver\\inc\\WWDT.h"
 
 
 
@@ -18336,8 +18336,8 @@ void WWDT_Open(uint32_t u32PreScale, uint32_t u32CmpValue, uint32_t u32EnableInt
 
 
  
-#line 11118 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\RTC.h"
+#line 11118 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\RTC.h"
  
 
 
@@ -18383,9 +18383,9 @@ void WWDT_Open(uint32_t u32PreScale, uint32_t u32CmpValue, uint32_t u32EnableInt
 
 
 
-#line 54 "..\\Library\\StdDriver\\inc\\RTC.h"
+#line 54 "..\\..\\Library\\StdDriver\\inc\\RTC.h"
 
-#line 62 "..\\Library\\StdDriver\\inc\\RTC.h"
+#line 62 "..\\..\\Library\\StdDriver\\inc\\RTC.h"
 
 
 
@@ -18582,8 +18582,8 @@ void RTC_DisableSnooperDetection(void);
 
 
  
-#line 11119 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\UART.h"
+#line 11119 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\UART.h"
  
 
 
@@ -18629,40 +18629,9 @@ void RTC_DisableSnooperDetection(void);
  
  
 
-#line 53 "..\\Library\\StdDriver\\inc\\UART.h"
+#line 53 "..\\..\\Library\\StdDriver\\inc\\UART.h"
 
-#line 61 "..\\Library\\StdDriver\\inc\\UART.h"
-
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
- 
-
-
-
- 
- 
- 
-
-
+#line 61 "..\\..\\Library\\StdDriver\\inc\\UART.h"
 
  
  
@@ -18672,10 +18641,41 @@ void RTC_DisableSnooperDetection(void);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
  
  
  
-#line 120 "..\\Library\\StdDriver\\inc\\UART.h"
+
+
+
+ 
+ 
+ 
+
+
+
+ 
+ 
+ 
+
+
+
+
+
+ 
+ 
+ 
+#line 120 "..\\..\\Library\\StdDriver\\inc\\UART.h"
 
  
  
@@ -19016,8 +19016,8 @@ uint32_t UART_Write(UART_T* uart, uint8_t *pu8TxBuf, uint32_t u32WriteBytes);
 
  
 
-#line 11120 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\I2S.h"
+#line 11120 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\I2S.h"
  
 
 
@@ -19066,9 +19066,9 @@ uint32_t UART_Write(UART_T* uart, uint8_t *pu8TxBuf, uint32_t u32WriteBytes);
 
 
  
-#line 57 "..\\Library\\StdDriver\\inc\\I2S.h"
+#line 57 "..\\..\\Library\\StdDriver\\inc\\I2S.h"
 
-#line 66 "..\\Library\\StdDriver\\inc\\I2S.h"
+#line 66 "..\\..\\Library\\StdDriver\\inc\\I2S.h"
 
  
 
@@ -19303,8 +19303,8 @@ void I2S_DisableMCLK(I2S_T *i2s);
 
  
 
-#line 11121 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\USBD.h"
+#line 11121 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\USBD.h"
  
 
 
@@ -19359,7 +19359,7 @@ extern const S_USBD_INFO_T gsInfo;
 
 
 
-#line 61 "..\\Library\\StdDriver\\inc\\USBD.h"
+#line 61 "..\\..\\Library\\StdDriver\\inc\\USBD.h"
 
 
  
@@ -19368,32 +19368,18 @@ extern const S_USBD_INFO_T gsInfo;
 
 
  
-#line 80 "..\\Library\\StdDriver\\inc\\USBD.h"
+#line 80 "..\\..\\Library\\StdDriver\\inc\\USBD.h"
 
  
-#line 89 "..\\Library\\StdDriver\\inc\\USBD.h"
-
- 
-
-
-
- 
-#line 101 "..\\Library\\StdDriver\\inc\\USBD.h"
-
- 
-
-
-
-
-
-
+#line 89 "..\\..\\Library\\StdDriver\\inc\\USBD.h"
 
  
 
 
 
  
- 
+#line 101 "..\\..\\Library\\StdDriver\\inc\\USBD.h"
+
  
 
 
@@ -19402,6 +19388,13 @@ extern const S_USBD_INFO_T gsInfo;
 
 
 
+ 
+
+
+
+ 
+ 
+ 
 
 
 
@@ -19409,7 +19402,14 @@ extern const S_USBD_INFO_T gsInfo;
 
 
 
-#line 142 "..\\Library\\StdDriver\\inc\\USBD.h"
+
+
+
+
+
+
+
+#line 142 "..\\..\\Library\\StdDriver\\inc\\USBD.h"
 
 
 
@@ -19937,8 +19937,8 @@ void USBD_LockEpStall(uint32_t u32EpBitmap);
 
 
  
-#line 11122 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\PDMA.h"
+#line 11122 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\PDMA.h"
  
 
 
@@ -19985,7 +19985,7 @@ void USBD_LockEpStall(uint32_t u32EpBitmap);
  
  
  
-#line 63 "..\\Library\\StdDriver\\inc\\PDMA.h"
+#line 63 "..\\..\\Library\\StdDriver\\inc\\PDMA.h"
 
 
    
@@ -20075,7 +20075,7 @@ void USBD_LockEpStall(uint32_t u32EpBitmap);
 
 
  
-#line 160 "..\\Library\\StdDriver\\inc\\PDMA.h"
+#line 160 "..\\..\\Library\\StdDriver\\inc\\PDMA.h"
 
 
 
@@ -20112,8 +20112,8 @@ void PDMA_DisableInt(uint32_t u32Ch, uint32_t u32Mask);
 
 
 
-#line 11123 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\SC.h"
+#line 11123 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\SC.h"
  
 
 
@@ -20144,9 +20144,9 @@ void PDMA_DisableInt(uint32_t u32Ch, uint32_t u32Mask);
 
 
  
-#line 37 "..\\Library\\StdDriver\\inc\\SC.h"
+#line 37 "..\\..\\Library\\StdDriver\\inc\\SC.h"
 
-#line 48 "..\\Library\\StdDriver\\inc\\SC.h"
+#line 48 "..\\..\\Library\\StdDriver\\inc\\SC.h"
 
 
    
@@ -20212,7 +20212,7 @@ void PDMA_DisableInt(uint32_t u32Ch, uint32_t u32Mask);
 
 
  
-#line 121 "..\\Library\\StdDriver\\inc\\SC.h"
+#line 121 "..\\..\\Library\\StdDriver\\inc\\SC.h"
 
 
 
@@ -20225,7 +20225,7 @@ void PDMA_DisableInt(uint32_t u32Ch, uint32_t u32Mask);
 
 
  
-#line 141 "..\\Library\\StdDriver\\inc\\SC.h"
+#line 141 "..\\..\\Library\\StdDriver\\inc\\SC.h"
 
 
 
@@ -20237,7 +20237,7 @@ void PDMA_DisableInt(uint32_t u32Ch, uint32_t u32Mask);
 
 
  
-#line 160 "..\\Library\\StdDriver\\inc\\SC.h"
+#line 160 "..\\..\\Library\\StdDriver\\inc\\SC.h"
 
 
 
@@ -20249,7 +20249,7 @@ void PDMA_DisableInt(uint32_t u32Ch, uint32_t u32Mask);
 
 
  
-#line 179 "..\\Library\\StdDriver\\inc\\SC.h"
+#line 179 "..\\..\\Library\\StdDriver\\inc\\SC.h"
 
 
 
@@ -20346,8 +20346,8 @@ void SC_StopTimer(SC_T *sc, uint32_t u32TimerNum);
 
 
  
-#line 11124 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\PS2.h"
+#line 11124 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\PS2.h"
  
 
 
@@ -20597,8 +20597,8 @@ void PS2_DisableInt(uint32_t u32Mask);
 
  
 
-#line 11125 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\CLK.h"
+#line 11125 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
  
 
 
@@ -20645,7 +20645,7 @@ void PS2_DisableInt(uint32_t u32Mask);
 
 
 
-#line 53 "..\\Library\\StdDriver\\inc\\CLK.h"
+#line 53 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
 
 
  
@@ -20660,70 +20660,17 @@ void PS2_DisableInt(uint32_t u32Mask);
 
 
 
-#line 75 "..\\Library\\StdDriver\\inc\\CLK.h"
+#line 75 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
 
-#line 100 "..\\Library\\StdDriver\\inc\\CLK.h"
-
-
-
-
-
-#line 115 "..\\Library\\StdDriver\\inc\\CLK.h"
-
-#line 126 "..\\Library\\StdDriver\\inc\\CLK.h"
-
- 
- 
- 
+#line 100 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
 
 
 
 
 
+#line 115 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
 
-
-
-
-
-#line 160 "..\\Library\\StdDriver\\inc\\CLK.h"
-
-#line 171 "..\\Library\\StdDriver\\inc\\CLK.h"
-
-#line 182 "..\\Library\\StdDriver\\inc\\CLK.h"
-
-#line 193 "..\\Library\\StdDriver\\inc\\CLK.h"
-
-#line 204 "..\\Library\\StdDriver\\inc\\CLK.h"
-
-
-
-
-
-
-
-
- 
- 
- 
-#line 227 "..\\Library\\StdDriver\\inc\\CLK.h"
-
-
- 
- 
- 
-
-
-
-
-
-
- 
- 
- 
-
-
-
-
+#line 126 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
 
  
  
@@ -20738,7 +20685,60 @@ void PS2_DisableInt(uint32_t u32Mask);
 
 
 
-#line 269 "..\\Library\\StdDriver\\inc\\CLK.h"
+#line 160 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
+
+#line 171 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
+
+#line 182 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
+
+#line 193 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
+
+#line 204 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+#line 227 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
+
+
+ 
+ 
+ 
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+#line 269 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
 
 
 
@@ -20753,15 +20753,15 @@ void PS2_DisableInt(uint32_t u32Mask);
 
  
 
-#line 293 "..\\Library\\StdDriver\\inc\\CLK.h"
+#line 293 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
 
-#line 302 "..\\Library\\StdDriver\\inc\\CLK.h"
-
-
-#line 400 "..\\Library\\StdDriver\\inc\\CLK.h"
+#line 302 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
 
 
-#line 422 "..\\Library\\StdDriver\\inc\\CLK.h"
+#line 400 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
+
+
+#line 422 "..\\..\\Library\\StdDriver\\inc\\CLK.h"
 
    
 
@@ -20909,8 +20909,8 @@ void CLK_DisableSysTick(void);
 
 
  
-#line 11126 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
-#line 1 "..\\Library\\StdDriver\\inc\\ACMP.h"
+#line 11126 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 1 "..\\..\\Library\\StdDriver\\inc\\ACMP.h"
  
 
 
@@ -20945,7 +20945,7 @@ void CLK_DisableSysTick(void);
  
  
  
-#line 43 "..\\Library\\StdDriver\\inc\\ACMP.h"
+#line 43 "..\\..\\Library\\StdDriver\\inc\\ACMP.h"
 
    
 
@@ -21066,7 +21066,7 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
  
-#line 11127 "..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
+#line 11127 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
 
 
 
@@ -21082,17 +21082,17 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
 #line 5 "..\\main.c"
-#line 1 "..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
+#line 1 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
 
 
 
 
 
 
-#line 39 "..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
+#line 39 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
 
 
-#line 48 "..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
+#line 48 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
 
 
 
@@ -21101,13 +21101,13 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
 
-#line 69 "..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
+#line 69 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
 
 
-#line 77 "..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
+#line 77 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
 
 
-#line 88 "..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
+#line 88 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
 
 
 
@@ -21155,7 +21155,7 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
 
-#line 141 "..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
+#line 141 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
 
 
 
@@ -21207,9 +21207,9 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
 
-#line 198 "..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
+#line 198 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
 
-#line 207 "..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
+#line 207 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
 
 
 
@@ -21452,7 +21452,7 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 extern void SYS_Init(void);
 
 #line 6 "..\\main.c"
-#line 1 "..\\Library\\Nu-LB-NUC140\\Include\\LCD.h"
+#line 1 "..\\..\\Library\\Nu-LB-NUC140\\Include\\LCD.h"
  
 
 
@@ -21496,7 +21496,7 @@ extern void draw_LCD(unsigned char *buffer);
 
 
 #line 7 "..\\main.c"
-#line 1 "..\\Library\\Nu-LB-NUC140\\Include\\Scankey.h"
+#line 1 "..\\..\\Library\\Nu-LB-NUC140\\Include\\Scankey.h"
 
 
 
@@ -21507,7 +21507,7 @@ uint8_t ScanKey(void);
 
 
 #line 8 "..\\main.c"
-#line 1 "..\\Library\\Nu-LB-NUC140\\Include\\Seven_Segment.h"
+#line 1 "..\\..\\Library\\Nu-LB-NUC140\\Include\\Seven_Segment.h"
 
 
 
@@ -21685,12 +21685,12 @@ int main(void) {
 				update_lcd = 0;
 			}
 		}
-		if (limit_buzzer > 0 && loop_count % 1 == 0) (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((11)<<2)))) = 0;
 		if (x != 0 && y != 0 && loop_count % 5 == 0) {
 			show_seven_seg(PC_values, index_seven_seg, limit_buzzer);
 			index_seven_seg++;
 			if (index_seven_seg == 4) index_seven_seg = 0;
 		}
+		if (limit_buzzer > 0 && loop_count % 1 == 0) (*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((11)<<2)))) = 0;
 		if (limit_buzzer > 0 && loop_count % 1 * 2 == 0) {
 			(*((volatile uint32_t *)(((((( uint32_t)0x50000000) + 0x4000) + 0x0200)+(0x40*(1))) + ((11)<<2)))) = 1;
 			limit_buzzer--;

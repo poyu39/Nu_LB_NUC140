@@ -22,7 +22,7 @@
   </DaveTm>
 
   <Target>
-    <TargetName>Sample</TargetName>
+    <TargetName>LAB_3</TargetName>
     <ToolsetNumber>0x4</ToolsetNumber>
     <ToolsetName>ARM-ADS</ToolsetName>
     <TargetOption>
@@ -200,7 +200,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Library\Device\Nuvoton\NUC100Series\Source\system_NUC100Series.c</PathWithFileName>
+      <PathWithFileName>..\..\Library\Device\Nuvoton\NUC100Series\Source\system_NUC100Series.c</PathWithFileName>
       <FilenameWithoutPath>system_NUC100Series.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -212,7 +212,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Library\Device\Nuvoton\NUC100Series\Source\ARM\startup_NUC100Series.s</PathWithFileName>
+      <PathWithFileName>..\..\Library\Device\Nuvoton\NUC100Series\Source\ARM\startup_NUC100Series.s</PathWithFileName>
       <FilenameWithoutPath>startup_NUC100Series.s</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -232,7 +232,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Library\StdDriver\src\clk.c</PathWithFileName>
+      <PathWithFileName>..\..\Library\StdDriver\src\clk.c</PathWithFileName>
       <FilenameWithoutPath>clk.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -244,7 +244,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Library\StdDriver\src\retarget.c</PathWithFileName>
+      <PathWithFileName>..\..\Library\StdDriver\src\retarget.c</PathWithFileName>
       <FilenameWithoutPath>retarget.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -256,7 +256,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Library\StdDriver\src\sys.c</PathWithFileName>
+      <PathWithFileName>..\..\Library\StdDriver\src\sys.c</PathWithFileName>
       <FilenameWithoutPath>sys.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -268,7 +268,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Library\StdDriver\src\gpio.c</PathWithFileName>
+      <PathWithFileName>..\..\Library\StdDriver\src\gpio.c</PathWithFileName>
       <FilenameWithoutPath>gpio.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -300,7 +300,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Library\Nu-LB-NUC140\Source\SYS_init.c</PathWithFileName>
+      <PathWithFileName>..\..\Library\Nu-LB-NUC140\Source\SYS_init.c</PathWithFileName>
       <FilenameWithoutPath>SYS_init.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -312,7 +312,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Library\Nu-LB-NUC140\Source\Scankey.c</PathWithFileName>
+      <PathWithFileName>..\..\Library\Nu-LB-NUC140\Source\Scankey.c</PathWithFileName>
       <FilenameWithoutPath>Scankey.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -324,7 +324,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Library\Nu-LB-NUC140\Source\Seven_Segment.c</PathWithFileName>
+      <PathWithFileName>..\..\Library\Nu-LB-NUC140\Source\Seven_Segment.c</PathWithFileName>
       <FilenameWithoutPath>Seven_Segment.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

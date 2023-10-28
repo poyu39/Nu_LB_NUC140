@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Sample</TargetName>
+      <TargetName>LAB_3</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
@@ -375,7 +375,7 @@
               <MiscControls></MiscControls>
               <Define>DEBUG_ENABLE_SEMIHOST</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Library\CMSIS\Include;..\Library\StdDriver\inc;..\Library\Device\Nuvoton\NUC100Series\Include;..\Library\Nu-LB-NUC140\Include;..\..\..\..\Desktop\微處理機project\Lab_1;..\Library;..\KEIL</IncludePath>
+              <IncludePath>..\..\Library\CMSIS\Include;..\..\Library\StdDriver\inc;..\..\Library\Device\Nuvoton\NUC100Series\Include;..\..\Library\Nu-LB-NUC140\Include;..\..\Library;..\KEIL</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -422,12 +422,12 @@
             <File>
               <FileName>system_NUC100Series.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Library\Device\Nuvoton\NUC100Series\Source\system_NUC100Series.c</FilePath>
+              <FilePath>..\..\Library\Device\Nuvoton\NUC100Series\Source\system_NUC100Series.c</FilePath>
             </File>
             <File>
               <FileName>startup_NUC100Series.s</FileName>
               <FileType>2</FileType>
-              <FilePath>..\Library\Device\Nuvoton\NUC100Series\Source\ARM\startup_NUC100Series.s</FilePath>
+              <FilePath>..\..\Library\Device\Nuvoton\NUC100Series\Source\ARM\startup_NUC100Series.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -437,22 +437,22 @@
             <File>
               <FileName>clk.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Library\StdDriver\src\clk.c</FilePath>
+              <FilePath>..\..\Library\StdDriver\src\clk.c</FilePath>
             </File>
             <File>
               <FileName>retarget.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Library\StdDriver\src\retarget.c</FilePath>
+              <FilePath>..\..\Library\StdDriver\src\retarget.c</FilePath>
             </File>
             <File>
               <FileName>sys.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Library\StdDriver\src\sys.c</FilePath>
+              <FilePath>..\..\Library\StdDriver\src\sys.c</FilePath>
             </File>
             <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Library\StdDriver\src\gpio.c</FilePath>
+              <FilePath>..\..\Library\StdDriver\src\gpio.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -467,17 +467,17 @@
             <File>
               <FileName>SYS_init.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Library\Nu-LB-NUC140\Source\SYS_init.c</FilePath>
+              <FilePath>..\..\Library\Nu-LB-NUC140\Source\SYS_init.c</FilePath>
             </File>
             <File>
               <FileName>Scankey.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Library\Nu-LB-NUC140\Source\Scankey.c</FilePath>
+              <FilePath>..\..\Library\Nu-LB-NUC140\Source\Scankey.c</FilePath>
             </File>
             <File>
               <FileName>Seven_Segment.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Library\Nu-LB-NUC140\Source\Seven_Segment.c</FilePath>
+              <FilePath>..\..\Library\Nu-LB-NUC140\Source\Seven_Segment.c</FilePath>
             </File>
           </Files>
         </Group>

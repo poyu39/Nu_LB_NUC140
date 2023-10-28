@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\obj\LAB_4_1.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\obj\LAB_4_1.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Mon Oct 23 19:08:26 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sat Oct 28 14:41:00 2023
 <BR><P>
 <H3>Maximum Stack Usage =        124 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -363,8 +363,8 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[3e]"></a>ShowSevenSegment</STRONG> (Thumb, 172 bytes, Stack size 20 bytes, seven_segment.o(i.ShowSevenSegment))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = ShowSevenSegment &rArr; __ARM_common_switch8
+<P><STRONG><a name="[3e]"></a>ShowSevenSegment</STRONG> (Thumb, 158 bytes, Stack size 16 bytes, seven_segment.o(i.ShowSevenSegment))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = ShowSevenSegment &rArr; __ARM_common_switch8
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_common_switch8
 </UL>
@@ -502,7 +502,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[4e]"></a>show_7_seg</STRONG> (Thumb, 110 bytes, Stack size 24 bytes, main.o(i.show_7_seg))
-<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = show_7_seg &rArr; ShowSevenSegment &rArr; __ARM_common_switch8
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = show_7_seg &rArr; ShowSevenSegment &rArr; __ARM_common_switch8
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ShowSevenSegment
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CloseSevenSegment

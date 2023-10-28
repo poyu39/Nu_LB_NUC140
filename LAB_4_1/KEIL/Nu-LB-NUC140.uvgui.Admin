@@ -83,18 +83,18 @@
       <flags>2</flags>
       <showCmd>3</showCmd>
       <MinPosition>
-        <xPos>-32000</xPos>
-        <yPos>-32000</yPos>
+        <xPos>-1</xPos>
+        <yPos>-1</yPos>
       </MinPosition>
       <MaxPosition>
         <xPos>-1</xPos>
         <yPos>-1</yPos>
       </MaxPosition>
       <NormalPosition>
-        <Top>104</Top>
-        <Left>104</Left>
-        <Right>1201</Right>
-        <Bottom>652</Bottom>
+        <Top>171</Top>
+        <Left>144</Left>
+        <Right>1241</Right>
+        <Bottom>719</Bottom>
       </NormalPosition>
     </WindowPosition>
     <MDIClientArea>
@@ -1815,9 +1815,9 @@
       <ActiveTab>0</ActiveTab>
       <Doc>
         <Name>..\main.c</Name>
-        <ColumnNumber>16</ColumnNumber>
-        <TopLine>80</TopLine>
-        <CurrentLine>98</CurrentLine>
+        <ColumnNumber>27</ColumnNumber>
+        <TopLine>95</TopLine>
+        <CurrentLine>105</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
