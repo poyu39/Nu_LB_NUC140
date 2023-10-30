@@ -21609,8 +21609,9 @@ void show_lcd(int lcd_x, int lcd_y, char lcd_buffer[4][17], char lcd_now[4][17])
 	}
 }
 
-int get_rand_pwd() {
+int get_rand_pwd(int loop_count) {
 	int rand_pwd=0, i;
+	srand(loop_count);
 	for (i = 0; i < 4; i++)
 		rand_pwd = rand_pwd * 10 + rand() % 6 + 1;
 	return rand_pwd;
@@ -21670,7 +21671,7 @@ int main(void) {
 			}
 			break;
 		case 7:
-			rand_pwd = get_rand_pwd();
+			rand_pwd = get_rand_pwd(loop_count);
 			update_seven_seg(seven_seg_buffer, rand_pwd);
 			break;
 		case 8:

@@ -21639,6 +21639,7 @@ int main(void) {
 			break;
 		case 5:
 			
+			srand(loop_count);
 			x = (rand() % 9 + 1) * 10 + rand() % 9 + 1;
 			y = (rand() % 9 + 1) * 10 + rand() % 9 + 1;
 			update_result(result, x, y);
