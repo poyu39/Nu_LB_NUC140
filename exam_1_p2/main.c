@@ -65,28 +65,48 @@ void show_seven_seg(int seven_seg_buffer[], int seven_seg_index) {
 
 int get_ans(int input_pwd, int rand_pwd, int line_index, int win_line_index, char lcd_buffer[4][17]) {
 	uint8_t a=0, b=0;
-	int i;
-	int temp_input_pwd = input_pwd;
-	int temp_rand_pwd = rand_pwd;
+	int i, j;
+	int check_input_pwd[4];
+	int check_rand_pwd[4];
+
+	// int to int[]
+	check_input_pwd[0] = input_pwd / 1000;
+	check_input_pwd[1] = (input_pwd % 1000) / 100;
+	check_input_pwd[2] = (input_pwd % 100) / 10;
+	check_input_pwd[3] = input_pwd % 10;
+	
+	check_rand_pwd[0] = rand_pwd / 1000;
+	check_rand_pwd[1] = (rand_pwd % 1000) / 100;
+	check_rand_pwd[2] = (rand_pwd % 100) / 10;
+	check_rand_pwd[3] = rand_pwd % 10;
+
+
 	if (input_pwd == rand_pwd && input_pwd != 0) {
-		sprintf(lcd_buffer[line_index], "%4d      %-4s  ", input_pwd, "WIN");
+		sprintf(lcd_buffer[line_index], "%-4d      %-4s  ", input_pwd, "WIN");
+		if (win_line_index != 4) {
+			lcd_buffer[win_line_index][14] = ' ';
+		}
 		win_line_index = line_index;
 	} else if (input_pwd == 0) {
 		sprintf(lcd_buffer[line_index], "          %-4s  ", "NULL");
 		if (win_line_index != 4) {
 			lcd_buffer[win_line_index][14] = ' ';
 		}
-		win_line_index = 4;
+		win_line_index = 5;
 	} else if (input_pwd != rand_pwd) {
 		for (i = 0; i < 4; i++) {
-			if (temp_input_pwd % 10 == temp_rand_pwd % 10)
+			if (check_input_pwd[i] == check_rand_pwd[i]) {
 				a++;
-			else
-				b++;
-			temp_input_pwd /= 10;
-			temp_rand_pwd /= 10;
+			} else {
+				for (j = 0; j < 4; j++) {
+					if (check_input_pwd[i] == check_rand_pwd[j] && i != j) {
+						b++;
+						break;
+					}
+				}
+			}
 		}
-		sprintf(lcd_buffer[line_index], "%4d      %dA%dB  ", input_pwd, a, b);
+		sprintf(lcd_buffer[line_index], "%-4d      %dA%dB  ", input_pwd, a, b);
 		if (win_line_index != 4) {
 			lcd_buffer[win_line_index][14] = ' ';
 		}
@@ -107,10 +127,30 @@ void show_lcd(int lcd_x, int lcd_y, char lcd_buffer[4][17], char lcd_now[4][17])
 }
 
 int get_rand_pwd(int loop_count) {
-	int rand_pwd=0, i;
+	int rand_pwd=0, i, j;
+	int temp_rand_pwd[4] = {0, 0, 0, 0};
+	int temp_rand_num;
+	int check=0;
 	srand(loop_count);
-	for (i = 0; i < 4; i++)
-		rand_pwd = rand_pwd * 10 + rand() % 6 + 1;
+	for (i = 0; i < 4; i++) {
+		while (TRUE) {
+			temp_rand_num = rand() % 6 + 1;
+			check=0;
+			for (j = 0; j < 4; j++) {
+				if (temp_rand_num == temp_rand_pwd[j]) {
+					temp_rand_num = rand() % 6 + 1;
+				} else {
+					check++;
+				}
+			}
+			if (check == 4) {
+				break;		
+			}
+		} 
+		rand_pwd = rand_pwd * 10 + temp_rand_num;
+		temp_rand_pwd[i] = temp_rand_num;
+	}
+		
 	return rand_pwd;
 }
 
@@ -137,6 +177,7 @@ int main(void) {
 	int seven_seg_buffer[4] = {16, 16, 16, 16};
 	int lcd_x = 0, lcd_y = 0;
 	int loop_count = 0;
+	int limit_buzzer = 0;
 
 	SYS_Init();
 	init_LCD();
@@ -160,10 +201,10 @@ int main(void) {
 		case 4:
 		case 5:
 		case 6:
-			if (input_pwd_index < 4 && line_index < 4) {
+			if (input_pwd_index < 4 && line_index < 4 && rand_pwd != 0) {
 				input_pwd = input_pwd * 10 + keyin;
 				input_pwd_index++;
-				sprintf(lcd_buffer[line_index], "%4d%s", input_pwd, SPACE_12);
+				sprintf(lcd_buffer[line_index], "%-4d%s", input_pwd, SPACE_12);
 				update_lcd = 1;
 			}
 			break;
@@ -177,6 +218,12 @@ int main(void) {
 			input_pwd_index = 0;
 			input_pwd = 0;
 			line_index = 0;
+			PC12 = 1; PC13 = 1; PC14 = 1; PC15 = 1;
+			led_index = 0;
+			win_line_index = 4;
+			rand_pwd = 0;
+			nid_index = 0;
+			CloseSevenSegment();
 			break;
 		case 9:
 			if (line_index < 4) {
@@ -185,10 +232,17 @@ int main(void) {
 					PC12 = 1; PC13 = 1; PC14 = 1; PC15 = 1;
 					led_index = 0;
 				}
+				if (win_line_index == 5) {
+					PC12 = 1; PC13 = 1; PC14 = 1; PC15 = 1;
+					led_index = 0;
+					limit_buzzer = 50;
+					win_line_index = 4;
+				}
 				line_index++;
 				input_pwd_index = 0;
 				input_pwd = 0;
 				update_lcd = 1;
+				nid_index = 0;
 			}
 			break;
 		default:
@@ -206,6 +260,13 @@ int main(void) {
 				nid_index++;
 				if (nid_index == 8) nid_index = 0;
 			}
+		}
+
+		if (limit_buzzer > 0 && loop_count % 1 == 0) PB11 = 0;
+		if (limit_buzzer > 0 && loop_count % 3 == 0) {
+			PB11 = 1;
+			limit_buzzer--;
+			if (limit_buzzer == 1) update_lcd = 1;
 		}
 
 		if (rand_pwd != 0 && loop_count % SEVEN_SEG_UPDATE_TICK == 0) {

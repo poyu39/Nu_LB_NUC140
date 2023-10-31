@@ -8,8 +8,8 @@
 #include "Seven_Segment.h"
 
 #define BUZZER_UPDATE_TICK 1
-#define SEVEN_SEG_UPDATE_TICK 5
-#define TICK_PER_MS 1000
+#define SEVEN_SEG_UPDATE_TICK 1
+#define TICK_PER_MS 5000
 
 #define LCD_SPACE "                "
 #define NID "D1009212"
@@ -117,7 +117,7 @@ int main(void) {
 			math_op_index--;
 			if (math_op_index < 0) {
 				math_op_index = 0;
-				limit_buzzer = 50;
+				limit_buzzer = 10;
 			}
 			break;
 		case 4:
@@ -149,7 +149,7 @@ int main(void) {
 			math_op_index++;
 			if (math_op_index > 5) {
 				math_op_index = 5;
-				limit_buzzer = 50;
+				limit_buzzer = 10;
 			}
 			break;
 		default:
@@ -177,13 +177,13 @@ int main(void) {
 				update_lcd = 0;
 			}
 		}
+		if (limit_buzzer > 0 && loop_count % 1 == 0) PB11 = 0;
 		if (x != 0 && y != 0 && loop_count % SEVEN_SEG_UPDATE_TICK == 0) {
 			show_seven_seg(PC_values, index_seven_seg, limit_buzzer);
 			index_seven_seg++;
 			if (index_seven_seg == 4) index_seven_seg = 0;
 		}
-		if (limit_buzzer > 0 && loop_count % BUZZER_UPDATE_TICK == 0) PB11 = 0;
-		if (limit_buzzer > 0 && loop_count % BUZZER_UPDATE_TICK * 2 == 0) {
+		if (limit_buzzer > 0 && loop_count % 3 == 0) {
 			PB11 = 1;
 			limit_buzzer--;
 		}
