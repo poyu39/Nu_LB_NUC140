@@ -20774,7 +20774,7 @@ extern void draw_Triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint16
 
 uint16_t loop_count = 0;
 
-uint8_t ooxx[9] = {-1, -1, -1, -1, -1, -1, -1, -1, -1};
+int8_t ooxx[9] = {-1, -1, -1, -1, -1, -1, -1, -1, -1};
 
 int8_t check_who_win() {
     int8_t win = -1;
@@ -20810,17 +20810,19 @@ int8_t check_who_win() {
 
 void draw_ox_game_field() {
     draw_Line(0, 0, 127, 0, 0xFFFF, 0x0000);
-    draw_Line(0, 64, 127, 64, 0xFFFF, 0x0000);
+    draw_Line(0, 63, 127, 63, 0xFFFF, 0x0000);
+    draw_Line(0, 0, 0, 63, 0xFFFF, 0x0000);
+    draw_Line(127, 0, 127, 63, 0xFFFF, 0x0000);
     draw_Line(0, 21, 127, 21, 0xFFFF, 0x0000);
     draw_Line(0, 42, 127, 42, 0xFFFF, 0x0000);
-    draw_Line(43, 0, 43, 64, 0xFFFF, 0x0000);
-    draw_Line(86, 0, 86, 64, 0xFFFF, 0x0000);
+    draw_Line(43, 0, 43, 63, 0xFFFF, 0x0000);
+    draw_Line(86, 0, 86, 63, 0xFFFF, 0x0000);
 }
 
 void draw_ox_game_select(uint8_t x, uint8_t y) {
-    if (loop_count % 100 == 50)
+    if (loop_count % 10 == 5)
         fill_Rectangle(0 + x * 43, 0 + y * 21, 41 + x * 43, 20 + y * 21, 0xFFFF, 0x0000);
-    else if (loop_count % 100 == 0)
+    else if (loop_count % 10 == 0)
         fill_Rectangle(0 + x * 43, 0 + y * 21, 41 + x * 43, 20 + y * 21, 0x0000, 0x0000);
     
     
@@ -20859,7 +20861,11 @@ int main(void) {
     while (keyin == 0) {
         keyin = ScanKey();
         draw_ox_game_field();
-        draw_ox_game_now(0 , 0);
+        draw_ox_game_select(x, y);
+
+        if ((loop_count + 1) >= 65535) loop_count = 0;
+        loop_count++;
+        CLK_SysTickDelay(10000);
     }
 
     clear_LCD();
@@ -20867,7 +20873,7 @@ int main(void) {
     while (1) {
         keyin = ScanKey();
 		if (keyin != 0) {
-			if (isPressed == 0) goto display;
+			if (isPressed != 0) goto display;
 			isPressed = 1;
 		}
 		switch (keyin) {
@@ -20876,32 +20882,35 @@ int main(void) {
 			break;
         case 2:
             if (y > 0) y--;
-            isPressed = 1;
+            clear_LCD();
             break;
         case 4:
             if (x > 0) x--;
+            clear_LCD();
             break;
         case 6:
             if (x < 2) x++;
+            clear_LCD();
             break;
         case 8:
             if (y < 2) y++;
+            clear_LCD();
             break;
         case 5:
-            if ((round + 1) % 2 == 1) {
+            if (ox == 0) {
                 if (ooxx[x + 3 * y] == -1) {
                     draw_Circle(21 + 43 * x, 10 + y * 21, 8, 0xFFFF, 0x0000);
-                    ox = 1;
                     ooxx[x + 3 * y] = 0;
                     round++;
+                    ox = 1;
                 }
-            } else {
+            } else if (ox == 1) {
                 if (ooxx[x + 3 * y] == -1) {
                     draw_Line(2 + x * 43, 0 + y * 21, 40 + x * 43, 18 + y * 21, 0xFFFF, 0x0000);
                     draw_Line(40 + x * 43, 0 + y * 21, 2 + x * 43, 18 + y * 21, 0xFFFF, 0x0000);
-                    ox = 0;
                     ooxx[x + 3 * y] = 1;
                     round++;
+                    ox = 0;
                 }
             }
             break;
@@ -20939,5 +20948,6 @@ int main(void) {
         loop_counter:
         if ((loop_count + 1) >= 65535) loop_count = 0;
         loop_count++;
+        CLK_SysTickDelay(10000);
     }
 }

@@ -11,7 +11,7 @@
 
 uint16_t loop_count = 0;
 
-uint8_t ooxx[9] = {-1, -1, -1, -1, -1, -1, -1, -1, -1};
+int8_t ooxx[9] = {-1, -1, -1, -1, -1, -1, -1, -1, -1};
 
 int8_t check_who_win() {
     int8_t win = -1;
@@ -57,9 +57,9 @@ void draw_ox_game_field() {
 }
 
 void draw_ox_game_select(uint8_t x, uint8_t y) {
-    if (loop_count % 100 == 50)
+    if (loop_count % 10 == 5)
         fill_Rectangle(0 + x * 43, 0 + y * 21, 41 + x * 43, 20 + y * 21, FG_COLOR, BG_COLOR);
-    else if (loop_count % 100 == 0)
+    else if (loop_count % 10 == 0)
         fill_Rectangle(0 + x * 43, 0 + y * 21, 41 + x * 43, 20 + y * 21, BG_COLOR, BG_COLOR);
     // fill_Rectangle(0 + x * 43, 0 + y * 21, 41 + x * 43, 20 + y * 21, FG_COLOR, BG_COLOR);
     // CLK_SysTickDelay(500000);
@@ -84,7 +84,8 @@ int main(void) {
             isPressed = 0,
             x = 0,
             y = 0,
-            round = 0;
+            round = 0,
+            ox = 0;
     int8_t win = -1;
 
     SYS_Init();
@@ -97,7 +98,11 @@ int main(void) {
     while (keyin == 0) {
         keyin = ScanKey();
         draw_ox_game_field();
-        draw_ox_game_now(0 , 0);
+        draw_ox_game_select(x, y);
+
+        if ((loop_count + 1) >= UINT16_MAX) loop_count = 0;
+        loop_count++;
+        CLK_SysTickDelay(LOOP_DELAY);
     }
 
     clear_LCD();
@@ -105,7 +110,7 @@ int main(void) {
     while (TRUE) {
         keyin = ScanKey();
 		if (keyin != 0) {
-			if (isPressed == 0) goto display;
+			if (isPressed != 0) goto display;
 			isPressed = 1;
 		}
 		switch (keyin) {
@@ -114,30 +119,35 @@ int main(void) {
 			break;
         case 2:
             if (y > 0) y--;
-            isPressed = 1;
+            clear_LCD();
             break;
         case 4:
             if (x > 0) x--;
+            clear_LCD();
             break;
         case 6:
             if (x < 2) x++;
+            clear_LCD();
             break;
         case 8:
             if (y < 2) y++;
+            clear_LCD();
             break;
         case 5:
-            if ((round + 1) % 2 == 1) {
+            if (ox == 0) {
                 if (ooxx[x + 3 * y] == -1) {
                     draw_Circle(21 + 43 * x, 10 + y * 21, 8, FG_COLOR, BG_COLOR);
                     ooxx[x + 3 * y] = 0;
                     round++;
+                    ox = 1;
                 }
-            } else {
+            } else if (ox == 1) {
                 if (ooxx[x + 3 * y] == -1) {
                     draw_Line(2 + x * 43, 0 + y * 21, 40 + x * 43, 18 + y * 21, FG_COLOR, BG_COLOR);
                     draw_Line(40 + x * 43, 0 + y * 21, 2 + x * 43, 18 + y * 21, FG_COLOR, BG_COLOR);
                     ooxx[x + 3 * y] = 1;
                     round++;
+                    ox = 0;
                 }
             }
             break;
