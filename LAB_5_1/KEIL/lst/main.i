@@ -20756,10 +20756,10 @@ uint8_t ScanKey(void);
 #line 7 "..\\main.c"
 
 
-unsigned char horizontal_16x8[16] = {
+unsigned char block_horizontal_16x8[16] = {
     0xFF, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0x81, 0xFF};
 
-unsigned char vertical_8x16[16] = {
+unsigned char block_vertical_8x16[16] = {
     0xFF, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0xFF, 0xFF, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0xFF};
 
 void Buzz(void) {
@@ -20771,13 +20771,13 @@ void Buzz(void) {
 
 void black_white_change(int nx, int ny, int pattern) {
     if (pattern == 0) {
-        draw_Bmp16x8(nx, ny, 0xFFFF, 0x0000, horizontal_16x8);
+        draw_Bmp16x8(nx, ny, 0xFFFF, 0x0000, block_horizontal_16x8);
         CLK_SysTickDelay(500000);
-        draw_Bmp16x8(nx, ny, 0x0000, 0x0000, horizontal_16x8);
+        draw_Bmp16x8(nx, ny, 0x0000, 0x0000, block_horizontal_16x8);
     } else {
-        draw_Bmp8x16(nx, ny, 0xFFFF, 0x0000, vertical_8x16);
+        draw_Bmp8x16(nx, ny, 0xFFFF, 0x0000, block_vertical_8x16);
         CLK_SysTickDelay(500000);
-        draw_Bmp8x16(nx, ny, 0x0000, 0x0000, vertical_8x16);
+        draw_Bmp8x16(nx, ny, 0x0000, 0x0000, block_vertical_8x16);
     }
 }
 
@@ -20786,7 +20786,7 @@ int main(void) {
     int8_t keyin = 0;
     int8_t movX = 3, dirX = 0;
     int8_t movY = 3, dirY = 0;
-    int is_press = 0;
+    int isPressed = 0;
     int is_vertical = 0;
     SYS_Init();
     init_LCD();
@@ -20804,57 +20804,55 @@ int main(void) {
     clear_LCD();
     while (1) {
         keyin = ScanKey();
-        if (is_vertical == 0) {
-            draw_Bmp16x8(x, y, 0xFFFF, 0x0000, horizontal_16x8);
-            CLK_SysTickDelay(100000);
-            draw_Bmp16x8(x, y, 0x0000, 0x0000, horizontal_16x8);
-        } else {
-            draw_Bmp8x16(x, y, 0xFFFF, 0x0000, vertical_8x16);
-            CLK_SysTickDelay(100000);
-            draw_Bmp8x16(x, y, 0x0000, 0x0000, vertical_8x16);
-        }
-        switch (keyin) {
-        case 0:
-            if (is_press == 1) is_press = 0;
+        if (keyin != 0) {
+			if (isPressed == 1) goto display;
+			isPressed = 1;
+		}
+		switch (keyin) {
+		case 0:
+			isPressed = 0;
+			break;
+        case 2:
+			dirX = 0;
+			dirY = -1;
+			break;
+		case 4:
+			dirX = -1;
+			dirY = 0;
+			break;
+		case 5:
+			if (is_vertical == 1) {
+				is_vertical = 0;
+				if (x > 128 - 16) {
+					x -= 8;
+				}
+				if (y > 64 - 16) {
+					y -= 16;
+				}
+			} else {
+				is_vertical = 1;
+				if (x > 128 - 16) {
+					x -= 8;
+				}
+				if (y > 64 - 16) {
+					y -= 8;
+				}
+			}
+			break;
+		case 6:
+			dirX = +1;
+			dirY = 0;
+			break;
+		case 8:
+			dirX = 0;
+			dirY = +1;
             break;
-        default:
-            if (is_press == 0) {
-                if (keyin == 2) {
-                    dirX = 0;
-                    dirY = -1;
-                } else if (keyin == 4) {
-                    dirX = -1;
-                    dirY = 0;
-                } else if (keyin == 5) {
-                    if (is_vertical == 1) {
-                        is_vertical = 0;
-                        if (x > 128 - 16) {
-                            x -= 8;
-                        }
-                        if (y > 64 - 16) {
-                            y -= 16;
-                        }
-                    } else {
-                        is_vertical = 1;
-                        if (x > 128 - 16) {
-                            x -= 8;
-                        }
-                        if (y > 64 - 16) {
-                            y -= 8;
-                        }
-                    }
-                } else if (keyin == 6) {
-                    dirX = +1;
-                    dirY = 0;
-                } else if (keyin == 8) {
-                    dirX = 0;
-                    dirY = +1;
-                }
-                is_press = 1;
-            }
-            break;
+		default:
+			break;
         }
-        x = x + dirX * movX;
+
+		display:
+		x = x + dirX * movX;
         y = y + dirY * movY;
         if (is_vertical == 0) {
             if (x < 0 || x > 128 - 16) {
@@ -20882,6 +20880,15 @@ int main(void) {
                 dirY *= -1;
                 Buzz();
             }
+        }
+		if (is_vertical == 0) {
+            draw_Bmp16x8(x, y, 0xFFFF, 0x0000, block_horizontal_16x8);
+            CLK_SysTickDelay(100000);
+            draw_Bmp16x8(x, y, 0x0000, 0x0000, block_horizontal_16x8);
+        } else {
+            draw_Bmp8x16(x, y, 0xFFFF, 0x0000, block_vertical_8x16);
+            CLK_SysTickDelay(100000);
+            draw_Bmp8x16(x, y, 0x0000, 0x0000, block_vertical_8x16);
         }
     }
 }
