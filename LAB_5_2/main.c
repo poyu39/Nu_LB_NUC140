@@ -175,5 +175,6 @@ int main(void) {
         loop_counter:
         if ((loop_count + 1) >= UINT16_MAX) loop_count = 0;
         loop_count++;
+        CLK_SysTickDelay(LOOP_DELAY);
     }
 }
