@@ -82,8 +82,7 @@ int main(void) {
             isPressed = 0,
             x = 0,
             y = 0,
-            round = 0,
-            ox = 0;
+            round = 0;
     int8_t win = -1;
 
     SYS_Init();
@@ -128,7 +127,6 @@ int main(void) {
             if ((round + 1) % 2 == 1) {
                 if (ooxx[x + 3 * y] == -1) {
                     draw_Circle(21 + 43 * x, 10 + y * 21, 8, FG_COLOR, BG_COLOR);
-                    ox = 1;
                     ooxx[x + 3 * y] = 0;
                     round++;
                 }
@@ -136,7 +134,6 @@ int main(void) {
                 if (ooxx[x + 3 * y] == -1) {
                     draw_Line(2 + x * 43, 0 + y * 21, 40 + x * 43, 18 + y * 21, FG_COLOR, BG_COLOR);
                     draw_Line(40 + x * 43, 0 + y * 21, 2 + x * 43, 18 + y * 21, FG_COLOR, BG_COLOR);
-                    ox = 0;
                     ooxx[x + 3 * y] = 1;
                     round++;
                 }
