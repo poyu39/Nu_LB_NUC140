@@ -47,11 +47,13 @@ int8_t check_who_win() {
 
 void draw_ox_game_field() {
     draw_Line(0, 0, 127, 0, FG_COLOR, BG_COLOR);
-    draw_Line(0, 64, 127, 64, FG_COLOR, BG_COLOR);
+    draw_Line(0, 63, 127, 63, FG_COLOR, BG_COLOR);
+    draw_Line(0, 0, 0, 63, FG_COLOR, BG_COLOR);
+    draw_Line(127, 0, 127, 63, FG_COLOR, BG_COLOR);
     draw_Line(0, 21, 127, 21, FG_COLOR, BG_COLOR);
     draw_Line(0, 42, 127, 42, FG_COLOR, BG_COLOR);
-    draw_Line(43, 0, 43, 64, FG_COLOR, BG_COLOR);
-    draw_Line(86, 0, 86, 64, FG_COLOR, BG_COLOR);
+    draw_Line(43, 0, 43, 63, FG_COLOR, BG_COLOR);
+    draw_Line(86, 0, 86, 63, FG_COLOR, BG_COLOR);
 }
 
 void draw_ox_game_select(uint8_t x, uint8_t y) {
