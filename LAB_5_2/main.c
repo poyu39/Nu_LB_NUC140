@@ -84,8 +84,7 @@ int main(void) {
             isPressed = 0,
             x = 0,
             y = 0,
-            round = 0,
-            ox = 0;
+            round = 0;
     int8_t win = -1;
 
     SYS_Init();
@@ -134,20 +133,18 @@ int main(void) {
             clear_LCD();
             break;
         case 5:
-            if (ox == 0) {
+            if ((round + 1) % 2 == 1) {
                 if (ooxx[x + 3 * y] == -1) {
                     draw_Circle(21 + 43 * x, 10 + y * 21, 8, FG_COLOR, BG_COLOR);
                     ooxx[x + 3 * y] = 0;
                     round++;
-                    ox = 1;
                 }
-            } else if (ox == 1) {
+            } else {
                 if (ooxx[x + 3 * y] == -1) {
                     draw_Line(2 + x * 43, 0 + y * 21, 40 + x * 43, 18 + y * 21, FG_COLOR, BG_COLOR);
                     draw_Line(40 + x * 43, 0 + y * 21, 2 + x * 43, 18 + y * 21, FG_COLOR, BG_COLOR);
                     ooxx[x + 3 * y] = 1;
                     round++;
-                    ox = 0;
                 }
             }
             break;
@@ -167,7 +164,7 @@ int main(void) {
             } else {
                 if (win == 0) {
                     clear_LCD();
-                    printS(0, 0, " O WIN");
+                    printS(0, 0, "O WIN");
                     break;
                 } else if (win == 1) {
                     clear_LCD();
