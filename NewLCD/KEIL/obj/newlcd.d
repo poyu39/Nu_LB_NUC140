@@ -1,6 +1,7 @@
 .\obj\newlcd.o: ..\..\Library\Nu-LB-NUC140\Source\NewLCD.c
 .\obj\newlcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\newlcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\newlcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\obj\newlcd.o: ..\..\Library\Device\Nuvoton\NUC100Series\Include\NUC100Series.h
 .\obj\newlcd.o: ..\..\Library\CMSIS\Include\core_cm0.h
 .\obj\newlcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -28,3 +29,5 @@
 .\obj\newlcd.o: ..\..\Library\StdDriver\inc\CLK.h
 .\obj\newlcd.o: ..\..\Library\StdDriver\inc\ACMP.h
 .\obj\newlcd.o: ..\..\Library\Nu-LB-NUC140\Include\LCD.h
+.\obj\newlcd.o: ..\..\Library\Nu-LB-NUC140\Include\Font5x7.h
+.\obj\newlcd.o: ..\..\Library\Nu-LB-NUC140\Include\Font8x16.h
