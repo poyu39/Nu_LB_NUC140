@@ -31,8 +31,8 @@
     Program header entries: 1
     Section header entries: 16
 
-    Program header offset: 193016 (0x0002f1f8)
-    Section header offset: 193048 (0x0002f218)
+    Program header offset: 192848 (0x0002f150)
+    Section header offset: 192880 (0x0002f170)
 
     Section header string table index: 15
 
@@ -1412,7 +1412,7 @@
     $t
     i.init_lcd_buffer
     init_lcd_buffer
-        0x00000abc:    b5f8        ..      PUSH     {r3-r7,lr}
+        0x00000abc:    b5f0        ..      PUSH     {r4-r7,lr}
         0x00000abe:    2000        .       MOVS     r0,#0
         0x00000ac0:    4a0e        .J      LDR      r2,[pc,#56] ; [0xafc] = 0x2000042c
         0x00000ac2:    2301        .#      MOVS     r3,#1
@@ -1441,7 +1441,7 @@
         0x00000af4:    1c6d        m.      ADDS     r5,r5,#1
         0x00000af6:    2d80        .-      CMP      r5,#0x80
         0x00000af8:    dbed        ..      BLT      0xad6 ; init_lcd_buffer + 26
-        0x00000afa:    bdf8        ..      POP      {r3-r7,pc}
+        0x00000afa:    bdf0        ..      POP      {r4-r7,pc}
     $d
         0x00000afc:    2000042c    ,..     DCD    536871980
     $t
@@ -1592,7 +1592,7 @@
     $t
     i.show_lcd_buffer
     show_lcd_buffer
-        0x00000c24:    b5f8        ..      PUSH     {r3-r7,lr}
+        0x00000c24:    b5f0        ..      PUSH     {r4-r7,lr}
         0x00000c26:    4f0e        .O      LDR      r7,[pc,#56] ; [0xc60] = 0x2000002c
         0x00000c28:    2500        .%      MOVS     r5,#0
         0x00000c2a:    2400        .$      MOVS     r4,#0
@@ -1619,7 +1619,7 @@
         0x00000c58:    b2ed        ..      UXTB     r5,r5
         0x00000c5a:    2d80        .-      CMP      r5,#0x80
         0x00000c5c:    d3e5        ..      BCC      0xc2a ; show_lcd_buffer + 6
-        0x00000c5e:    bdf8        ..      POP      {r3-r7,pc}
+        0x00000c5e:    bdf0        ..      POP      {r4-r7,pc}
     $d
         0x00000c60:    2000002c    ,..     DCD    536870956
         0x00000c64:    2000042c    ,..     DCD    536871980
@@ -1669,11 +1669,11 @@
 
 
 ** Section #6 '.debug_info' (SHT_PROGBITS)
-    Size   : 16772 bytes
+    Size   : 16816 bytes
 
 
 ** Section #7 '.debug_line' (SHT_PROGBITS)
-    Size   : 6384 bytes
+    Size   : 6244 bytes
 
 
 ** Section #8 '.debug_loc' (SHT_PROGBITS)
@@ -1681,7 +1681,7 @@
 
 
 ** Section #9 '.debug_macinfo' (SHT_PROGBITS)
-    Size   : 141392 bytes
+    Size   : 141340 bytes
 
 
 ** Section #10 '.debug_pubnames' (SHT_PROGBITS)
@@ -1689,13 +1689,13 @@
 
 
 ** Section #11 '.symtab' (SHT_SYMTAB)
-    Size   : 3728 bytes (alignment 4)
+    Size   : 3712 bytes (alignment 4)
     String table #12 '.strtab'
-    Last local symbol no. 142
+    Last local symbol no. 141
 
 
 ** Section #12 '.strtab' (SHT_STRTAB)
-    Size   : 3312 bytes
+    Size   : 3284 bytes
 
 
 ** Section #13 '.note' (SHT_NOTE)
@@ -1703,7 +1703,7 @@
 
 
 ** Section #14 '.comment' (SHT_PROGBITS)
-    Size   : 10572 bytes
+    Size   : 10596 bytes
 
 
 ** Section #15 '.shstrtab' (SHT_STRTAB)

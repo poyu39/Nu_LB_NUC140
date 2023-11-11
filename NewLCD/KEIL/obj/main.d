@@ -29,4 +29,4 @@
 .\obj\main.o: ..\..\Library\StdDriver\inc\ACMP.h
 .\obj\main.o: ..\MCU_init.h
 .\obj\main.o: ..\..\Library\Nu-LB-NUC140\Include\SYS_init.h
-.\obj\main.o: ..\..\Library\Nu-LB-NUC140\Include\LCD.h
+.\obj\main.o: ..\..\Library\Nu-LB-NUC140\Include\NewLCD.h

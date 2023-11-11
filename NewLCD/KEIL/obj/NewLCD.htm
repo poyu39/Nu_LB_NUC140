@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\obj\NewLCD.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\obj\NewLCD.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sat Nov 11 16:21:31 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sat Nov 11 16:30:34 2023
 <BR><P>
 <H3>Maximum Stack Usage =        220 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -293,8 +293,8 @@ Global Symbols
 <P><STRONG><a name="[2e]"></a>CLK_WaitClockReady</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, clk.o(i.CLK_WaitClockReady))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = CLK_WaitClockReady
 </UL>
-<BR>[Called By]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CLK_EnablePLL
-<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SYS_Init
+<BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SYS_Init
+<LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CLK_EnablePLL
 </UL>
 
 <P><STRONG><a name="[40]"></a>SPI_DisableAutoSS</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, spi.o(i.SPI_DisableAutoSS))
@@ -341,11 +341,11 @@ Global Symbols
 
 <P><STRONG><a name="[51]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
 
-<P><STRONG><a name="[44]"></a>clear_lcd_buffer</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, main.o(i.clear_lcd_buffer))
+<P><STRONG><a name="[44]"></a>clear_lcd_buffer</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, newlcd.o(i.clear_lcd_buffer))
 <BR><BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[3a]"></a>draw_circle_in_buffer</STRONG> (Thumb, 314 bytes, Stack size 140 bytes, main.o(i.draw_circle_in_buffer))
+<P><STRONG><a name="[3a]"></a>draw_circle_in_buffer</STRONG> (Thumb, 314 bytes, Stack size 140 bytes, newlcd.o(i.draw_circle_in_buffer))
 <BR><BR>[Stack]<UL><LI>Max Depth = 204<LI>Call Chain = draw_circle_in_buffer &rArr; draw_line_in_buffer &rArr; draw_pixel_in_buffer
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_pixel_in_buffer
@@ -354,7 +354,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[3c]"></a>draw_line_in_buffer</STRONG> (Thumb, 180 bytes, Stack size 48 bytes, main.o(i.draw_line_in_buffer))
+<P><STRONG><a name="[3c]"></a>draw_line_in_buffer</STRONG> (Thumb, 180 bytes, Stack size 48 bytes, newlcd.o(i.draw_line_in_buffer))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = draw_line_in_buffer &rArr; draw_pixel_in_buffer
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_pixel_in_buffer
@@ -362,14 +362,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_circle_in_buffer
 </UL>
 
-<P><STRONG><a name="[3b]"></a>draw_pixel_in_buffer</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, main.o(i.draw_pixel_in_buffer))
+<P><STRONG><a name="[3b]"></a>draw_pixel_in_buffer</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, newlcd.o(i.draw_pixel_in_buffer))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = draw_pixel_in_buffer
 </UL>
-<BR>[Called By]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_line_in_buffer
-<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_circle_in_buffer
+<BR>[Called By]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_circle_in_buffer
+<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_line_in_buffer
 </UL>
 
-<P><STRONG><a name="[3d]"></a>init_LCD</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, lcd.o(i.init_LCD))
+<P><STRONG><a name="[3d]"></a>init_LCD</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, newlcd.o(i.init_LCD))
 <BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = init_LCD &rArr; init_SPI3 &rArr; SPI_Open &rArr; CLK_GetHCLKFreq &rArr; SystemCoreClockUpdate &rArr; __aeabi_uidivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcdWriteCommand
@@ -378,7 +378,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[3e]"></a>init_SPI3</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, lcd.o(i.init_SPI3))
+<P><STRONG><a name="[3e]"></a>init_SPI3</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, newlcd.o(i.init_SPI3))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = init_SPI3 &rArr; SPI_Open &rArr; CLK_GetHCLKFreq &rArr; SystemCoreClockUpdate &rArr; __aeabi_uidivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SPI_Open
@@ -387,8 +387,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_LCD
 </UL>
 
-<P><STRONG><a name="[41]"></a>init_lcd_buffer</STRONG> (Thumb, 64 bytes, Stack size 24 bytes, main.o(i.init_lcd_buffer))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = init_lcd_buffer &rArr; lcdSetAddr
+<P><STRONG><a name="[41]"></a>init_lcd_buffer</STRONG> (Thumb, 64 bytes, Stack size 20 bytes, newlcd.o(i.init_lcd_buffer))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = init_lcd_buffer &rArr; lcdSetAddr
 </UL>
 <BR>[Calls]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcdWriteData
 <LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcdSetAddr
@@ -396,18 +396,18 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[42]"></a>lcdSetAddr</STRONG> (Thumb, 106 bytes, Stack size 8 bytes, lcd.o(i.lcdSetAddr))
+<P><STRONG><a name="[42]"></a>lcdSetAddr</STRONG> (Thumb, 106 bytes, Stack size 8 bytes, newlcd.o(i.lcdSetAddr))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = lcdSetAddr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_lcd_buffer
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_lcd_buffer
 </UL>
 
-<P><STRONG><a name="[3f]"></a>lcdWriteCommand</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, lcd.o(i.lcdWriteCommand))
+<P><STRONG><a name="[3f]"></a>lcdWriteCommand</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, newlcd.o(i.lcdWriteCommand))
 <BR><BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_LCD
 </UL>
 
-<P><STRONG><a name="[43]"></a>lcdWriteData</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, lcd.o(i.lcdWriteData))
+<P><STRONG><a name="[43]"></a>lcdWriteData</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, newlcd.o(i.lcdWriteData))
 <BR><BR>[Called By]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_lcd_buffer
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_lcd_buffer
 </UL>
@@ -415,18 +415,18 @@ Global Symbols
 <P><STRONG><a name="[26]"></a>main</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 220<LI>Call Chain = main &rArr; draw_circle_in_buffer &rArr; draw_line_in_buffer &rArr; draw_pixel_in_buffer
 </UL>
-<BR>[Calls]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SYS_Init
-<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_lcd_buffer
+<BR>[Calls]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_lcd_buffer
 <LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_lcd_buffer
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_LCD
 <LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_circle_in_buffer
 <LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_lcd_buffer
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SYS_Init
 <LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CLK_SysTickDelay
-<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_LCD
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
-<P><STRONG><a name="[45]"></a>show_lcd_buffer</STRONG> (Thumb, 60 bytes, Stack size 24 bytes, main.o(i.show_lcd_buffer))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = show_lcd_buffer &rArr; lcdSetAddr
+<P><STRONG><a name="[45]"></a>show_lcd_buffer</STRONG> (Thumb, 60 bytes, Stack size 20 bytes, newlcd.o(i.show_lcd_buffer))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = show_lcd_buffer &rArr; lcdSetAddr
 </UL>
 <BR>[Calls]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcdWriteData
 <LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcdSetAddr

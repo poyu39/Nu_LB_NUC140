@@ -1,4 +1,9 @@
-#line 1 "..\\main.c"
+#line 1 "..\\..\\Library\\Nu-LB-NUC140\\Source\\NewLCD.c"
+
+
+
+
+ 
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdio.h"
  
  
@@ -898,7 +903,7 @@ extern __declspec(__nothrow) void __use_no_semihosting(void);
 
  
 
-#line 2 "..\\main.c"
+#line 7 "..\\..\\Library\\Nu-LB-NUC140\\Source\\NewLCD.c"
 #line 1 "C:\\Keil_v5\\ARM\\ARMCC\\Bin\\..\\include\\stdlib.h"
  
  
@@ -1636,7 +1641,7 @@ extern __declspec(__nothrow) int __C_library_version_number(void);
 
 
  
-#line 3 "..\\main.c"
+#line 8 "..\\..\\Library\\Nu-LB-NUC140\\Source\\NewLCD.c"
 #line 1 "..\\..\\Library\\Device\\Nuvoton\\NUC100Series\\Include\\NUC100Series.h"
  
 
@@ -21058,386 +21063,9 @@ void ACMP_Close(ACMP_T *, uint32_t u32ChNum);
 
 
 
-#line 4 "..\\main.c"
-#line 1 "..\\MCU_init.h"
-
-
-
-
-
-
-#line 5 "..\\main.c"
-#line 1 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
-
-
-
-
-
-
-#line 39 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
-
-
-#line 48 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
-
-
-
-
-
-
-
-
-#line 69 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
-
-
-#line 77 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
-
-
-#line 88 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#line 141 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#line 198 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
-
-#line 207 "..\\..\\Library\\Nu-LB-NUC140\\Include\\SYS_init.h"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-extern void SYS_Init(void);
-
-#line 6 "..\\main.c"
-#line 1 "..\\..\\Library\\Nu-LB-NUC140\\Include\\NewLCD.h"
+#line 9 "..\\..\\Library\\Nu-LB-NUC140\\Source\\NewLCD.c"
+#line 1 "..\\..\\Library\\Nu-LB-NUC140\\Include\\LCD.h"
+ 
 
 
 
@@ -21447,45 +21075,263 @@ extern void init_LCD(void);
 
 extern void clear_LCD(void);
 
-extern int lcdSetAddr(uint8_t PageAddr, uint8_t ColumnAddr);
+extern void printC(int16_t x, int16_t y, unsigned char ascii_code);
 
-extern int lcdWriteData(uint8_t temp);
+extern void printC_5x7(int16_t x, int16_t y, unsigned char ascii_code);
 
-extern void show_lcd_buffer(void);
+extern void print_Line(int8_t line, char text[]);
 
-extern void init_lcd_buffer(void);
+extern void printS(int16_t x, int16_t y, char text[]);
 
-extern void clear_lcd_buffer(void);
+extern void printS_5x7(int16_t x, int16_t y, char text[]);
 
-extern uint8_t get_lcd_buffer_bin(int16_t x, int16_t y);
+extern void draw_Bmp8x8(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp32x8(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp120x8(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp8x16(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp16x8(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp16x16(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp16x24(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp16x32(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp16x40(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp16x48(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp16x64(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp32x16(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp32x32(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp32x48(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp32x64(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
+extern void draw_Bmp64x64(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, unsigned char bitmap[]);
 
-extern void draw_pixel_in_buffer(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor);
+extern void draw_Pixel(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor);
 
-extern void draw_line_in_buffer(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t fgColor, uint16_t bgColor);
+extern void draw_LCD(unsigned char *buffer);
 
-extern void draw_circle_in_buffer(int16_t xc, int16_t yc, int16_t r, uint16_t fgColor, uint16_t bgColor, uint8_t isFill);
 
-extern void draw_rectangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t fgColor, uint16_t bgColor, uint8_t isFill);
+#line 10 "..\\..\\Library\\Nu-LB-NUC140\\Source\\NewLCD.c"
 
-extern void draw_triangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t fgColor, uint16_t bgColor, uint8_t isFill);
-#line 7 "..\\main.c"
+uint8_t lcd_buffer_hex[128 * (64 / 8)];
+uint8_t lcd_buffer_hex_last[128 * (64 / 8)];
 
-int main(void) {
-    SYS_Init();
-    init_LCD();
-    init_lcd_buffer();
-    clear_lcd_buffer();
-    show_lcd_buffer();
+void init_SPI3(void) {
+     
+     
+    SPI_Open(((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)), (0x0), ((1ul << 2)), 9, 1000000);
+    SPI_DisableAutoSS(((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)));
+}
 
+void lcdWriteCommand(unsigned char temp) {
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR = ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR & ~((1ul << 3)|(1ul << 2)|(1<<0))) | (1<<0));
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->TX[0] = (temp));  
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->CNTRL |= (1ul << 0));          
+    while (( ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->CNTRL & (1ul << 0))>>0 ))
+        ;  
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR = ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR & ~((1ul << 3)|(1ul << 2)|(1<<0))));
+}
+
+
+void lcdWriteData(uint8_t temp) {
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR = ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR & ~((1ul << 3)|(1ul << 2)|(1<<0))) | (1<<0));
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->TX[0] = (0x100 + temp));  
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->CNTRL |= (1ul << 0));                  
+    while (( ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->CNTRL & (1ul << 0))>>0 ))
+        ;  
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR = ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR & ~((1ul << 3)|(1ul << 2)|(1<<0))));
+}
+
+
+void lcdSetAddr(uint8_t PageAddr, uint8_t ColumnAddr) {
     
-    while (1) {
-        draw_circle_in_buffer(64, 32, 16, 0xFFFF, 0x0000, 1);
-        show_lcd_buffer();
-        CLK_SysTickDelay(10000000);
-        
-        clear_lcd_buffer();
-        draw_circle_in_buffer(64, 32, 16, 0xFFFF, 0xFFFF, 0);
-        show_lcd_buffer();
-        CLK_SysTickDelay(10000000);
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR = ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR & ~((1ul << 3)|(1ul << 2)|(1<<0))) | (1<<0));
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->TX[0] = (0xB0 | PageAddr));  
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->CNTRL |= (1ul << 0));                     
+    while (( ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->CNTRL & (1ul << 0))>>0 ))
+        ;  
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR = ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR & ~((1ul << 3)|(1ul << 2)|(1<<0))));
+    
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR = ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR & ~((1ul << 3)|(1ul << 2)|(1<<0))) | (1<<0));
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->TX[0] = (0x10 | (ColumnAddr >> 4) & 0xF));  
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->CNTRL |= (1ul << 0));                                    
+    while (( ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->CNTRL & (1ul << 0))>>0 ))
+        ;  
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR = ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR & ~((1ul << 3)|(1ul << 2)|(1<<0))));
+    
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR = ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR & ~((1ul << 3)|(1ul << 2)|(1<<0))) | (1<<0));
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->TX[0] = (0x00 | (ColumnAddr & 0xF)));  
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->CNTRL |= (1ul << 0));                               
+    while (( ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->CNTRL & (1ul << 0))>>0 ))
+        ;  
+    ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR = ((((SPI_T *) ((( uint32_t)0x40100000) + 0x34000)))->SSR & ~((1ul << 3)|(1ul << 2)|(1<<0))));
+}
+
+void init_LCD(void) {
+    init_SPI3();
+    lcdWriteCommand(0xEB);
+    lcdWriteCommand(0x81);
+    lcdWriteCommand(0xA0);
+    lcdWriteCommand(0xC0);
+    lcdWriteCommand(0xAF);  
+}
+
+void show_lcd_buffer() {
+    uint8_t x, y;
+    for (x = 0; x < 128; x++) {
+        for (y = 0; y < (64 / 8); y++) {
+            if (lcd_buffer_hex[x + y * 128] == lcd_buffer_hex_last[x + y * 128]) continue;
+            lcd_buffer_hex_last[x + y * 128] = lcd_buffer_hex[x + y * 128];
+            lcdSetAddr(y, (128 + 1 - x));
+            lcdWriteData(lcd_buffer_hex[x + y * 128]);
+        }
+    }
+}
+
+void init_lcd_buffer() {
+    int i, x, y;
+    for (i = 0; i < 128 * 64 / 8; i++) {
+        lcd_buffer_hex[i] = 0x00;
+        lcd_buffer_hex_last[i] = 0x00;
+    }
+    for (x = 0; x < 128; x++) {
+        for (y = 0; y < (64 / 8); y++) {
+            lcdSetAddr(y, (128 + 1 - x));
+            lcdWriteData(lcd_buffer_hex[x + y * 128]);
+        }
+    }
+}
+
+void clear_lcd_buffer() {
+    int i;
+    for (i = 0; i < 128 * 64 / 8; i++) {
+        lcd_buffer_hex[i] = 0x00;
+    }
+}
+
+uint8_t get_lcd_buffer_bin(int16_t x, int16_t y) {
+    return (lcd_buffer_hex[x + y / 8 * 128] >> (y % 8)) & 0x01;
+}
+
+void draw_pixel_in_buffer(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor) {
+    if (fgColor == 0xFFFF)
+        lcd_buffer_hex[x + y / 8 * 128] |= (0x01 << (y % 8));
+    else if (fgColor == 0x0000)
+        lcd_buffer_hex[x + y / 8 * 128] &= (0xFE << (y % 8));
+}
+
+void draw_line_in_buffer(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t fgColor, uint16_t bgColor) {
+    int16_t dy = y2 - y1;
+    int16_t dx = x2 - x1;
+    int16_t stepx, stepy;
+
+    if (dy < 0) {
+        dy = -dy;
+        stepy = -1;
+    } else {
+        stepy = 1;
+    }
+    if (dx < 0) {
+        dx = -dx;
+        stepx = -1;
+    } else {
+        stepx = 1;
+    }
+    dy <<= 1;  
+    dx <<= 1;  
+
+    draw_pixel_in_buffer(x1, y1, fgColor, bgColor);
+    if (dx > dy) {
+        int fraction = dy - (dx >> 1);  
+        while (x1 != x2) {
+            if (fraction >= 0) {
+                y1 += stepy;
+                fraction -= dx;  
+            }
+            x1 += stepx;
+            fraction += dy;  
+            draw_pixel_in_buffer(x1, y1, fgColor, bgColor);
+        }
+    } else {
+        int fraction = dx - (dy >> 1);
+        while (y1 != y2) {
+            if (fraction >= 0) {
+                x1 += stepx;
+                fraction -= dy;
+            }
+            y1 += stepy;
+            fraction += dx;
+            draw_pixel_in_buffer(x1, y1, fgColor, bgColor);
+        }
+    }
+}
+
+void draw_circle_in_buffer(int16_t xc, int16_t yc, int16_t r, uint16_t fgColor, uint16_t bgColor, uint8_t isFill) {
+    int16_t x = 0;
+    int16_t y = r;
+    int16_t p = 3 - 2 * r;
+    if (!r)
+        return;
+    while (y >= x) { 
+        draw_pixel_in_buffer(xc - x, yc - y, fgColor, bgColor);  
+        draw_pixel_in_buffer(xc - y, yc - x, fgColor, bgColor);  
+        draw_pixel_in_buffer(xc + y, yc - x, fgColor, bgColor);  
+        draw_pixel_in_buffer(xc + x, yc - y, fgColor, bgColor);  
+        draw_pixel_in_buffer(xc - x, yc + y, fgColor, bgColor);  
+        draw_pixel_in_buffer(xc - y, yc + x, fgColor, bgColor);  
+        draw_pixel_in_buffer(xc + y, yc + x, fgColor, bgColor);  
+        draw_pixel_in_buffer(xc + x, yc + y, fgColor, bgColor);  
+        if (isFill == 1) {
+            draw_line_in_buffer(xc - x, yc - y, xc + x, yc - y, fgColor, bgColor);
+            draw_line_in_buffer(xc - y, yc - x, xc + y, yc - x, fgColor, bgColor);
+            draw_line_in_buffer(xc - x, yc + y, xc + x, yc + y, fgColor, bgColor);
+            draw_line_in_buffer(xc - y, yc + x, xc + y, yc + x, fgColor, bgColor);
+        }
+        if (p < 0)
+            p += 4 * (x++) + 6;
+        else
+            p += 4 * ((x++) - y--) + 10;
+    }
+}
+
+void draw_rectangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t fgColor, uint16_t bgColor, uint8_t isFill) {
+    int16_t x, y, tmp;
+    if (x0 > x1) {
+        tmp = x1;
+        x1 = x0;
+        x0 = tmp;
+    }
+    if (y0 > y1) {
+        tmp = y1;
+        y1 = y0;
+        y0 = tmp;
+    }
+    if (isFill == 1) {
+        for (x = x0; x <= x1; x++) {
+            for (y = y0; y <= y1; y++) {
+                draw_pixel_in_buffer(x, y, fgColor, bgColor);
+            }
+        }
+    } else {
+        for (x = x0; x <= x1; x++) draw_pixel_in_buffer(x, y0, fgColor, bgColor);
+        for (y = y0; y <= y1; y++) draw_pixel_in_buffer(x0, y, fgColor, bgColor);
+        for (x = x0; x <= x1; x++) draw_pixel_in_buffer(x, y1, fgColor, bgColor);
+        for (y = y0; y <= y1; y++) draw_pixel_in_buffer(x1, y, fgColor, bgColor);
+    }
+}
+
+void draw_triangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t fgColor, uint16_t bgColor, uint8_t isFill) {
+    int i;
+    int dx = abs(x0 - x2);
+    int dy = abs(y0 - y2);
+    draw_line_in_buffer(x0, y0, x1, y1, fgColor, bgColor);
+    draw_line_in_buffer(x1, y1, x2, y2, fgColor, bgColor);
+    draw_line_in_buffer(x0, y0, x2, y2, fgColor, bgColor);
+    if (isFill) {
+        if (dx > dy) {
+            for (i = 0; i < dx; i++) {
+                draw_line_in_buffer(x1, y1, x0 + i, y0 + i * dy / dx + dy, fgColor, bgColor);
+            }
+        } else {
+            for (i = 0; i < dy; i++) {
+                draw_line_in_buffer(x1, y1, x0 + i * dx / dy + dx, y0 + i, fgColor, bgColor);
+            }
+        }
     }
 }

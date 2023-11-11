@@ -465,11 +465,6 @@
           <GroupName>User</GroupName>
           <Files>
             <File>
-              <FileName>LCD.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\Library\Nu-LB-NUC140\Source\LCD.c</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\main.c</FilePath>
@@ -478,6 +473,11 @@
               <FileName>SYS_init.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Library\Nu-LB-NUC140\Source\SYS_init.c</FilePath>
+            </File>
+            <File>
+              <FileName>NewLCD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Library\Nu-LB-NUC140\Source\NewLCD.c</FilePath>
             </File>
           </Files>
         </Group>
