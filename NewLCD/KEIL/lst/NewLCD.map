@@ -93,6 +93,7 @@ Section Cross References
     lcd.o(i.printS_5x7) refers to strlen.o(.text) for strlen
     lcd.o(i.print_Line) refers to lcd.o(i.printC) for printC
     lcd.o(i.print_Line) refers to strlen.o(.text) for strlen
+    main.o(i.CLK_SysTickDelay) refers to system_nuc100series.o(.data) for CyclesPerUs
     main.o(i.clear_lcd_buffer) refers to main.o(.bss) for .bss
     main.o(i.draw_circle_in_buffer) refers to main.o(i.draw_pixel_in_buffer) for draw_pixel_in_buffer
     main.o(i.draw_circle_in_buffer) refers to main.o(i.draw_line_in_buffer) for draw_line_in_buffer
@@ -104,12 +105,11 @@ Section Cross References
     main.o(i.init_lcd_buffer) refers to main.o(.bss) for .bss
     main.o(i.main) refers to sys_init.o(i.SYS_Init) for SYS_Init
     main.o(i.main) refers to lcd.o(i.init_LCD) for init_LCD
+    main.o(i.main) refers to main.o(i.init_lcd_buffer) for init_lcd_buffer
     main.o(i.main) refers to main.o(i.clear_lcd_buffer) for clear_lcd_buffer
-    main.o(i.main) refers to main.o(i.draw_line_in_buffer) for draw_line_in_buffer
-    main.o(i.main) refers to main.o(i.draw_rectangle_in_buffer) for draw_rectangle_in_buffer
-    main.o(i.main) refers to main.o(i.draw_circle_in_buffer) for draw_circle_in_buffer
-    main.o(i.main) refers to main.o(i.draw_triangle_in_buffer) for draw_triangle_in_buffer
     main.o(i.main) refers to main.o(i.show_lcd_buffer) for show_lcd_buffer
+    main.o(i.main) refers to main.o(i.draw_circle_in_buffer) for draw_circle_in_buffer
+    main.o(i.main) refers to main.o(i.CLK_SysTickDelay) for CLK_SysTickDelay
     main.o(i.show_lcd_buffer) refers to lcd.o(i.lcdSetAddr) for lcdSetAddr
     main.o(i.show_lcd_buffer) refers to lcd.o(i.lcdWriteData) for lcdWriteData
     main.o(i.show_lcd_buffer) refers to main.o(.bss) for .bss
@@ -239,11 +239,12 @@ Removing Unused input sections from the image.
     Removing lcd.o(.data), (2000 bytes).
     Removing main.o(.rev16_text), (4 bytes).
     Removing main.o(.revsh_text), (4 bytes).
-    Removing main.o(i.init_lcd_buffer), (36 bytes).
+    Removing main.o(i.draw_rectangle_in_buffer), (164 bytes).
+    Removing main.o(i.draw_triangle_in_buffer), (188 bytes).
     Removing sys_init.o(.rev16_text), (4 bytes).
     Removing sys_init.o(.revsh_text), (4 bytes).
 
-102 unused section(s) (total 7746 bytes) removed from the image.
+103 unused section(s) (total 8062 bytes) removed from the image.
 
 ==============================================================================
 
@@ -254,9 +255,8 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     RESET                                    0x00000000   Section      192  startup_nuc100series.o(RESET)
-    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  idiv.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
@@ -264,6 +264,7 @@ Image Symbol Table
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
@@ -304,43 +305,43 @@ Image Symbol Table
     .text                                    0x000000d4   Section       76  startup_nuc100series.o(.text)
     Default_Handler                          0x000000ff   Thumb Code     2  startup_nuc100series.o(.text)
     .text                                    0x00000120   Section        0  uidiv.o(.text)
-    .text                                    0x0000014c   Section        0  idiv.o(.text)
-    .text                                    0x00000174   Section       36  init.o(.text)
-    i.CLK_EnableModuleClock                  0x00000198   Section        0  clk.o(i.CLK_EnableModuleClock)
-    i.CLK_EnablePLL                          0x000001c8   Section        0  clk.o(i.CLK_EnablePLL)
-    i.CLK_EnableXtalRC                       0x00000360   Section        0  clk.o(i.CLK_EnableXtalRC)
-    i.CLK_GetHCLKFreq                        0x00000370   Section        0  clk.o(i.CLK_GetHCLKFreq)
-    i.CLK_GetPLLClockFreq                    0x00000380   Section        0  spi.o(i.CLK_GetPLLClockFreq)
-    CLK_GetPLLClockFreq                      0x00000381   Thumb Code    70  spi.o(i.CLK_GetPLLClockFreq)
-    i.CLK_SetCoreClock                       0x000003d8   Section        0  clk.o(i.CLK_SetCoreClock)
-    i.CLK_SetHCLK                            0x00000450   Section        0  clk.o(i.CLK_SetHCLK)
-    i.CLK_SetModuleClock                     0x00000498   Section        0  clk.o(i.CLK_SetModuleClock)
-    i.CLK_WaitClockReady                     0x00000564   Section        0  clk.o(i.CLK_WaitClockReady)
-    i.SPI_DisableAutoSS                      0x00000590   Section        0  spi.o(i.SPI_DisableAutoSS)
-    i.SPI_Open                               0x0000059c   Section        0  spi.o(i.SPI_Open)
-    i.SYS_Init                               0x00000708   Section        0  sys_init.o(i.SYS_Init)
-    i.SystemCoreClockUpdate                  0x0000077c   Section        0  system_nuc100series.o(i.SystemCoreClockUpdate)
-    i.SystemInit                             0x0000080c   Section        0  system_nuc100series.o(i.SystemInit)
-    i.__scatterload_copy                     0x0000080e   Section       14  handlers.o(i.__scatterload_copy)
-    i.__scatterload_null                     0x0000081c   Section        2  handlers.o(i.__scatterload_null)
-    i.__scatterload_zeroinit                 0x0000081e   Section       14  handlers.o(i.__scatterload_zeroinit)
-    i.clear_lcd_buffer                       0x0000082c   Section        0  main.o(i.clear_lcd_buffer)
-    i.draw_circle_in_buffer                  0x00000844   Section        0  main.o(i.draw_circle_in_buffer)
-    i.draw_line_in_buffer                    0x0000097e   Section        0  main.o(i.draw_line_in_buffer)
-    i.draw_pixel_in_buffer                   0x00000a34   Section        0  main.o(i.draw_pixel_in_buffer)
-    i.draw_rectangle_in_buffer               0x00000a54   Section        0  main.o(i.draw_rectangle_in_buffer)
-    i.draw_triangle_in_buffer                0x00000af8   Section        0  main.o(i.draw_triangle_in_buffer)
-    i.init_LCD                               0x00000bb4   Section        0  lcd.o(i.init_LCD)
-    i.init_SPI3                              0x00000bdc   Section        0  lcd.o(i.init_SPI3)
-    i.lcdSetAddr                             0x00000c00   Section        0  lcd.o(i.lcdSetAddr)
-    i.lcdWriteCommand                        0x00000c70   Section        0  lcd.o(i.lcdWriteCommand)
-    i.lcdWriteData                           0x00000c98   Section        0  lcd.o(i.lcdWriteData)
-    i.main                                   0x00000cc4   Section        0  main.o(i.main)
-    i.show_lcd_buffer                        0x00000d70   Section        0  main.o(i.show_lcd_buffer)
-    .constdata                               0x00000dcc   Section       56  clk.o(.constdata)
+    .text                                    0x0000014c   Section       36  init.o(.text)
+    i.CLK_EnableModuleClock                  0x00000170   Section        0  clk.o(i.CLK_EnableModuleClock)
+    i.CLK_EnablePLL                          0x000001a0   Section        0  clk.o(i.CLK_EnablePLL)
+    i.CLK_EnableXtalRC                       0x00000338   Section        0  clk.o(i.CLK_EnableXtalRC)
+    i.CLK_GetHCLKFreq                        0x00000348   Section        0  clk.o(i.CLK_GetHCLKFreq)
+    i.CLK_GetPLLClockFreq                    0x00000358   Section        0  spi.o(i.CLK_GetPLLClockFreq)
+    CLK_GetPLLClockFreq                      0x00000359   Thumb Code    70  spi.o(i.CLK_GetPLLClockFreq)
+    i.CLK_SetCoreClock                       0x000003b0   Section        0  clk.o(i.CLK_SetCoreClock)
+    i.CLK_SetHCLK                            0x00000428   Section        0  clk.o(i.CLK_SetHCLK)
+    i.CLK_SetModuleClock                     0x00000470   Section        0  clk.o(i.CLK_SetModuleClock)
+    i.CLK_SysTickDelay                       0x0000053c   Section        0  main.o(i.CLK_SysTickDelay)
+    CLK_SysTickDelay                         0x0000053d   Thumb Code    28  main.o(i.CLK_SysTickDelay)
+    i.CLK_WaitClockReady                     0x00000560   Section        0  clk.o(i.CLK_WaitClockReady)
+    i.SPI_DisableAutoSS                      0x0000058c   Section        0  spi.o(i.SPI_DisableAutoSS)
+    i.SPI_Open                               0x00000598   Section        0  spi.o(i.SPI_Open)
+    i.SYS_Init                               0x00000704   Section        0  sys_init.o(i.SYS_Init)
+    i.SystemCoreClockUpdate                  0x00000778   Section        0  system_nuc100series.o(i.SystemCoreClockUpdate)
+    i.SystemInit                             0x00000808   Section        0  system_nuc100series.o(i.SystemInit)
+    i.__scatterload_copy                     0x0000080a   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x00000818   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x0000081a   Section       14  handlers.o(i.__scatterload_zeroinit)
+    i.clear_lcd_buffer                       0x00000828   Section        0  main.o(i.clear_lcd_buffer)
+    i.draw_circle_in_buffer                  0x00000840   Section        0  main.o(i.draw_circle_in_buffer)
+    i.draw_line_in_buffer                    0x0000097a   Section        0  main.o(i.draw_line_in_buffer)
+    i.draw_pixel_in_buffer                   0x00000a30   Section        0  main.o(i.draw_pixel_in_buffer)
+    i.init_LCD                               0x00000a70   Section        0  lcd.o(i.init_LCD)
+    i.init_SPI3                              0x00000a98   Section        0  lcd.o(i.init_SPI3)
+    i.init_lcd_buffer                        0x00000abc   Section        0  main.o(i.init_lcd_buffer)
+    i.lcdSetAddr                             0x00000ae0   Section        0  lcd.o(i.lcdSetAddr)
+    i.lcdWriteCommand                        0x00000b50   Section        0  lcd.o(i.lcdWriteCommand)
+    i.lcdWriteData                           0x00000b78   Section        0  lcd.o(i.lcdWriteData)
+    i.main                                   0x00000ba4   Section        0  main.o(i.main)
+    i.show_lcd_buffer                        0x00000c10   Section        0  main.o(i.show_lcd_buffer)
+    .constdata                               0x00000c54   Section       56  clk.o(.constdata)
     .data                                    0x20000000   Section       44  system_nuc100series.o(.data)
-    .bss                                     0x2000002c   Section    16384  main.o(.bss)
-    STACK                                    0x20004030   Section     1024  startup_nuc100series.o(STACK)
+    .bss                                     0x2000002c   Section     2048  main.o(.bss)
+    STACK                                    0x20000830   Section     1024  startup_nuc100series.o(STACK)
 
     Global Symbols
 
@@ -402,48 +403,45 @@ Image Symbol Table
     WDT_IRQHandler                           0x000000ff   Thumb Code     0  startup_nuc100series.o(.text)
     __aeabi_uidiv                            0x00000121   Thumb Code     0  uidiv.o(.text)
     __aeabi_uidivmod                         0x00000121   Thumb Code    44  uidiv.o(.text)
-    __aeabi_idiv                             0x0000014d   Thumb Code     0  idiv.o(.text)
-    __aeabi_idivmod                          0x0000014d   Thumb Code    40  idiv.o(.text)
-    __scatterload                            0x00000175   Thumb Code    28  init.o(.text)
-    __scatterload_rt2                        0x00000175   Thumb Code     0  init.o(.text)
-    CLK_EnableModuleClock                    0x00000199   Thumb Code    40  clk.o(i.CLK_EnableModuleClock)
-    CLK_EnablePLL                            0x000001c9   Thumb Code   348  clk.o(i.CLK_EnablePLL)
-    CLK_EnableXtalRC                         0x00000361   Thumb Code    10  clk.o(i.CLK_EnableXtalRC)
-    CLK_GetHCLKFreq                          0x00000371   Thumb Code    12  clk.o(i.CLK_GetHCLKFreq)
-    CLK_SetCoreClock                         0x000003d9   Thumb Code   112  clk.o(i.CLK_SetCoreClock)
-    CLK_SetHCLK                              0x00000451   Thumb Code    66  clk.o(i.CLK_SetHCLK)
-    CLK_SetModuleClock                       0x00000499   Thumb Code   180  clk.o(i.CLK_SetModuleClock)
-    CLK_WaitClockReady                       0x00000565   Thumb Code    34  clk.o(i.CLK_WaitClockReady)
-    SPI_DisableAutoSS                        0x00000591   Thumb Code    10  spi.o(i.SPI_DisableAutoSS)
-    SPI_Open                                 0x0000059d   Thumb Code   348  spi.o(i.SPI_Open)
-    SYS_Init                                 0x00000709   Thumb Code   104  sys_init.o(i.SYS_Init)
-    SystemCoreClockUpdate                    0x0000077d   Thumb Code   118  system_nuc100series.o(i.SystemCoreClockUpdate)
-    SystemInit                               0x0000080d   Thumb Code     2  system_nuc100series.o(i.SystemInit)
-    __scatterload_copy                       0x0000080f   Thumb Code    14  handlers.o(i.__scatterload_copy)
-    __scatterload_null                       0x0000081d   Thumb Code     2  handlers.o(i.__scatterload_null)
-    __scatterload_zeroinit                   0x0000081f   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
-    clear_lcd_buffer                         0x0000082d   Thumb Code    20  main.o(i.clear_lcd_buffer)
-    draw_circle_in_buffer                    0x00000845   Thumb Code   314  main.o(i.draw_circle_in_buffer)
-    draw_line_in_buffer                      0x0000097f   Thumb Code   180  main.o(i.draw_line_in_buffer)
-    draw_pixel_in_buffer                     0x00000a35   Thumb Code    24  main.o(i.draw_pixel_in_buffer)
-    draw_rectangle_in_buffer                 0x00000a55   Thumb Code   164  main.o(i.draw_rectangle_in_buffer)
-    draw_triangle_in_buffer                  0x00000af9   Thumb Code   188  main.o(i.draw_triangle_in_buffer)
-    init_LCD                                 0x00000bb5   Thumb Code    38  lcd.o(i.init_LCD)
-    init_SPI3                                0x00000bdd   Thumb Code    28  lcd.o(i.init_SPI3)
-    lcdSetAddr                               0x00000c01   Thumb Code   106  lcd.o(i.lcdSetAddr)
-    lcdWriteCommand                          0x00000c71   Thumb Code    36  lcd.o(i.lcdWriteCommand)
-    lcdWriteData                             0x00000c99   Thumb Code    40  lcd.o(i.lcdWriteData)
-    main                                     0x00000cc5   Thumb Code   166  main.o(i.main)
-    show_lcd_buffer                          0x00000d71   Thumb Code    84  main.o(i.show_lcd_buffer)
-    Region$$Table$$Base                      0x00000e04   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00000e24   Number         0  anon$$obj.o(Region$$Table)
+    __scatterload                            0x0000014d   Thumb Code    28  init.o(.text)
+    __scatterload_rt2                        0x0000014d   Thumb Code     0  init.o(.text)
+    CLK_EnableModuleClock                    0x00000171   Thumb Code    40  clk.o(i.CLK_EnableModuleClock)
+    CLK_EnablePLL                            0x000001a1   Thumb Code   348  clk.o(i.CLK_EnablePLL)
+    CLK_EnableXtalRC                         0x00000339   Thumb Code    10  clk.o(i.CLK_EnableXtalRC)
+    CLK_GetHCLKFreq                          0x00000349   Thumb Code    12  clk.o(i.CLK_GetHCLKFreq)
+    CLK_SetCoreClock                         0x000003b1   Thumb Code   112  clk.o(i.CLK_SetCoreClock)
+    CLK_SetHCLK                              0x00000429   Thumb Code    66  clk.o(i.CLK_SetHCLK)
+    CLK_SetModuleClock                       0x00000471   Thumb Code   180  clk.o(i.CLK_SetModuleClock)
+    CLK_WaitClockReady                       0x00000561   Thumb Code    34  clk.o(i.CLK_WaitClockReady)
+    SPI_DisableAutoSS                        0x0000058d   Thumb Code    10  spi.o(i.SPI_DisableAutoSS)
+    SPI_Open                                 0x00000599   Thumb Code   348  spi.o(i.SPI_Open)
+    SYS_Init                                 0x00000705   Thumb Code   104  sys_init.o(i.SYS_Init)
+    SystemCoreClockUpdate                    0x00000779   Thumb Code   118  system_nuc100series.o(i.SystemCoreClockUpdate)
+    SystemInit                               0x00000809   Thumb Code     2  system_nuc100series.o(i.SystemInit)
+    __scatterload_copy                       0x0000080b   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x00000819   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x0000081b   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    clear_lcd_buffer                         0x00000829   Thumb Code    20  main.o(i.clear_lcd_buffer)
+    draw_circle_in_buffer                    0x00000841   Thumb Code   314  main.o(i.draw_circle_in_buffer)
+    draw_line_in_buffer                      0x0000097b   Thumb Code   180  main.o(i.draw_line_in_buffer)
+    draw_pixel_in_buffer                     0x00000a31   Thumb Code    56  main.o(i.draw_pixel_in_buffer)
+    init_LCD                                 0x00000a71   Thumb Code    38  lcd.o(i.init_LCD)
+    init_SPI3                                0x00000a99   Thumb Code    28  lcd.o(i.init_SPI3)
+    init_lcd_buffer                          0x00000abd   Thumb Code    26  main.o(i.init_lcd_buffer)
+    lcdSetAddr                               0x00000ae1   Thumb Code   106  lcd.o(i.lcdSetAddr)
+    lcdWriteCommand                          0x00000b51   Thumb Code    36  lcd.o(i.lcdWriteCommand)
+    lcdWriteData                             0x00000b79   Thumb Code    40  lcd.o(i.lcdWriteData)
+    main                                     0x00000ba5   Thumb Code   100  main.o(i.main)
+    show_lcd_buffer                          0x00000c11   Thumb Code    60  main.o(i.show_lcd_buffer)
+    Region$$Table$$Base                      0x00000c8c   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00000cac   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_nuc100series.o(.data)
     CyclesPerUs                              0x20000004   Data           4  system_nuc100series.o(.data)
     PllClock                                 0x20000008   Data           4  system_nuc100series.o(.data)
     gau32ClkSrcTbl                           0x2000000c   Data          32  system_nuc100series.o(.data)
-    lcd_buffer_bin                           0x2000002c   Data        8192  main.o(.bss)
-    lcd_buffer_bin_last                      0x2000202c   Data        8192  main.o(.bss)
-    __initial_sp                             0x20004430   Data           0  startup_nuc100series.o(STACK)
+    lcd_buffer_hex                           0x2000002c   Data        1024  main.o(.bss)
+    lcd_buffer_hex_last                      0x2000042c   Data        1024  main.o(.bss)
+    __initial_sp                             0x20000c30   Data           0  startup_nuc100series.o(STACK)
 
 
 
@@ -453,77 +451,76 @@ Memory Map of the image
 
   Image Entry point : 0x000000d5
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00000e50, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00000cd8, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000e24, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000cac, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x00000000   0x00000000   0x000000c0   Data   RO          114    RESET               startup_nuc100series.o
-    0x000000c0   0x000000c0   0x00000000   Code   RO          974  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
-    0x000000c0   0x000000c0   0x00000004   Code   RO          981    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
-    0x000000c4   0x000000c4   0x00000004   Code   RO          984    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
-    0x000000c8   0x000000c8   0x00000000   Code   RO          986    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
-    0x000000c8   0x000000c8   0x00000000   Code   RO          988    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
-    0x000000c8   0x000000c8   0x00000008   Code   RO          989    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
-    0x000000d0   0x000000d0   0x00000000   Code   RO          991    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
-    0x000000d0   0x000000d0   0x00000000   Code   RO          993    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
-    0x000000d0   0x000000d0   0x00000004   Code   RO          982    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x000000c0   0x000000c0   0x00000000   Code   RO          979  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x000000c0   0x000000c0   0x00000004   Code   RO          986    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x000000c4   0x000000c4   0x00000004   Code   RO          989    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO          991    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO          993    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x000000c8   0x000000c8   0x00000008   Code   RO          994    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO          996    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO          998    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x000000d0   0x000000d0   0x00000004   Code   RO          987    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
     0x000000d4   0x000000d4   0x0000004c   Code   RO          115  * .text               startup_nuc100series.o
-    0x00000120   0x00000120   0x0000002c   Code   RO          975    .text               mc_p.l(uidiv.o)
-    0x0000014c   0x0000014c   0x00000028   Code   RO          977    .text               mc_p.l(idiv.o)
-    0x00000174   0x00000174   0x00000024   Code   RO          995    .text               mc_p.l(init.o)
-    0x00000198   0x00000198   0x00000030   Code   RO          127    i.CLK_EnableModuleClock  clk.o
-    0x000001c8   0x000001c8   0x00000198   Code   RO          128    i.CLK_EnablePLL     clk.o
-    0x00000360   0x00000360   0x00000010   Code   RO          130    i.CLK_EnableXtalRC  clk.o
-    0x00000370   0x00000370   0x00000010   Code   RO          132    i.CLK_GetHCLKFreq   clk.o
-    0x00000380   0x00000380   0x00000058   Code   RO          272    i.CLK_GetPLLClockFreq  spi.o
-    0x000003d8   0x000003d8   0x00000078   Code   RO          138    i.CLK_SetCoreClock  clk.o
-    0x00000450   0x00000450   0x00000048   Code   RO          139    i.CLK_SetHCLK       clk.o
-    0x00000498   0x00000498   0x000000cc   Code   RO          140    i.CLK_SetModuleClock  clk.o
-    0x00000564   0x00000564   0x0000002c   Code   RO          142    i.CLK_WaitClockReady  clk.o
-    0x00000590   0x00000590   0x0000000a   Code   RO          277    i.SPI_DisableAutoSS  spi.o
-    0x0000059a   0x0000059a   0x00000002   PAD
-    0x0000059c   0x0000059c   0x0000016c   Code   RO          286    i.SPI_Open          spi.o
-    0x00000708   0x00000708   0x00000074   Code   RO          950    i.SYS_Init          sys_init.o
-    0x0000077c   0x0000077c   0x00000090   Code   RO            3    i.SystemCoreClockUpdate  system_nuc100series.o
-    0x0000080c   0x0000080c   0x00000002   Code   RO            4    i.SystemInit        system_nuc100series.o
-    0x0000080e   0x0000080e   0x0000000e   Code   RO          999    i.__scatterload_copy  mc_p.l(handlers.o)
-    0x0000081c   0x0000081c   0x00000002   Code   RO         1000    i.__scatterload_null  mc_p.l(handlers.o)
-    0x0000081e   0x0000081e   0x0000000e   Code   RO         1001    i.__scatterload_zeroinit  mc_p.l(handlers.o)
-    0x0000082c   0x0000082c   0x00000018   Code   RO          825    i.clear_lcd_buffer  main.o
-    0x00000844   0x00000844   0x0000013a   Code   RO          826    i.draw_circle_in_buffer  main.o
-    0x0000097e   0x0000097e   0x000000b4   Code   RO          827    i.draw_line_in_buffer  main.o
-    0x00000a32   0x00000a32   0x00000002   PAD
-    0x00000a34   0x00000a34   0x00000020   Code   RO          828    i.draw_pixel_in_buffer  main.o
-    0x00000a54   0x00000a54   0x000000a4   Code   RO          829    i.draw_rectangle_in_buffer  main.o
-    0x00000af8   0x00000af8   0x000000bc   Code   RO          830    i.draw_triangle_in_buffer  main.o
-    0x00000bb4   0x00000bb4   0x00000026   Code   RO          641    i.init_LCD          lcd.o
-    0x00000bda   0x00000bda   0x00000002   PAD
-    0x00000bdc   0x00000bdc   0x00000024   Code   RO          642    i.init_SPI3         lcd.o
-    0x00000c00   0x00000c00   0x00000070   Code   RO          643    i.lcdSetAddr        lcd.o
-    0x00000c70   0x00000c70   0x00000028   Code   RO          644    i.lcdWriteCommand   lcd.o
-    0x00000c98   0x00000c98   0x0000002c   Code   RO          645    i.lcdWriteData      lcd.o
-    0x00000cc4   0x00000cc4   0x000000ac   Code   RO          832    i.main              main.o
-    0x00000d70   0x00000d70   0x0000005c   Code   RO          833    i.show_lcd_buffer   main.o
-    0x00000dcc   0x00000dcc   0x00000038   Data   RO          143    .constdata          clk.o
-    0x00000e04   0x00000e04   0x00000020   Data   RO          997    Region$$Table       anon$$obj.o
+    0x00000120   0x00000120   0x0000002c   Code   RO          980    .text               mc_p.l(uidiv.o)
+    0x0000014c   0x0000014c   0x00000024   Code   RO         1000    .text               mc_p.l(init.o)
+    0x00000170   0x00000170   0x00000030   Code   RO          127    i.CLK_EnableModuleClock  clk.o
+    0x000001a0   0x000001a0   0x00000198   Code   RO          128    i.CLK_EnablePLL     clk.o
+    0x00000338   0x00000338   0x00000010   Code   RO          130    i.CLK_EnableXtalRC  clk.o
+    0x00000348   0x00000348   0x00000010   Code   RO          132    i.CLK_GetHCLKFreq   clk.o
+    0x00000358   0x00000358   0x00000058   Code   RO          272    i.CLK_GetPLLClockFreq  spi.o
+    0x000003b0   0x000003b0   0x00000078   Code   RO          138    i.CLK_SetCoreClock  clk.o
+    0x00000428   0x00000428   0x00000048   Code   RO          139    i.CLK_SetHCLK       clk.o
+    0x00000470   0x00000470   0x000000cc   Code   RO          140    i.CLK_SetModuleClock  clk.o
+    0x0000053c   0x0000053c   0x00000024   Code   RO          825    i.CLK_SysTickDelay  main.o
+    0x00000560   0x00000560   0x0000002c   Code   RO          142    i.CLK_WaitClockReady  clk.o
+    0x0000058c   0x0000058c   0x0000000a   Code   RO          277    i.SPI_DisableAutoSS  spi.o
+    0x00000596   0x00000596   0x00000002   PAD
+    0x00000598   0x00000598   0x0000016c   Code   RO          286    i.SPI_Open          spi.o
+    0x00000704   0x00000704   0x00000074   Code   RO          955    i.SYS_Init          sys_init.o
+    0x00000778   0x00000778   0x00000090   Code   RO            3    i.SystemCoreClockUpdate  system_nuc100series.o
+    0x00000808   0x00000808   0x00000002   Code   RO            4    i.SystemInit        system_nuc100series.o
+    0x0000080a   0x0000080a   0x0000000e   Code   RO         1004    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x00000818   0x00000818   0x00000002   Code   RO         1005    i.__scatterload_null  mc_p.l(handlers.o)
+    0x0000081a   0x0000081a   0x0000000e   Code   RO         1006    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x00000828   0x00000828   0x00000018   Code   RO          826    i.clear_lcd_buffer  main.o
+    0x00000840   0x00000840   0x0000013a   Code   RO          827    i.draw_circle_in_buffer  main.o
+    0x0000097a   0x0000097a   0x000000b4   Code   RO          828    i.draw_line_in_buffer  main.o
+    0x00000a2e   0x00000a2e   0x00000002   PAD
+    0x00000a30   0x00000a30   0x00000040   Code   RO          829    i.draw_pixel_in_buffer  main.o
+    0x00000a70   0x00000a70   0x00000026   Code   RO          641    i.init_LCD          lcd.o
+    0x00000a96   0x00000a96   0x00000002   PAD
+    0x00000a98   0x00000a98   0x00000024   Code   RO          642    i.init_SPI3         lcd.o
+    0x00000abc   0x00000abc   0x00000024   Code   RO          832    i.init_lcd_buffer   main.o
+    0x00000ae0   0x00000ae0   0x00000070   Code   RO          643    i.lcdSetAddr        lcd.o
+    0x00000b50   0x00000b50   0x00000028   Code   RO          644    i.lcdWriteCommand   lcd.o
+    0x00000b78   0x00000b78   0x0000002c   Code   RO          645    i.lcdWriteData      lcd.o
+    0x00000ba4   0x00000ba4   0x0000006c   Code   RO          833    i.main              main.o
+    0x00000c10   0x00000c10   0x00000044   Code   RO          834    i.show_lcd_buffer   main.o
+    0x00000c54   0x00000c54   0x00000038   Data   RO          143    .constdata          clk.o
+    0x00000c8c   0x00000c8c   0x00000020   Data   RO         1002    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000e24, Size: 0x0000002c, Max: 0xffffffff, ABSOLUTE)
-
-    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
-
-    0x20000000   0x00000e24   0x0000002c   Data   RW            5    .data               system_nuc100series.o
-
-
-    Execution Region ER_ZI (Exec base: 0x2000002c, Load base: 0x00000e50, Size: 0x00004404, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000cac, Size: 0x0000002c, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x2000002c        -       0x00004000   Zero   RW          834    .bss                main.o
-    0x2000402c   0x00000e50   0x00000004   PAD
-    0x20004030        -       0x00000400   Zero   RW          112    STACK               startup_nuc100series.o
+    0x20000000   0x00000cac   0x0000002c   Data   RW            5    .data               system_nuc100series.o
+
+
+    Execution Region ER_ZI (Exec base: 0x2000002c, Load base: 0x00000cd8, Size: 0x00000c04, Max: 0xffffffff, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x2000002c        -       0x00000800   Zero   RW          835    .bss                main.o
+    0x2000082c   0x00000cd8   0x00000004   PAD
+    0x20000830        -       0x00000400   Zero   RW          112    STACK               startup_nuc100series.o
 
 
 ==============================================================================
@@ -533,16 +530,16 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       928        126         56          0          0       6672   clk.o
-       270         22          0          0          0       3333   lcd.o
-      1166         26          0          0      16384       8261   main.o
-       462         34          0          0          0       2975   spi.o
+       928        126         56          0          0       6492   clk.o
+       270         22          0          0          0       3213   lcd.o
+       830         46          0          0       2048       6202   main.o
+       462         34          0          0          0       2895   spi.o
         76         32        192          0       1024        736   startup_nuc100series.o
-       116         12          0          0          0      35059   sys_init.o
-       146         26          0         44          0     118103   system_nuc100series.o
+       116         12          0          0          0      35019   sys_init.o
+       146         26          0         44          0     117983   system_nuc100series.o
 
     ----------------------------------------------------------------------
-      3170        278        280         44      17412     175139   Object Totals
+      2834        298        280         44       3076     172540   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          6          0          0          0          4          0   (incl. Padding)
 
@@ -559,22 +556,21 @@ Image component sizes
          0          0          0          0          0          0   entry8b.o
          8          4          0          0          0          0   entry9a.o
         30          0          0          0          0          0   handlers.o
-        40          0          0          0          0         72   idiv.o
         36          8          0          0          0         68   init.o
         44          0          0          0          0         72   uidiv.o
 
     ----------------------------------------------------------------------
-       170         16          0          0          0        212   Library Totals
+       130         16          0          0          0        140   Library Totals
          0          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
 
-       170         16          0          0          0        212   mc_p.l
+       130         16          0          0          0        140   mc_p.l
 
     ----------------------------------------------------------------------
-       170         16          0          0          0        212   Library Totals
+       130         16          0          0          0        140   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -583,15 +579,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      3340        294        280         44      17412     174403   Grand Totals
-      3340        294        280         44      17412     174403   ELF Image Totals
-      3340        294        280         44          0          0   ROM Totals
+      2964        314        280         44       3076     171776   Grand Totals
+      2964        314        280         44       3076     171776   ELF Image Totals
+      2964        314        280         44          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 3620 (   3.54kB)
-    Total RW  Size (RW Data + ZI Data)             17456 (  17.05kB)
-    Total ROM Size (Code + RO Data + RW Data)       3664 (   3.58kB)
+    Total RO  Size (Code + RO Data)                 3244 (   3.17kB)
+    Total RW  Size (RW Data + ZI Data)              3120 (   3.05kB)
+    Total ROM Size (Code + RO Data + RW Data)       3288 (   3.21kB)
 
 ==============================================================================
 

@@ -13,8 +13,8 @@
 extern int lcdSetAddr(uint8_t PageAddr, uint8_t ColumnAddr);
 extern int lcdWriteData(uint8_t temp);
 
-uint8_t lcd_buffer_bin[LCD_Xmax * LCD_Ymax];
-uint8_t lcd_buffer_bin_last[LCD_Xmax * LCD_Ymax];
+uint8_t lcd_buffer_hex[LCD_Xmax * (LCD_Ymax / 8)];
+uint8_t lcd_buffer_hex_last[LCD_Xmax * (LCD_Ymax / 8)];
 
 void show_lcd_buffer(void);
 void init_lcd_buffer(void);
@@ -26,59 +26,57 @@ void draw_rectangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, ui
 void draw_triangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t fgColor, uint16_t bgColor, uint8_t isFill);
 
 int main(void) {
+    int i;
     SYS_Init();
     init_LCD();
+    init_lcd_buffer();
     clear_lcd_buffer();
+    show_lcd_buffer();
 
     // demo
-    draw_line_in_buffer(0, 0, 127, 63, FG_COLOR, BG_COLOR);
-    draw_rectangle_in_buffer(10, 10, 20, 20, FG_COLOR, BG_COLOR, 0);
-    draw_rectangle_in_buffer(30, 10, 40, 20, FG_COLOR, BG_COLOR, 1);
-    draw_circle_in_buffer(20, 40, 10, FG_COLOR, BG_COLOR, 0);
-    draw_circle_in_buffer(50, 40, 10, FG_COLOR, BG_COLOR, 1);
-    draw_triangle_in_buffer(80, 10, 90, 20, 100, 10, FG_COLOR, BG_COLOR, 0);
-    draw_triangle_in_buffer(80, 30, 90, 20, 100, 30, FG_COLOR, BG_COLOR, 1);
-    show_lcd_buffer();
+    while (TRUE) {
+        draw_circle_in_buffer(64, 32, 16, FG_COLOR, BG_COLOR, 1);
+        show_lcd_buffer();
+        CLK_SysTickDelay(10000000);
+        draw_circle_in_buffer(64, 32, 16, BG_COLOR, BG_COLOR, 1);
+        draw_circle_in_buffer(64, 32, 16, FG_COLOR, BG_COLOR, 0);
+        show_lcd_buffer();
+        CLK_SysTickDelay(10000000);
+    }
 }
 
 void show_lcd_buffer() {
-    unsigned char temp;
     uint8_t x, y, z;
     for (x = 0; x < LCD_Xmax; x++) {
         for (y = 0; y < (LCD_Ymax / 8); y++) {
-            if (lcd_buffer_bin[(x + y * 128 * 8)] == lcd_buffer_bin_last[(x + y * 128 * 8)]) continue;
-            lcd_buffer_bin_last[(x + y * 128 * 8)] = lcd_buffer_bin[(x + y * 128 * 8)];
-            temp = 0x00;
-            for (z = 0; z < 8; z++) {
-                // 1 2 4 8 16 32 64 128
-                temp += lcd_buffer_bin_last[(x + y * 128 * 8) + z * 128] << z;
-            }
-            lcdSetAddr(y, (128 + 1 - x));
-            lcdWriteData(temp);
+            if (lcd_buffer_hex[x + y * LCD_Xmax] == lcd_buffer_hex_last[x + y * LCD_Xmax]) continue;
+            lcd_buffer_hex_last[x + y * LCD_Xmax] = lcd_buffer_hex[x + y * LCD_Xmax];
+            lcdSetAddr(y, (LCD_Xmax + 1 - x));
+            lcdWriteData(lcd_buffer_hex[x + y * LCD_Xmax]);
         }
     }
 }
 
 void init_lcd_buffer() {
     int i;
-    for (i = 0; i < LCD_Xmax * LCD_Ymax; i++) {
-        lcd_buffer_bin[i] = 0;
-        lcd_buffer_bin_last[i] = 0;
+    for (i = 0; i < LCD_Xmax * LCD_Ymax / 8; i++) {
+        lcd_buffer_hex[i] = 0x00;
+        lcd_buffer_hex_last[i] = 0x00;
     }
 }
 
 void clear_lcd_buffer() {
     int i;
     for (i = 0; i < LCD_Xmax * LCD_Ymax; i++) {
-        lcd_buffer_bin[i] = 0;
+        lcd_buffer_hex[i] = 0x00;
     }
 }
 
 void draw_pixel_in_buffer(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor) {
     if (fgColor == FG_COLOR)
-        lcd_buffer_bin[x + y * 128] = 1;
+        lcd_buffer_hex[x + y / 8 * LCD_Xmax] |= (0x01 << (y % 8));
     else if (fgColor == BG_COLOR)
-        lcd_buffer_bin[x + y * 128] = 0;
+        lcd_buffer_hex[x + y / 8 * LCD_Xmax] &= (0xFE << (y % 8));
 }
 
 void draw_line_in_buffer(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t fgColor, uint16_t bgColor) {
