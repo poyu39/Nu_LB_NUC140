@@ -21496,6 +21496,7 @@ uint8_t lcd_buffer_hex_last[128 * (64 / 8)];
 void show_lcd_buffer(void);
 void init_lcd_buffer(void);
 void clear_lcd_buffer(void);
+uint8_t get_lcd_buffer_bin(int16_t x, int16_t y);
 void draw_pixel_in_buffer(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor);
 void draw_line_in_buffer(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t fgColor, uint16_t bgColor);
 void draw_circle_in_buffer(int16_t xc, int16_t yc, int16_t r, uint16_t fgColor, uint16_t bgColor, uint8_t isFill);
@@ -21503,7 +21504,6 @@ void draw_rectangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, ui
 void draw_triangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t fgColor, uint16_t bgColor, uint8_t isFill);
 
 int main(void) {
-    int i;
     SYS_Init();
     init_LCD();
     init_lcd_buffer();
@@ -21515,15 +21515,16 @@ int main(void) {
         draw_circle_in_buffer(64, 32, 16, 0xFFFF, 0x0000, 1);
         show_lcd_buffer();
         CLK_SysTickDelay(10000000);
-        draw_circle_in_buffer(64, 32, 16, 0x0000, 0x0000, 1);
-        draw_circle_in_buffer(64, 32, 16, 0xFFFF, 0x0000, 0);
+        
+        clear_lcd_buffer();
+        draw_circle_in_buffer(64, 32, 16, 0xFFFF, 0xFFFF, 0);
         show_lcd_buffer();
         CLK_SysTickDelay(10000000);
     }
 }
 
 void show_lcd_buffer() {
-    uint8_t x, y, z;
+    uint8_t x, y;
     for (x = 0; x < 128; x++) {
         for (y = 0; y < (64 / 8); y++) {
             if (lcd_buffer_hex[x + y * 128] == lcd_buffer_hex_last[x + y * 128]) continue;
@@ -21535,18 +21536,28 @@ void show_lcd_buffer() {
 }
 
 void init_lcd_buffer() {
-    int i;
+    int i, x, y;
     for (i = 0; i < 128 * 64 / 8; i++) {
         lcd_buffer_hex[i] = 0x00;
         lcd_buffer_hex_last[i] = 0x00;
+    }
+    for (x = 0; x < 128; x++) {
+        for (y = 0; y < (64 / 8); y++) {
+            lcdSetAddr(y, (128 + 1 - x));
+            lcdWriteData(lcd_buffer_hex[x + y * 128]);
+        }
     }
 }
 
 void clear_lcd_buffer() {
     int i;
-    for (i = 0; i < 128 * 64; i++) {
+    for (i = 0; i < 128 * 64 / 8; i++) {
         lcd_buffer_hex[i] = 0x00;
     }
+}
+
+uint8_t get_lcd_buffer_bin(int16_t x, int16_t y) {
+    return (lcd_buffer_hex[x + y / 8 * 128] >> (y % 8)) & 0x01;
 }
 
 void draw_pixel_in_buffer(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor) {

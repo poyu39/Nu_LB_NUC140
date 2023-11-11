@@ -192,10 +192,10 @@ I (..\..\Library\StdDriver\inc\SC.h)(0x653CAE77)
 I (..\..\Library\StdDriver\inc\PS2.h)(0x653CAE77)
 I (..\..\Library\StdDriver\inc\CLK.h)(0x653CAE77)
 I (..\..\Library\StdDriver\inc\ACMP.h)(0x653CAE77)
-I (..\..\Library\Nu-LB-NUC140\Include\LCD.h)(0x653CAE77)
+I (..\..\Library\Nu-LB-NUC140\Include\LCD.h)(0x654F32BD)
 I (..\..\Library\Nu-LB-NUC140\Include\Font5x7.h)(0x653CAE77)
 I (..\..\Library\Nu-LB-NUC140\Include\Font8x16.h)(0x653CAE77)
-F (..\main.c)(0x654F277F)(-c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ..\..\Library\CMSIS\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\NUC100Series\Include -I ..\..\Library\Nu-LB-NUC140\Include -I ..\KEIL -I ..\..\Library-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DDEBUG_ENABLE_SEMIHOST-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
+F (..\main.c)(0x654F3989)(-c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ..\..\Library\CMSIS\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\NUC100Series\Include -I ..\..\Library\Nu-LB-NUC140\Include -I ..\KEIL -I ..\..\Library-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DDEBUG_ENABLE_SEMIHOST-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x588B8344)
 I (..\..\Library\Device\Nuvoton\NUC100Series\Include\NUC100Series.h)(0x653CAE77)
@@ -226,7 +226,7 @@ I (..\..\Library\StdDriver\inc\CLK.h)(0x653CAE77)
 I (..\..\Library\StdDriver\inc\ACMP.h)(0x653CAE77)
 I (..\MCU_init.h)(0x654E4A71)
 I (..\..\Library\Nu-LB-NUC140\Include\SYS_init.h)(0x653CAE77)
-I (..\..\Library\Nu-LB-NUC140\Include\LCD.h)(0x653CAE77)
+I (..\..\Library\Nu-LB-NUC140\Include\LCD.h)(0x654F32BD)
 F (..\..\Library\Nu-LB-NUC140\Source\SYS_init.c)(0x653CAE77)(-c --cpu Cortex-M0 -D__EVAL -D__MICROLIB -g -O2 --apcs=interwork --split_sections -I ..\..\Library\CMSIS\Include -I ..\..\Library\StdDriver\inc -I ..\..\Library\Device\Nuvoton\NUC100Series\Include -I ..\..\Library\Nu-LB-NUC140\Include -I ..\KEIL -I ..\..\Library-IC:\Keil_v5\ARM\RV31\INC-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DDEBUG_ENABLE_SEMIHOST-o .\obj\sys_init.o --omf_browse .\obj\sys_init.crf --depend .\obj\sys_init.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (..\..\Library\Device\Nuvoton\NUC100Series\Include\NUC100Series.h)(0x653CAE77)
