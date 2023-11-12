@@ -6,4 +6,6 @@
 *.scvd
 *.ini
 obj/
+lst/
 */KEIL/Nu-LB-NUC140.uvgui.poyu
+*/KEIL/Nu-LB-NUC140.uvopt
