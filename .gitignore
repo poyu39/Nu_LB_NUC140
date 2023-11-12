@@ -6,4 +6,4 @@
 *.scvd
 *.ini
 obj/
-*.uvgui.*
+*/KEIL/Nu-LB-NUC140.uvgui.poyu
