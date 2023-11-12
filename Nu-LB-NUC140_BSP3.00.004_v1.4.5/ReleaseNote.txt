@@ -1,0 +1,41 @@
+Nu-LB-NUC140 v1.4 made by Richard Kuo rkuo2000@gmail.com
+
+Based on NUC100_120_BSP3.00.004 BSP,
+the following folders are added for educational use:
+./SampleCode/Nu-LB-NUC140 - learning board sample codes
+./Library/Nu-LB-NUC140    - learning board libraries
+./Library/NuMakerLib      - external module libraries
+
+Library added:
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\Nu-LB-NUC140\Include\NVT_I2C.h
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\Nu-LB-NUC140\Source\NVT_I2C.c
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\Nu-LB-NUC140\Include\I2Cdev.h
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\Nu-LB-NUC140\Source\I2Cdev.c
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\NuMakerLib\Include\MPU6050.h
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\NuMakerLib\Source\MPU6050.c
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\NuMakerLib\Include\MPU6050_6Axis_MotionApps20.h
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\NuMakerLib\Include\inv_mpu.h
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\NuMakerLib\Source\inv_mpu.c
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\NuMakerLib\Include\inv_mpu_dmp_motion_driver.h
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\NuMakerLib\Source\inv_mpu_dmp_motion_driver.c
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\NuMakerLib\Include\MPU9250.h
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\NuMakerLib\Source\MPU9250.c
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\NuMakerLib\Include\MLX90614.h
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\Library\NuMakerLib\Source\MLX90614.c
+
+SampleCode added:
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\I2C_MLX90614
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\I2C_MPU6050_DMP
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\I2C_MPU6050_HMC5883_AHRS
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\I2C_MPU9250_DMP
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\I2C_IMU_Tilt
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\proj_BT2Firebase
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\proj_BT2LED5050
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\I2C_IMUx2
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\I2C_IMUx2_Tilt
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\USBD_VCOM\Windows Driver\usbser.sys
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\USBD_VCOM_IMUx2_Tilt
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\proj_BT2Firebase
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\proj_BT2LED5050
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\roj_BT2Robot
+\\Nu-LB-NUC140_BSP3.00.004_v1.4\SampleCode\Nu-LB-NUC140\proj_USB_Keyboard_IMUx2

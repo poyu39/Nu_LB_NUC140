@@ -1,0 +1,22 @@
+//Define Clock source
+#define MCU_CLOCK_SOURCE      
+#define MCU_CLOCK_SOURCE_HXT // HXT, LXT, HIRC, LIRC
+#define MCU_CLOCK_FREQUENCY   50000000  //Hz
+
+//Define MCU Interfaces
+#define MCU_INTERFACE_SPI2
+#define SPI2_CLOCK_SOURCE_PLL // HCLK, PLL
+#define PIN_SPI2_SS0_PD0
+#define PIN_SPI2_SCLK_PD1
+#define PIN_SPI2_MISO0_PD2
+#define PIN_SPI2_MOSI0_PD3
+#define PIN_SPI2_MISO1_PD4
+#define PIN_SPI2_MOSI1_PD5
+
+#define MCU_INTERFACE_SPI3     // LCD
+#define SPI3_CLOCK_SOURCE_HCLK // HCLK, PLL
+#define PIN_SPI3_SS0_PD8
+#define PIN_SPI3_SCLK_PD9
+#define PIN_SPI3_MISO0_PD10
+#define PIN_SPI3_MOSI0_PD11
+
