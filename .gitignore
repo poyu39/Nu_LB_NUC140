@@ -1,0 +1,9 @@
+*.dep
+*.bak
+*.Admin
+*.KAI
+*.PC234
+*.scvd
+*.ini
+obj/
+*.uvgui.*
