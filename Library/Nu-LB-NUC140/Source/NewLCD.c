@@ -68,36 +68,6 @@ void lcdSetAddr(uint8_t PageAddr, uint8_t ColumnAddr) {
     SPI_SET_SS0_HIGH(SPI3);
 }
 
-void init_LCD(void) {
-    init_SPI3();
-    lcdWriteCommand(0xEB);
-    lcdWriteCommand(0x81);
-    lcdWriteCommand(0xA0);
-    lcdWriteCommand(0xC0);
-    lcdWriteCommand(0xAF);  // Set Display Enable
-}
-
-void clear_LCD(void) {
-    int16_t i, j;
-    lcdSetAddr(0x0, 0x0);
-    for (i = 0; i < 132 * 8; i++) {
-        lcdWriteData(0x00);
-    }
-    lcdWriteData(0x0f);
-}
-
-void show_lcd_buffer() {
-    uint8_t x, y;
-    for (x = 0; x < LCD_Xmax; x++) {
-        for (y = 0; y < (LCD_Ymax / 8); y++) {
-            if (lcd_buffer_hex[x + y * LCD_Xmax] == lcd_buffer_hex_last[x + y * LCD_Xmax]) continue;
-            lcd_buffer_hex_last[x + y * LCD_Xmax] = lcd_buffer_hex[x + y * LCD_Xmax];
-            lcdSetAddr(y, (LCD_Xmax + 1 - x));
-            lcdWriteData(lcd_buffer_hex[x + y * LCD_Xmax]);
-        }
-    }
-}
-
 void init_lcd_buffer() {
     int i, x, y;
     for (i = 0; i < LCD_Xmax * LCD_Ymax / 8; i++) {
@@ -106,6 +76,38 @@ void init_lcd_buffer() {
     }
     for (x = 0; x < LCD_Xmax; x++) {
         for (y = 0; y < (LCD_Ymax / 8); y++) {
+            lcdSetAddr(y, (LCD_Xmax + 1 - x));
+            lcdWriteData(lcd_buffer_hex[x + y * LCD_Xmax]);
+        }
+    }
+}
+
+void clear_lcd(void) {
+    int16_t i;
+    lcdSetAddr(0x0, 0x0);
+    for (i = 0; i < 132 * 8; i++) {
+        lcdWriteData(0x00);
+    }
+    lcdWriteData(0x0f);
+}
+
+void init_lcd(void) {
+    init_SPI3();
+    lcdWriteCommand(0xEB);
+    lcdWriteCommand(0x81);
+    lcdWriteCommand(0xA0);
+    lcdWriteCommand(0xC0);
+    lcdWriteCommand(0xAF);
+    init_lcd_buffer();
+    clear_lcd();
+}
+
+void show_lcd_buffer() {
+    uint8_t x, y;
+    for (x = 0; x < LCD_Xmax; x++) {
+        for (y = 0; y < (LCD_Ymax / 8); y++) {
+            if (lcd_buffer_hex[x + y * LCD_Xmax] == lcd_buffer_hex_last[x + y * LCD_Xmax]) continue;
+            lcd_buffer_hex_last[x + y * LCD_Xmax] = lcd_buffer_hex[x + y * LCD_Xmax];
             lcdSetAddr(y, (LCD_Xmax + 1 - x));
             lcdWriteData(lcd_buffer_hex[x + y * LCD_Xmax]);
         }
