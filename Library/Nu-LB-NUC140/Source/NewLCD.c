@@ -77,6 +77,15 @@ void init_LCD(void) {
     lcdWriteCommand(0xAF);  // Set Display Enable
 }
 
+void clear_LCD(void) {
+    int16_t i, j;
+    lcdSetAddr(0x0, 0x0);
+    for (i = 0; i < 132 * 8; i++) {
+        lcdWriteData(0x00);
+    }
+    lcdWriteData(0x0f);
+}
+
 void show_lcd_buffer() {
     uint8_t x, y;
     for (x = 0; x < LCD_Xmax; x++) {
@@ -117,14 +126,14 @@ void draw_pixel_in_buffer(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgCol
         lcd_buffer_hex[x + y / 8 * LCD_Xmax] &= (0xFE << (y % 8));
 }
 
-void draw_bitmap_in_buffer(int16_t x, int16_t y, uint8_t bitmap[], uint16_t fgColor, uint16_t bgColor) {
-    uint8_t t, i, k, kx, ky;
-    if (x < (LCD_Xmax - 7) && y < (LCD_Ymax - 7)) {
-        for (i = 0; i < 8; i++) {
-            kx = x + i;
-            t = bitmap[i];
+void draw_bitmap_in_buffer(uint8_t bitmap[], int16_t x, int16_t y, int16_t bitmap_x_size, int16_t bitmap_y_size, uint16_t fgColor, uint16_t bgColor) {
+    uint16_t t, i, j, k, kx, ky;
+    for (i = 0; i < bitmap_y_size; i++) {
+        for (j = 0; j < bitmap_x_size; j++) {
+            kx = x + j;
+            t = bitmap[j + i * bitmap_x_size];
             for (k = 0; k < 8; k++) {
-                ky = y + k;
+                ky = y + k + i * 8;
                 if (t & (0x01 << k))
                     draw_pixel_in_buffer(kx, ky, fgColor, bgColor);
             }
@@ -260,7 +269,7 @@ void print_c_in_buffer(int16_t x, int16_t y, unsigned char ascii_code, uint8_t s
             for (j = 0; j < 8; j++) {
                 char_bitmap[j] = Font8x16[(ascii_code - 0x20) * 16 + i * 8 + j];
             }
-            draw_bitmap_in_buffer(x, y + i * 8, char_bitmap, FG_COLOR, BG_COLOR);
+            draw_bitmap_in_buffer(char_bitmap, x, y + i * 8, 8, 1, FG_COLOR, BG_COLOR);
         }
     } else if (size == 5) {
         if (x < (LCD_Xmax - 5) && y < (LCD_Ymax - 7)) {
@@ -273,7 +282,7 @@ void print_c_in_buffer(int16_t x, int16_t y, unsigned char ascii_code, uint8_t s
             for (i = 0; i < 5; i++) {
                 char_bitmap[i] = Font5x7[ascii_code * 5 + i];
             }
-            draw_bitmap_in_buffer(x, y, char_bitmap, FG_COLOR, BG_COLOR);
+            draw_bitmap_in_buffer(char_bitmap, x, y, 8, 1, FG_COLOR, BG_COLOR);
         }
     }
 }
