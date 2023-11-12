@@ -375,7 +375,7 @@
               <MiscControls></MiscControls>
               <Define>DEBUG_ENABLE_SEMIHOST</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Library\CMSIS\Include;..\..\Library\StdDriver\inc;..\..\Library\Device\Nuvoton\NUC100Series\Include;..\..\Library\Nu-LB-NUC140\Include;..\KEIL;..\..\Library</IncludePath>
+              <IncludePath>..\..\Library\CMSIS\Include;..\..\Library\StdDriver\inc;..\..\Library\Device\Nuvoton\NUC100Series\Include;..\..\Library\Nu-LB-NUC140\Include;..\KEIL;..\..\Library;..\</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
