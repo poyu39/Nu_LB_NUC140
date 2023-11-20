@@ -2,7 +2,7 @@
 #include "NUC100Series.h"
 #include "GPIO.h"
 #include "SYS.h"
-#include "Seven_Segment.h"
+#include "NewSevenSegment.h"
 #define SEG_N0 0x82
 #define SEG_N1 0xEE
 #define SEG_N2 0x07
