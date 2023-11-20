@@ -106,8 +106,8 @@ void show_lcd_buffer() {
     uint8_t x, y;
     for (x = 0; x < LCD_Xmax; x++) {
         for (y = 0; y < (LCD_Ymax / 8); y++) {
-            if (lcd_buffer_hex[x + y * LCD_Xmax] == lcd_buffer_hex_last[x + y * LCD_Xmax]) continue;
-            lcd_buffer_hex_last[x + y * LCD_Xmax] = lcd_buffer_hex[x + y * LCD_Xmax];
+            // if (lcd_buffer_hex[x + y * LCD_Xmax] == lcd_buffer_hex_last[x + y * LCD_Xmax]) continue;
+            // lcd_buffer_hex_last[x + y * LCD_Xmax] = lcd_buffer_hex[x + y * LCD_Xmax];
             lcdSetAddr(y, (LCD_Xmax + 1 - x));
             lcdWriteData(lcd_buffer_hex[x + y * LCD_Xmax]);
         }
