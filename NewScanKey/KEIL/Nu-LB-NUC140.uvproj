@@ -479,6 +479,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\Library\Nu-LB-NUC140\Source\NewLCD.c</FilePath>
             </File>
+            <File>
+              <FileName>NewScankey.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Library\Nu-LB-NUC140\Source\NewScankey.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
