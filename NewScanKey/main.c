@@ -2,6 +2,7 @@
 #include "NUC100Series.h"
 #include "MCU_init.h"
 #include "SYS_init.h"
+#include "NewLCD.h"
 
 volatile uint8_t KEY_Flag;
 /*
@@ -11,52 +12,24 @@ volatile uint8_t KEY_Flag;
     PA5   7     8     9
 */
 void GPAB_IRQHandler(void) {
-    uint8_t i;
-    if (PA->ISRC & BIT0) {
-        PA->ISRC |= BIT0;
-        for (i = 0; i <= 6; i++) GPIO_PIN_DATA(0, i) = 1;
-        for (i = 3; i <= 5; i++) {
-            if (GPIO_PIN_DATA(0, i - 1) == 0) GPIO_PIN_DATA(0, i - 1) = 1;
-            GPIO_PIN_DATA(0, i) = 0;
-            if (PA0 == 0) {
-                KEY_Flag = 3 + 3 * (i - 3);
-                break;
-            }
-            CLK_SysTickDelay(5000);
+    uint8_t i, which_PA_INT;
+    if (PA->ISRC & BIT0) which_PA_INT = 0;
+    if (PA->ISRC & BIT1) which_PA_INT = 1;
+    if (PA->ISRC & BIT2) which_PA_INT = 2;
+
+    PA0 = 1; PA1 = 1; PA2 = 1; PA3 = 1; PA4 = 1; PA5 = 1;
+    for (i = 3; i <= 5; i++) {
+        CLK_SysTickDelay(5000);
+        GPIO_PIN_DATA(0, i - 1) = 1;
+        GPIO_PIN_DATA(0, i) = 0;
+        if (GPIO_PIN_DATA(0, which_PA_INT) == 0) {
+            KEY_Flag = (3 - which_PA_INT) + 3 * (i - 3);
+            break;
         }
-        PA0 = 1; PA1 = 1; PA2 = 1; PA3 = 0; PA4 = 0; PA5 = 0;
     }
-    if (PA->ISRC & BIT1) {
-        PA->ISRC |= BIT1;
-        for (i = 0; i <= 6; i++) GPIO_PIN_DATA(0, i) = 1;
-        for (i = 3; i <= 5; i++) {
-            if (GPIO_PIN_DATA(0, i - 1) == 0) GPIO_PIN_DATA(0, i - 1) = 1;
-            GPIO_PIN_DATA(0, i) = 0;
-            if (PA1 == 0) {
-                KEY_Flag = 2 + 3 * (i - 3);
-                break;
-            }
-            CLK_SysTickDelay(5000);
-        }
-        PA0 = 1; PA1 = 1; PA2 = 1; PA3 = 0; PA4 = 0; PA5 = 0;
-        return;
-    }
-    if (PA->ISRC & BIT2) {
-        PA->ISRC |= BIT2;
-        for (i = 0; i <= 6; i++) GPIO_PIN_DATA(0, i) = 1;
-        for (i = 3; i <= 5; i++) {
-            GPIO_PIN_DATA(0, i - 1) = 1;
-            GPIO_PIN_DATA(0, i) = 0;
-            if (PA2 == 0) {
-                KEY_Flag = 1 + 3 * (i - 3);
-                break;
-            }
-            CLK_SysTickDelay(5000);
-        }
-        PA0 = 1; PA1 = 1; PA2 = 1; PA3 = 0; PA4 = 0; PA5 = 0;
-        return;
-    }
+    PA0 = 1; PA1 = 1; PA2 = 1; PA3 = 0; PA4 = 0; PA5 = 0;
     PA->ISRC = PA->ISRC;
+    return;
 }
 
 void Init_KEY(void) {
@@ -72,10 +45,22 @@ void Init_KEY(void) {
 }
 
 int main(void) {
+    char TEXT[16];
+    int print_temp = 0;
     SYS_Init();
     Init_KEY();
-    UART_Open(UART0, 115200);
+    init_lcd();
     while (TRUE) {
-        printf("%d\n", KEY_Flag);
+        if (KEY_Flag != 0) {
+            print_temp = print_temp * 10 + KEY_Flag;
+            sprintf(TEXT, "%d", print_temp);
+            print_line_in_buffer(0, TEXT, 8);
+            show_lcd_buffer();
+            if (print_temp > 9999) {
+                print_temp = 0;
+                clear_lcd_buffer();
+            }
+            KEY_Flag = 0;
+        }
     }
 }
