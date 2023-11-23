@@ -7,10 +7,7 @@
 
 int main(void) {
     SYS_Init();
-    init_seven_segment(TRUE, 200);
-    seven_segment_buffer[0] = 9;
-    seven_segment_buffer[1] = 3;
-    seven_segment_buffer[2] = 2;
-    seven_segment_buffer[3] = 9;
+    init_seg(TRUE, 200);
+    set_seg_buffer_number(9239, FALSE);
     while (TRUE);
 }
