@@ -8,7 +8,9 @@
 #include "GPIO.h"
 #include "SYS_init.h"
 
-volatile uint8_t KEY_Flag;
+// 哪個按鈕被按下
+volatile uint8_t KEY_FLAG;
+
 /*
         PA2   PA1   PA0
     PA3   1     2     3
@@ -17,17 +19,20 @@ volatile uint8_t KEY_Flag;
 */
 void GPAB_IRQHandler(void) {
     uint8_t i, which_PA_INT;
+    // 查看是哪個 PA 觸發中斷
     if (PA->ISRC & BIT0) which_PA_INT = 0;
     if (PA->ISRC & BIT1) which_PA_INT = 1;
     if (PA->ISRC & BIT2) which_PA_INT = 2;
 
+    // 檢查是哪個按鈕被按下
+    // 將所有 PA 腳位設為 1，接下來輪流將PA3~5設為 0，並檢查是否有按鈕被按下。
     PA0 = 1; PA1 = 1; PA2 = 1; PA3 = 1; PA4 = 1; PA5 = 1;
     for (i = 3; i <= 5; i++) {
         CLK_SysTickDelay(5000);
         GPIO_PIN_DATA(0, i - 1) = 1;
         GPIO_PIN_DATA(0, i) = 0;
         if (GPIO_PIN_DATA(0, which_PA_INT) == 0) {
-            KEY_Flag = (3 - which_PA_INT) + 3 * (i - 3);
+            KEY_FLAG = (3 - which_PA_INT) + 3 * (i - 3);
             break;
         }
     }
@@ -36,6 +41,7 @@ void GPAB_IRQHandler(void) {
     return;
 }
 
+// 初始化 keypad interrupt 模式
 void init_keypad_INT(void) {
     GPIO_SetMode(PA, (BIT0 | BIT1 | BIT2 | BIT3 | BIT4 | BIT5), GPIO_MODE_QUASI);
     GPIO_EnableInt(PA, 0, GPIO_INT_LOW);

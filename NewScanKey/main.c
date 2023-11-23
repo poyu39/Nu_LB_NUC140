@@ -12,8 +12,8 @@ int main(void) {
     init_keypad_INT();
     init_lcd();
     while (TRUE) {
-        if (KEY_Flag != 0) {
-            print_temp = print_temp * 10 + KEY_Flag;
+        if (KEY_FLAG != 0) {
+            print_temp = print_temp * 10 + KEY_FLAG;
             sprintf(TEXT, "%d", print_temp);
             print_line_in_buffer(0, TEXT, 8);
             show_lcd_buffer();
@@ -21,7 +21,7 @@ int main(void) {
                 print_temp = 0;
                 clear_lcd_buffer();
             }
-            KEY_Flag = 0;
+            KEY_FLAG = 0;
         }
     }
 }
