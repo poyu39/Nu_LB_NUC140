@@ -18,56 +18,45 @@ uint8_t lcd_buffer_hex[LCD_Xmax * (LCD_Ymax / 8)];
 uint8_t lcd_buffer_hex_last[LCD_Xmax * (LCD_Ymax / 8)];
 
 void init_SPI3(void) {
-    /* Configure as a master, clock idle low, 9-bit transaction, drive output on falling clock edge and latch input on rising edge. */
-    /* Set IP clock divider. SPI clock rate = 1MHz */
     SPI_Open(SPI3, SPI_MASTER, SPI_MODE_0, 9, 1000000);
     SPI_DisableAutoSS(SPI3);
 }
 
 void lcdWriteCommand(unsigned char temp) {
     SPI_SET_SS0_LOW(SPI3);
-    SPI_WRITE_TX0(SPI3, temp);  // Write Data
-    SPI_TRIGGER(SPI3);          // Trigger SPI data transfer
-    while (SPI_IS_BUSY(SPI3))
-        ;  // Check SPI3 busy status
+    SPI_WRITE_TX0(SPI3, temp);
+    SPI_TRIGGER(SPI3);
+    while (SPI_IS_BUSY(SPI3));
     SPI_SET_SS0_HIGH(SPI3);
 }
 
-// Wrtie data to LCD
 void lcdWriteData(uint8_t temp) {
     SPI_SET_SS0_LOW(SPI3);
-    SPI_WRITE_TX0(SPI3, 0x100 + temp);  // Write Data
-    SPI_TRIGGER(SPI3);                  // Trigger SPI data transfer
-    while (SPI_IS_BUSY(SPI3))
-        ;  // Check SPI3 busy status
+    SPI_WRITE_TX0(SPI3, 0x100 + temp);
+    SPI_TRIGGER(SPI3);
+    while (SPI_IS_BUSY(SPI3));
     SPI_SET_SS0_HIGH(SPI3);
 }
 
-// Set Address to LCD
 void lcdSetAddr(uint8_t PageAddr, uint8_t ColumnAddr) {
-    // Set PA
     SPI_SET_SS0_LOW(SPI3);
-    SPI_WRITE_TX0(SPI3, 0xB0 | PageAddr);  // Write Data
-    SPI_TRIGGER(SPI3);                     // Trigger SPI data transfer
-    while (SPI_IS_BUSY(SPI3))
-        ;  // Check SPI3 busy status
+    SPI_WRITE_TX0(SPI3, 0xB0 | PageAddr);
+    SPI_TRIGGER(SPI3);
+    while (SPI_IS_BUSY(SPI3));
     SPI_SET_SS0_HIGH(SPI3);
-    // Set CA MSB
     SPI_SET_SS0_LOW(SPI3);
-    SPI_WRITE_TX0(SPI3, 0x10 | (ColumnAddr >> 4) & 0xF);  // Write Data
-    SPI_TRIGGER(SPI3);                                    // Trigger SPI data transfer
-    while (SPI_IS_BUSY(SPI3))
-        ;  // Check SPI3 busy status
+    SPI_WRITE_TX0(SPI3, 0x10 | (ColumnAddr >> 4) & 0xF);
+    SPI_TRIGGER(SPI3);
+    while (SPI_IS_BUSY(SPI3));
     SPI_SET_SS0_HIGH(SPI3);
-    // Set CA LSB
     SPI_SET_SS0_LOW(SPI3);
-    SPI_WRITE_TX0(SPI3, 0x00 | (ColumnAddr & 0xF));  // Write Data
-    SPI_TRIGGER(SPI3);                               // Trigger SPI data transfer
-    while (SPI_IS_BUSY(SPI3))
-        ;  // Check SPI3 busy status
+    SPI_WRITE_TX0(SPI3, 0x00 | (ColumnAddr & 0xF));
+    SPI_TRIGGER(SPI3);
+    while (SPI_IS_BUSY(SPI3));
     SPI_SET_SS0_HIGH(SPI3);
 }
 
+// 初始化 LCD 的 buffer
 void init_lcd_buffer() {
     int i, x, y;
     for (i = 0; i < LCD_Xmax * LCD_Ymax / 8; i++) {
@@ -82,6 +71,7 @@ void init_lcd_buffer() {
     }
 }
 
+// 只清除 LCD，不會清除 buffer。
 void clear_lcd(void) {
     int16_t i;
     lcdSetAddr(0x0, 0x0);
@@ -91,6 +81,7 @@ void clear_lcd(void) {
     lcdWriteData(0x0f);
 }
 
+// 初始化 LCD
 void init_lcd(void) {
     init_SPI3();
     lcdWriteCommand(0xEB);
@@ -102,18 +93,20 @@ void init_lcd(void) {
     clear_lcd();
 }
 
+// 將 buffer 的內容顯示到 LCD 上
 void show_lcd_buffer() {
     uint8_t x, y;
     for (x = 0; x < LCD_Xmax; x++) {
         for (y = 0; y < (LCD_Ymax / 8); y++) {
-            // if (lcd_buffer_hex[x + y * LCD_Xmax] == lcd_buffer_hex_last[x + y * LCD_Xmax]) continue;
-            // lcd_buffer_hex_last[x + y * LCD_Xmax] = lcd_buffer_hex[x + y * LCD_Xmax];
+            if (lcd_buffer_hex[x + y * LCD_Xmax] == lcd_buffer_hex_last[x + y * LCD_Xmax]) continue;
+            lcd_buffer_hex_last[x + y * LCD_Xmax] = lcd_buffer_hex[x + y * LCD_Xmax];
             lcdSetAddr(y, (LCD_Xmax + 1 - x));
             lcdWriteData(lcd_buffer_hex[x + y * LCD_Xmax]);
         }
     }
 }
 
+// 清除 buffer 的內容
 void clear_lcd_buffer() {
     int i;
     for (i = 0; i < LCD_Xmax * LCD_Ymax / 8; i++) {
@@ -121,14 +114,29 @@ void clear_lcd_buffer() {
     }
 }
 
-void draw_pixel_in_buffer(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor) {
-    if (fgColor == FG_COLOR)
+/**
+ * @brief 畫一個 pixel 在 buffer 中
+ * @param x x 座標
+ * @param y y 座標
+ * @param color 顏色
+*/
+void draw_pixel_in_buffer(int16_t x, int16_t y, uint16_t color) {
+    if (color == FG_COLOR)
         lcd_buffer_hex[x + y / 8 * LCD_Xmax] |= (0x01 << (y % 8));
-    else if (fgColor == BG_COLOR)
+    else if (color == BG_COLOR)
         lcd_buffer_hex[x + y / 8 * LCD_Xmax] &= (0xFE << (y % 8));
 }
 
-void draw_bitmap_in_buffer(uint8_t bitmap[], int16_t x, int16_t y, int16_t bitmap_x_size, int16_t bitmap_y_size, uint16_t fgColor, uint16_t bgColor) {
+/**
+ * @brief 畫一個 bitmap 在 buffer 中
+ * @param bitmap 圖形陣列
+ * @param x x 座標
+ * @param y y 座標
+ * @param bitmap_x_size 圖形的 x 大小
+ * @param bitmap_y_size 圖形的 y 大小
+ * @param color 顏色
+*/
+void draw_bitmap_in_buffer(uint8_t bitmap[], int16_t x, int16_t y, int16_t bitmap_x_size, int16_t bitmap_y_size, uint16_t color) {
     uint16_t t, i, j, k, kx, ky;
     for (i = 0; i < bitmap_y_size; i++) {
         for (j = 0; j < bitmap_x_size; j++) {
@@ -137,13 +145,21 @@ void draw_bitmap_in_buffer(uint8_t bitmap[], int16_t x, int16_t y, int16_t bitma
             for (k = 0; k < 8; k++) {
                 ky = y + k + i * 8;
                 if (t & (0x01 << k))
-                    draw_pixel_in_buffer(kx, ky, fgColor, bgColor);
+                    draw_pixel_in_buffer(kx, ky, color);
             }
         }
     }
 }
 
-void draw_line_in_buffer(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t fgColor, uint16_t bgColor) {
+/**
+ * @brief 畫一條線在 buffer 中
+ * @param x1 起始 x 座標
+ * @param y1 起始 y 座標
+ * @param x2 結束 x 座標
+ * @param y2 結束 y 座標
+ * @param color 顏色
+*/
+void draw_line_in_buffer(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color) {
     int16_t dy = y2 - y1;
     int16_t dx = x2 - x1;
     int16_t stepx, stepy;
@@ -163,7 +179,7 @@ void draw_line_in_buffer(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_
     dy <<= 1;  // dy is now 2*dy
     dx <<= 1;  // dx is now 2*dx
 
-    draw_pixel_in_buffer(x1, y1, fgColor, bgColor);
+    draw_pixel_in_buffer(x1, y1, color);
     if (dx > dy) {
         int fraction = dy - (dx >> 1);  // same as 2*dy - dx
         while (x1 != x2) {
@@ -173,7 +189,7 @@ void draw_line_in_buffer(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_
             }
             x1 += stepx;
             fraction += dy;  // same as fraction -= 2*dy
-            draw_pixel_in_buffer(x1, y1, fgColor, bgColor);
+            draw_pixel_in_buffer(x1, y1, color);
         }
     } else {
         int fraction = dx - (dy >> 1);
@@ -184,31 +200,39 @@ void draw_line_in_buffer(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_
             }
             y1 += stepy;
             fraction += dx;
-            draw_pixel_in_buffer(x1, y1, fgColor, bgColor);
+            draw_pixel_in_buffer(x1, y1, color);
         }
     }
 }
 
-void draw_circle_in_buffer(int16_t xc, int16_t yc, int16_t r, uint16_t fgColor, uint16_t bgColor, uint8_t isFill) {
+/**
+ * @brief 畫一個圓在 buffer 中
+ * @param xc 圓心 x 座標
+ * @param yc 圓心 y 座標
+ * @param r 半徑
+ * @param color 顏色
+ * @param isFill 是否填滿
+*/
+void draw_circle_in_buffer(int16_t xc, int16_t yc, int16_t r, uint16_t color, uint8_t isFill) {
     int16_t x = 0;
     int16_t y = r;
     int16_t p = 3 - 2 * r;
     if (!r)
         return;
     while (y >= x) { // only formulate 1/8 of circle
-        draw_pixel_in_buffer(xc - x, yc - y, fgColor, bgColor);  // upper left left
-        draw_pixel_in_buffer(xc - y, yc - x, fgColor, bgColor);  // upper upper left
-        draw_pixel_in_buffer(xc + y, yc - x, fgColor, bgColor);  // upper upper right
-        draw_pixel_in_buffer(xc + x, yc - y, fgColor, bgColor);  // upper right right
-        draw_pixel_in_buffer(xc - x, yc + y, fgColor, bgColor);  // lower left left
-        draw_pixel_in_buffer(xc - y, yc + x, fgColor, bgColor);  // lower lower left
-        draw_pixel_in_buffer(xc + y, yc + x, fgColor, bgColor);  // lower lower right
-        draw_pixel_in_buffer(xc + x, yc + y, fgColor, bgColor);  // lower right right
+        draw_pixel_in_buffer(xc - x, yc - y, color);  // upper left left
+        draw_pixel_in_buffer(xc - y, yc - x, color);  // upper upper left
+        draw_pixel_in_buffer(xc + y, yc - x, color);  // upper upper right
+        draw_pixel_in_buffer(xc + x, yc - y, color);  // upper right right
+        draw_pixel_in_buffer(xc - x, yc + y, color);  // lower left left
+        draw_pixel_in_buffer(xc - y, yc + x, color);  // lower lower left
+        draw_pixel_in_buffer(xc + y, yc + x, color);  // lower lower right
+        draw_pixel_in_buffer(xc + x, yc + y, color);  // lower right right
         if (isFill == 1) {
-            draw_line_in_buffer(xc - x, yc - y, xc + x, yc - y, fgColor, bgColor);
-            draw_line_in_buffer(xc - y, yc - x, xc + y, yc - x, fgColor, bgColor);
-            draw_line_in_buffer(xc - x, yc + y, xc + x, yc + y, fgColor, bgColor);
-            draw_line_in_buffer(xc - y, yc + x, xc + y, yc + x, fgColor, bgColor);
+            draw_line_in_buffer(xc - x, yc - y, xc + x, yc - y, color);
+            draw_line_in_buffer(xc - y, yc - x, xc + y, yc - x, color);
+            draw_line_in_buffer(xc - x, yc + y, xc + x, yc + y, color);
+            draw_line_in_buffer(xc - y, yc + x, xc + y, yc + x, color);
         }
         if (p < 0)
             p += 4 * (x++) + 6;
@@ -217,7 +241,16 @@ void draw_circle_in_buffer(int16_t xc, int16_t yc, int16_t r, uint16_t fgColor, 
     }
 }
 
-void draw_rectangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t fgColor, uint16_t bgColor, uint8_t isFill) {
+/**
+ * @brief 畫一個矩形在 buffer 中
+ * @param x0 左上角 x 座標
+ * @param y0 左上角 y 座標
+ * @param x1 右下角 x 座標
+ * @param y1 右下角 y 座標
+ * @param color 顏色
+ * @param isFill 是否填滿
+*/
+void draw_rectangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color, uint8_t isFill) {
     int16_t x, y, tmp;
     if (x0 > x1) {
         tmp = x1;
@@ -232,37 +265,55 @@ void draw_rectangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, ui
     if (isFill == 1) {
         for (x = x0; x <= x1; x++) {
             for (y = y0; y <= y1; y++) {
-                draw_pixel_in_buffer(x, y, fgColor, bgColor);
+                draw_pixel_in_buffer(x, y, color);
             }
         }
     } else {
-        for (x = x0; x <= x1; x++) draw_pixel_in_buffer(x, y0, fgColor, bgColor);
-        for (y = y0; y <= y1; y++) draw_pixel_in_buffer(x0, y, fgColor, bgColor);
-        for (x = x0; x <= x1; x++) draw_pixel_in_buffer(x, y1, fgColor, bgColor);
-        for (y = y0; y <= y1; y++) draw_pixel_in_buffer(x1, y, fgColor, bgColor);
+        for (x = x0; x <= x1; x++) draw_pixel_in_buffer(x, y0, color);
+        for (y = y0; y <= y1; y++) draw_pixel_in_buffer(x0, y, color);
+        for (x = x0; x <= x1; x++) draw_pixel_in_buffer(x, y1, color);
+        for (y = y0; y <= y1; y++) draw_pixel_in_buffer(x1, y, color);
     }
 }
 
-void draw_triangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t fgColor, uint16_t bgColor, uint8_t isFill) {
+/**
+ * @brief 畫一個三角形在 buffer 中
+ * @param x0 第一個點 x 座標
+ * @param y0 第一個點 y 座標
+ * @param x1 第二個點 x 座標
+ * @param y1 第二個點 y 座標
+ * @param x2 第三個點 x 座標
+ * @param y2 第三個點 y 座標
+ * @param color 顏色
+ * @param isFill 是否填滿
+*/
+void draw_triangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color, uint8_t isFill) {
     int i;
     int dx = abs(x0 - x2);
     int dy = abs(y0 - y2);
-    draw_line_in_buffer(x0, y0, x1, y1, fgColor, bgColor);
-    draw_line_in_buffer(x1, y1, x2, y2, fgColor, bgColor);
-    draw_line_in_buffer(x0, y0, x2, y2, fgColor, bgColor);
+    draw_line_in_buffer(x0, y0, x1, y1, color);
+    draw_line_in_buffer(x1, y1, x2, y2, color);
+    draw_line_in_buffer(x0, y0, x2, y2, color);
     if (isFill) {
         if (dx > dy) {
             for (i = 0; i < dx; i++) {
-                draw_line_in_buffer(x1, y1, x0 + i, y0 + i * dy / dx + dy, fgColor, bgColor);
+                draw_line_in_buffer(x1, y1, x0 + i, y0 + i * dy / dx + dy, color);
             }
         } else {
             for (i = 0; i < dy; i++) {
-                draw_line_in_buffer(x1, y1, x0 + i * dx / dy + dx, y0 + i, fgColor, bgColor);
+                draw_line_in_buffer(x1, y1, x0 + i * dx / dy + dx, y0 + i, color);
             }
         }
     }
 }
 
+/**
+ * @brief 在 buffer 中印出一個字元
+ * @param x x 座標
+ * @param y y 座標
+ * @param ascii_code 字元
+ * @param size 字元大小 (5 or 8)
+*/
 void print_c_in_buffer(int16_t x, int16_t y, unsigned char ascii_code, uint8_t size) {
     int8_t i, j;
     uint8_t char_bitmap[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
@@ -271,7 +322,7 @@ void print_c_in_buffer(int16_t x, int16_t y, unsigned char ascii_code, uint8_t s
             for (j = 0; j < 8; j++) {
                 char_bitmap[j] = Font8x16[(ascii_code - 0x20) * 16 + i * 8 + j];
             }
-            draw_bitmap_in_buffer(char_bitmap, x, y + i * 8, 8, 1, FG_COLOR, BG_COLOR);
+            draw_bitmap_in_buffer(char_bitmap, x, y + i * 8, 8, 1, FG_COLOR);
         }
     } else if (size == 5) {
         if (x < (LCD_Xmax - 5) && y < (LCD_Ymax - 7)) {
@@ -284,23 +335,42 @@ void print_c_in_buffer(int16_t x, int16_t y, unsigned char ascii_code, uint8_t s
             for (i = 0; i < 5; i++) {
                 char_bitmap[i] = Font5x7[ascii_code * 5 + i];
             }
-            draw_bitmap_in_buffer(char_bitmap, x, y, 8, 1, FG_COLOR, BG_COLOR);
+            draw_bitmap_in_buffer(char_bitmap, x, y, 8, 1, FG_COLOR);
         }
     }
 }
 
+/**
+ * @brief 在 buffer 中印出一個字串
+ * @param x x 座標
+ * @param y y 座標
+ * @param text 字串
+ * @param size 字元大小 (5 or 8)
+*/
 void print_s_in_buffer(int16_t x, int16_t y, char text[], uint8_t size) {
     int8_t i;
     for (i = 0; i < strlen(text); i++)
         print_c_in_buffer(x + i * size, y, text[i], size);
 }
 
-void print_line_in_buffer(int8_t line, char text[]) {
+/**
+ * @brief 在 buffer 中印出一行字串
+ * @param line 行數
+ * @param text 字串
+ * @param size 字元大小 (5 or 8)
+*/
+void print_line_in_buffer(int8_t line, char text[], uint8_t size) {
     int8_t i;
     for (i = 0; i < strlen(text); i++)
-        print_c_in_buffer(i * 8, line * 16, text[i], 8);
+        print_c_in_buffer(i * 8, line * 16, text[i], size);
 }
 
+/**
+ * @brief 取得 buffer 中的一個 pixel
+ * @param x x 座標
+ * @param y y 座標
+ * @return 0 or 1
+*/
 uint8_t get_lcd_buffer_bin(int16_t x, int16_t y) {
     return (lcd_buffer_hex[x + y / 8 * LCD_Xmax] >> (y % 8)) & 0x01;
 }

@@ -20,8 +20,7 @@ void rand_hello_world(uint8_t size) {
 
 int main(void) {
     SYS_Init();
-    init_LCD();
-    init_lcd_buffer();
+    init_lcd();
     while (TRUE) {
         rand_hello_world(5);
         show_lcd_buffer();

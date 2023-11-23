@@ -3,17 +3,11 @@
 #define FG_COLOR 0xFFFF
 #define BG_COLOR 0x0000
 
-extern int lcdSetAddr(uint8_t PageAddr, uint8_t ColumnAddr);
-
-extern int lcdWriteData(uint8_t temp);
-
 extern void show_lcd_buffer(void);
 
 extern void clear_lcd_buffer(void);
 
 extern void clear_lcd(void);
-
-extern void init_lcd_buffer(void);
 
 extern void init_lcd(void);
 
