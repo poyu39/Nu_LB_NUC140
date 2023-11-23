@@ -44,12 +44,12 @@ void GPAB_IRQHandler(void) {
 // 初始化 keypad interrupt 模式
 void init_keypad_INT(void) {
     GPIO_SetMode(PA, (BIT0 | BIT1 | BIT2 | BIT3 | BIT4 | BIT5), GPIO_MODE_QUASI);
-    GPIO_EnableInt(PA, 0, GPIO_INT_LOW);
-    GPIO_EnableInt(PA, 1, GPIO_INT_LOW);
-    GPIO_EnableInt(PA, 2, GPIO_INT_LOW);
+    GPIO_EnableInt(PA, 0, GPIO_INT_FALLING);
+    GPIO_EnableInt(PA, 1, GPIO_INT_FALLING);
+    GPIO_EnableInt(PA, 2, GPIO_INT_FALLING);
     NVIC_EnableIRQ(GPAB_IRQn);
     NVIC_SetPriority(GPAB_IRQn, 3);
-    GPIO_SET_DEBOUNCE_TIME(GPIO_DBCLKSRC_LIRC, GPIO_DBCLKSEL_256);
+    GPIO_SET_DEBOUNCE_TIME(GPIO_DBCLKSRC_LIRC, GPIO_DBCLKSEL_128);
     GPIO_ENABLE_DEBOUNCE(PA, (BIT0 | BIT1 | BIT2));
     PA0 = 1; PA1 = 1; PA2 = 1; PA3 = 0; PA4 = 0; PA5 = 0;
 }
