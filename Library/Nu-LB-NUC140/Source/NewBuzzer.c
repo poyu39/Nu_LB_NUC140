@@ -38,3 +38,6 @@ void buzzer_play(uint16_t t) {
     if (play_time == 0) play_time = t;
 }
 
+uint8_t buzzer_is_playing(void) {
+    return play_time > 0;
+}
