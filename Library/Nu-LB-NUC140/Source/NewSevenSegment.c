@@ -30,7 +30,7 @@
 uint8_t seg_map[17] = {SEG_NONE, SEG_N0, SEG_N1, SEG_N2, SEG_N3, SEG_N4, SEG_N5, SEG_N6, SEG_N7, SEG_N8, SEG_N9, SEG_N10, SEG_N11, SEG_N12, SEG_N13, SEG_N14, SEG_N15};
 
 // 用來儲存七段顯示器3~0的數字
-int8_t seg_buffer[4] = {-1, -1, -1, -1};
+int8_t seg_buffer[4];
 
 // 用來控制是否開啟七段顯示器3~0的輪播功能
 uint8_t SEG_LOOP = 1;
@@ -67,6 +67,14 @@ void set_seg_buffer_number(uint16_t number, uint8_t fill_zero) {
     }
 }
 
+// 清除七段顯示器 buffer
+void clear_seg_buffer(void) {
+    seg_buffer[3] = -1;
+    seg_buffer[2] = -1;
+    seg_buffer[1] = -1;
+    seg_buffer[0] = -1;
+}
+
 void TMR0_IRQHandler(void) {
     TIMER_ClearIntFlag(TIMER0);
     if (SEG_LOOP & FALSE) return;
@@ -96,4 +104,5 @@ void init_seg(uint8_t use_timer, uint8_t timer_hz) {
     GPIO_SetMode(PE, (BIT0 | BIT1 | BIT2 | BIT3 | BIT4 | BIT5 | BIT6 | BIT7), GPIO_PMD_QUASI);
     PE0 = 0; PE1 = 0; PE2 = 0; PE3 = 0; PE4 = 0; PE5 = 0; PE6 = 0; PE7 = 0;
     if (use_timer) init_timer0(timer_hz);
+    clear_seg_buffer();
 }
