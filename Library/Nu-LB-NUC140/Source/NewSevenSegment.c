@@ -56,6 +56,8 @@ void close_seg(void) {
 
 // 設定七段顯示器的數字
 void set_seg_buffer_number(uint16_t number, uint8_t fill_zero) {
+    static uint16_t last_number;
+    if (number == last_number) return;
     seg_buffer[3] = number / 1000;
     seg_buffer[2] = (number / 100) % 10;
     seg_buffer[1] = (number / 10) % 10;
@@ -65,6 +67,7 @@ void set_seg_buffer_number(uint16_t number, uint8_t fill_zero) {
         if (seg_buffer[2] == 0 && seg_buffer[3] == -1) seg_buffer[2] = -1;
         if (seg_buffer[1] == 0 && seg_buffer[2] == -1) seg_buffer[1] = -1;
     }
+    last_number = number;
 }
 
 // 清除七段顯示器 buffer
