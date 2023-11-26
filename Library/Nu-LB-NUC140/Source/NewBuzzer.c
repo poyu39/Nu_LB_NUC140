@@ -23,7 +23,7 @@ void TMR1_IRQHandler(void) {
 }
 
 void init_timer1(void) {
-    TIMER_Open(TIMER1, TIMER_PERIODIC_MODE, 200); // 1ms
+    TIMER_Open(TIMER1, TIMER_PERIODIC_MODE, 200); // 5ms
     TIMER_EnableInt(TIMER1);
     NVIC_EnableIRQ(TMR1_IRQn);
     TIMER_Start(TIMER1);
