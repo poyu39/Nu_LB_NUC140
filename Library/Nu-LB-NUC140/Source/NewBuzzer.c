@@ -35,7 +35,13 @@ void init_buzzer(void) {
 }
 
 void buzzer_play(uint16_t t) {
-    if (play_time == 0) play_time = t;
+    if (buzzer_is_playing()) buzzer_stop();
+    play_time = t;
+}
+
+void buzzer_stop(void) {
+    play_time = 0;
+    PB11 = 1;
 }
 
 uint8_t buzzer_is_playing(void) {
