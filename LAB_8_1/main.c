@@ -22,9 +22,9 @@ uint16_t music[72] = {
     F5, E6, D6, C6, C6, 0, E5, D6, C6, B5, B5, 0};
 
 uint32_t pitch[72] = {
-    P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms,
-    P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms,
-    P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms, P250ms,
+    P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms,
+    P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms,
+    P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms,
     P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms,
     P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms,
     P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms, P500ms};
