@@ -8,8 +8,8 @@
 #include "NewBuzzer.h"
 #include <string.h>
 
-const char menu[5][6] = {"WATER", "MILK", "COLA", "JUICE", "TEA"};
-const uint8_t menu_price[5] = {15, 50, 30, 25, 10};
+const char menu[6][6] = {"WATER", "MILK", "COLA", "JUICE", "TEA", "EXIT"};
+const uint8_t menu_price[6] = {15, 50, 30, 25, 10, 0};
 volatile uint32_t timer2_5ms=0, timer2_1s=0;
 volatile uint8_t select_state=0, check_out_flag=0, reset_state_timer=0;
 volatile int16_t refund=0, money=0;
@@ -27,14 +27,20 @@ void start_state() {
 }
 
 void menu_state() {
-    int i;
+    int i, start_index;
     char text_temp[16];
     clear_lcd_buffer();
+    if (select_line > 3) start_index = select_line - 3;
+    else start_index = 0;
     for (i = 0; i < 4; i++) {
         strcpy(text_temp, "");
-        if (i == select_line - (select_line / 4) && select_state == 1) strcat(text_temp, ">");
-        strcat(text_temp, menu[i + (select_line / 4)]);
-        sprintf(text_temp, "%-10s $%2d", text_temp, menu_price[i + (select_line / 4)]);
+        if (i == select_line - start_index && select_state == 1) strcat(text_temp, ">");
+        strcat(text_temp, menu[i + start_index]);
+        if (start_index == 2 && i == 3) {
+            sprintf(text_temp, "%-10s", text_temp);
+        } else {
+            sprintf(text_temp, "%-10s $%2d", text_temp, menu_price[i + start_index]);
+        }
         print_line_in_buffer(i, text_temp, 8);
     }
     show_lcd_buffer();
@@ -125,6 +131,7 @@ int main(void) {
     init_buzzer();
 
     start_state();
+    PD14 = 0;
 
     while (TRUE) {
         if (KEY_FLAG != 0) {
@@ -148,7 +155,7 @@ int main(void) {
                 if (select_line > 0) select_line--;
                 break;
             case 8:
-                if (select_line < 4) select_line++;
+                if (select_line < 5) select_line++;
                 break;
             default:
                 break;
