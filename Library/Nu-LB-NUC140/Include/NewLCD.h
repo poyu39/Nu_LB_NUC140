@@ -9,7 +9,7 @@ extern void clear_lcd_buffer(void);
 
 extern void clear_lcd(void);
 
-extern void init_lcd(void);
+extern void init_lcd(uint8_t dynamic_update, uint8_t auto_clear);
 
 extern void draw_bitmap_in_buffer(uint8_t bitmap[], int16_t x, int16_t y, int16_t bitmap_x_size, int16_t bitmap_y_size, uint16_t color);
 

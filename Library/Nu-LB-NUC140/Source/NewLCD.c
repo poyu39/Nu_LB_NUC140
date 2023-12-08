@@ -15,7 +15,7 @@
 #include "Font8x16.h"
 
 uint8_t lcd_buffer_hex[LCD_Xmax * (LCD_Ymax / 8)];
-uint8_t lcd_buffer_hex_last[LCD_Xmax * (LCD_Ymax / 8)];
+uint8_t dynamic_update_flag = 0, auto_clear_flag = 0;
 
 void init_SPI3(void) {
     SPI_Open(SPI3, SPI_MASTER, SPI_MODE_0, 9, 1000000);
@@ -70,7 +70,6 @@ void init_lcd_buffer() {
     int i, x, y;
     for (i = 0; i < LCD_Xmax * LCD_Ymax / 8; i++) {
         lcd_buffer_hex[i] = 0x00;
-        lcd_buffer_hex_last[i] = 0x00;
     }
     for (x = 0; x < LCD_Xmax; x++) {
         for (y = 0; y < (LCD_Ymax / 8); y++) {
@@ -114,11 +113,18 @@ void show_lcd_buffer() {
     uint8_t x, y;
     for (x = 0; x < LCD_Xmax; x++) {
         for (y = 0; y < (LCD_Ymax / 8); y++) {
-            if (lcd_buffer_hex[x + y * LCD_Xmax] == lcd_buffer_hex_last[x + y * LCD_Xmax]) continue;
-            lcd_buffer_hex_last[x + y * LCD_Xmax] = lcd_buffer_hex[x + y * LCD_Xmax];
             lcdSetAddr(y, (LCD_Xmax + 1 - x));
-            lcdWriteData(lcd_buffer_hex[x + y * LCD_Xmax]);
+            if (dynamic_update_flag) {
+                if (lcdReadData() != lcd_buffer_hex[x + y * LCD_Xmax]) {
+                    lcdWriteData(lcd_buffer_hex[x + y * LCD_Xmax]);
+                }
+            } else {
+                lcdWriteData(lcd_buffer_hex[x + y * LCD_Xmax]);
+            }
         }
+    }
+    if (auto_clear_flag == 1) {
+        clear_lcd_buffer();
     }
 }
 
