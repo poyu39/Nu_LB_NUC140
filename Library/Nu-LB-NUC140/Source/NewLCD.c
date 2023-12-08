@@ -5,12 +5,12 @@
 */
 #include "stdio.h"
 #include "stdlib.h"
+#include "stdarg.h"
 #include "string.h"
 #include "NUC100Series.h"
 #include "SYS.h"
 #include "SPI.h"
-#include "GPIO.h"
-#include "LCD.h"
+#include "NewLCD.h"
 #include "Font5x7.h"
 #include "Font8x16.h"
 
@@ -311,10 +311,10 @@ void draw_triangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int
  * @brief 在 buffer 中印出一個字元
  * @param x x 座標
  * @param y y 座標
- * @param ascii_code 字元
  * @param size 字元大小 (5 or 8)
+ * @param ascii_code 字元
 */
-void print_c_in_buffer(int16_t x, int16_t y, unsigned char ascii_code, uint8_t size) {
+void print_c_in_buffer(int16_t x, int16_t y, uint8_t size, unsigned char ascii_code) {
     int8_t i, j;
     uint8_t char_bitmap[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     if (size == 8) {
@@ -344,25 +344,35 @@ void print_c_in_buffer(int16_t x, int16_t y, unsigned char ascii_code, uint8_t s
  * @brief 在 buffer 中印出一個字串
  * @param x x 座標
  * @param y y 座標
- * @param text 字串
  * @param size 字元大小 (5 or 8)
+ * @param format 格式化字串
 */
-void print_s_in_buffer(int16_t x, int16_t y, char text[], uint8_t size) {
+void printf_s_in_buffer(int16_t x, int16_t y, uint8_t size, const char *format, ...) {
     int8_t i;
-    for (i = 0; i < strlen(text); i++)
-        print_c_in_buffer(x + i * size, y, text[i], size);
+    char buffer[100];
+    va_list args;
+    va_start(args, format);
+    vsprintf(buffer, format, args);
+    va_end(args);
+    for (i = 0; i < strlen(buffer); i++)
+        print_c_in_buffer(x + i * size, y, size, buffer[i]);
 }
 
 /**
  * @brief 在 buffer 中印出一行字串
  * @param line 行數
- * @param text 字串
  * @param size 字元大小 (5 or 8)
+ * @param format 格式化字串
 */
-void print_line_in_buffer(int8_t line, char text[], uint8_t size) {
+void printf_line_in_buffer(int8_t line, uint8_t size, const char *format, ...) {
     int8_t i;
-    for (i = 0; i < strlen(text); i++)
-        print_c_in_buffer(i * 8, line * 16, text[i], size);
+    char buffer[100];
+    va_list args;
+    va_start(args, format);
+    vsprintf(buffer, format, args);
+    va_end(args);
+    for (i = 0; i < strlen(buffer); i++)
+        print_c_in_buffer(i * 8, line * 16, size, buffer[i]);
 }
 
 /**
