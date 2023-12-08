@@ -3,10 +3,10 @@
     Author: 邱柏宇
     Discord: poyu39
 */
-#include "stdio.h"
-#include "stdlib.h"
-#include "stdarg.h"
-#include "string.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
 #include "NUC100Series.h"
 #include "SYS.h"
 #include "SPI.h"
