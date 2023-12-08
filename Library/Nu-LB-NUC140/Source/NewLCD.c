@@ -38,6 +38,15 @@ void lcdWriteData(uint8_t temp) {
     SPI_SET_SS0_HIGH(SPI3);
 }
 
+uint16_t lcdReadData(void) {
+    uint16_t temp;
+    SPI_SET_SS0_LOW(SPI3);
+    temp = SPI_READ_RX0(SPI3);
+    while (SPI_IS_BUSY(SPI3));
+    SPI_SET_SS0_HIGH(SPI3);
+    return temp;
+}
+
 void lcdSetAddr(uint8_t PageAddr, uint8_t ColumnAddr) {
     SPI_SET_SS0_LOW(SPI3);
     SPI_WRITE_TX0(SPI3, 0xB0 | PageAddr);
