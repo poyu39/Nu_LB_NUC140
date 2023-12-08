@@ -1,6 +1,6 @@
 /*
     NewScankey
-    Author: poyu39
+    Author: 邱柏宇
     Discord: poyu39
 */
 #include <stdio.h>
