@@ -29,4 +29,4 @@ extern void printf_s_in_buffer(int16_t x, int16_t y, uint8_t size, const char *f
 
 extern void printf_line_in_buffer(int8_t line, uint8_t size, const char *format, ...);
 
-extern uint8_t get_lcd_buffer_bin(int16_t x, int16_t y);
+extern uint8_t get_lcd_buffer_pixel(int16_t x, int16_t y);

@@ -403,6 +403,6 @@ void printf_line_in_buffer(int8_t line, uint8_t size, const char *format, ...) {
  * @param y y 座標
  * @return 0 or 1
 */
-uint8_t get_lcd_buffer_bin(int16_t x, int16_t y) {
+uint8_t get_lcd_buffer_pixel(int16_t x, int16_t y) {
     return (lcd_buffer_hex[x + y / 8 * LCD_Xmax] >> (y % 8)) & 0x01;
 }
