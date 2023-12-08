@@ -90,8 +90,13 @@ void clear_lcd(void) {
     lcdWriteData(0x0f);
 }
 
-// 初始化 LCD
-void init_lcd(void) {
+/**
+ * @brief 初始化 LCD
+ * @param dynamic_update 是否啟用動態更新
+ * @param auto_clear 是否每次 show_lcd_buffer 自動清除 buffer。
+ * @note 如果啟用動態更新，則只有在 buffer 中該 index 改變時才會更新到 LCD 上。
+*/
+void init_lcd(uint8_t dynamic_update, uint8_t auto_clear) {
     init_SPI3();
     lcdWriteCommand(0xEB);
     lcdWriteCommand(0x81);
@@ -100,6 +105,8 @@ void init_lcd(void) {
     lcdWriteCommand(0xAF);
     init_lcd_buffer();
     clear_lcd();
+    dynamic_update_flag = dynamic_update;
+    auto_clear_flag = auto_clear;
 }
 
 // 將 buffer 的內容顯示到 LCD 上
