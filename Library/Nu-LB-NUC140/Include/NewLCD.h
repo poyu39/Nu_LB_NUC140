@@ -23,7 +23,7 @@ extern void draw_rectangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t
 
 extern void draw_triangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color, uint8_t isFill);
 
-extern void print_c_in_buffer(int16_t x, int16_t y, uint8_t size, unsigned char ascii_code);
+extern void print_c_in_buffer(int16_t x, int16_t y, uint8_t size, unsigned char ascii_code, uint16_t color);
 
 extern void printf_s_in_buffer(int16_t x, int16_t y, uint8_t size, const char *format, ...);
 

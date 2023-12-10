@@ -336,7 +336,7 @@ void draw_triangle_in_buffer(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int
  * @param size 字元大小 (5 or 8)
  * @param ascii_code 字元
 */
-void print_c_in_buffer(int16_t x, int16_t y, uint8_t size, unsigned char ascii_code) {
+void print_c_in_buffer(int16_t x, int16_t y, uint8_t size, unsigned char ascii_code, uint16_t color) {
     int8_t i, j;
     uint8_t char_bitmap[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     if (size == 8) {
@@ -344,7 +344,7 @@ void print_c_in_buffer(int16_t x, int16_t y, uint8_t size, unsigned char ascii_c
             for (j = 0; j < 8; j++) {
                 char_bitmap[j] = Font8x16[(ascii_code - 0x20) * 16 + i * 8 + j];
             }
-            draw_bitmap_in_buffer(char_bitmap, x, y + i * 8, 8, 1, FG_COLOR);
+            draw_bitmap_in_buffer(char_bitmap, x, y + i * 8, 8, 1, color);
         }
     } else if (size == 5) {
         if (x < (LCD_Xmax - 5) && y < (LCD_Ymax - 7)) {
@@ -357,7 +357,7 @@ void print_c_in_buffer(int16_t x, int16_t y, uint8_t size, unsigned char ascii_c
             for (i = 0; i < 5; i++) {
                 char_bitmap[i] = Font5x7[ascii_code * 5 + i];
             }
-            draw_bitmap_in_buffer(char_bitmap, x, y, 8, 1, FG_COLOR);
+            draw_bitmap_in_buffer(char_bitmap, x, y, 8, 1, color);
         }
     }
 }
@@ -377,7 +377,7 @@ void printf_s_in_buffer(int16_t x, int16_t y, uint8_t size, const char *format, 
     vsprintf(buffer, format, args);
     va_end(args);
     for (i = 0; i < strlen(buffer); i++)
-        print_c_in_buffer(x + i * size, y, size, buffer[i]);
+        print_c_in_buffer(x + i * size, y, size, buffer[i], FG_COLOR);
 }
 
 /**
@@ -394,7 +394,7 @@ void printf_line_in_buffer(int8_t line, uint8_t size, const char *format, ...) {
     vsprintf(buffer, format, args);
     va_end(args);
     for (i = 0; i < strlen(buffer); i++)
-        print_c_in_buffer(i * 8, line * 16, size, buffer[i]);
+        print_c_in_buffer(i * 8, line * 16, size, buffer[i], FG_COLOR);
 }
 
 /**
