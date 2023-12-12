@@ -447,12 +447,12 @@ void draw_Bmp64x64(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor, uns
 }
 
 void draw_Pixel(int16_t x, int16_t y, uint16_t fgColor, uint16_t bgColor)
-{
+{	
 	if (fgColor!=0) 
 		DisplayBuffer[x+y/8*LCD_Xmax] |= (0x01<<(y%8));
 	else 
 		DisplayBuffer[x+y/8*LCD_Xmax] &= (0xFE<<(y%8));
-
+		
 	lcdSetAddr(y/8,(LCD_Xmax+1-x));
 	lcdWriteData(DisplayBuffer[x+y/8*LCD_Xmax]);
 }

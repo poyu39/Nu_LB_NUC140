@@ -1,5 +1,5 @@
-#define ADXL345_I2C_SLA        0xA6
-#define ADXL345_I2C_PORT       I2C1
+#define ADXL345_devAddr        0x53
+
 // ADXL345 Internal Registers 
 #define ADXL345_DEVID          0x00
 // Reserved                    0x01 ~ 0x1C
@@ -34,6 +34,6 @@
 #define ADXL345_FIFO_STATUS    0x39
 
 extern void Init_ADXL345(void);
-extern uint16_t Read_ADXL345_DataX(void);
-extern uint16_t Read_ADXL345_DataY(void);
-extern uint16_t Read_ADXL345_DataZ(void);
+extern uint16_t ADXL345_ReadAccelX(void);
+extern uint16_t ADXL345_ReadAccelY(void);
+extern uint16_t ADXL345_ReadAccelZ(void);

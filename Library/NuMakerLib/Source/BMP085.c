@@ -28,64 +28,52 @@ unsigned long b4, b7;
 int16_t OSS =0; // over-sampling setting	
 long p;
 
-void BMP085Calibration(void)
+int16_t BMP085_readword(uint8_t regAddr)
 {
-  uint8_t tmp[2];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, 0xAA, 2, tmp);
-    ac1 = (tmp[1]<<8) | tmp[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, 0xAC, 2, tmp);	
-    ac2 = (tmp[1]<<8) | tmp[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, 0xAE, 2, tmp);		
-    ac3 = (tmp[1]<<8) | tmp[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, 0xB0, 2, tmp);			
-    ac4 = (tmp[1]<<8) | tmp[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, 0xB2, 2, tmp);			 	
-    ac5 = (tmp[1]<<8) | tmp[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, 0xB4, 2, tmp);			 	
-    ac6 = (tmp[1]<<8) | tmp[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, 0xB6, 2, tmp);			 		
-    b1 =  (tmp[1]<<8) | tmp[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, 0xB8, 2, tmp);			 		
-    b2 =  (tmp[1]<<8) | tmp[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, 0xBA, 2, tmp);			 			
-    mb =  (tmp[1]<<8) | tmp[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, 0xBC, 2, tmp);			 				
-    mc =  (tmp[1]<<8) | tmp[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, 0xBE, 2, tmp);			 				
-    md =  (tmp[1]<<8) | tmp[0];
+	uint8_t data[2];
+	I2Cdev_readBytes(BMP085_devAddr, regAddr, 2, data);
+	return data[0]<<8 | data[1];
+}
+
+void BMP085_Calibration(void)
+{
+    ac1=BMP085_readword(0xAA);
+    ac2=BMP085_readword(0xAC);
+    ac3=BMP085_readword(0xAE);
+    ac4=BMP085_readword(0xB0);
+    ac5=BMP085_readword(0xB2);
+    ac6=BMP085_readword(0xB4);
+    b1 =BMP085_readword(0xB6);
+    b2 =BMP085_readword(0xB8);
+    mb =BMP085_readword(0xBA);
+    mc =BMP085_readword(0xBC);
+    md =BMP085_readword(0xBE);		 				
 }
 
 uint16_t BMP085_ReadUT(void)
 {
-  uint8_t msb, lsb;
-  uint8_t tmp[1], data[1];
-    tmp[0] =0x2E;
-    I2C_writeBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, BMP085_CR, 1, tmp);
+  uint8_t msb[1], lsb[1];
+    I2Cdev_writeByte(BMP085_devAddr, BMP085_CR, 0x2E);
     CLK_SysTickDelay(4500);
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, BMP085_MSB, 1, data);
-    msb = data[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, BMP085_LSB, 1, data);
-    lsb = data[0];	
-    return ((msb<<8) | lsb);
+    I2Cdev_readByte(BMP085_devAddr, BMP085_MSB, msb);
+    I2Cdev_readByte(BMP085_devAddr, BMP085_LSB, lsb);
+    return ((msb[0]<<8) | lsb[0]);
 }
 
 uint32_t BMP085_ReadUP(void)
 {
-  uint8_t msb, lsb, xsb;
-  uint8_t data[1];
-    data[0]=0x34+(OSS<<6);
-    I2C_writeBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, BMP085_CR, 1, data);
+  uint8_t msb[1], lsb[1], xsb[1];
+  uint8_t data;
+    data=0x34+(OSS<<6);
+    I2Cdev_writeByte(BMP085_devAddr, BMP085_CR, data);
     CLK_SysTickDelay(4500);		
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, BMP085_MSB, 1, data);
-    msb = data[0];
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, BMP085_LSB, 1, data);
-    lsb = data[0]; 
-    I2C_readBytes(BMP085_I2C_PORT, BMP085_I2C_SLA, BMP085_XSB, 1, data);	
-    xsb = data[0];
-    return( ( ((unsigned long)msb<<16) + ((unsigned long)lsb<<8) + (unsigned long)xsb )>> (8-OSS));
+    I2Cdev_readByte(BMP085_devAddr, BMP085_MSB, msb);
+    I2Cdev_readByte(BMP085_devAddr, BMP085_LSB, lsb); 
+    I2Cdev_readByte(BMP085_devAddr, BMP085_XSB, xsb);	
+    return( ( ((unsigned long)msb[0]<<16) + ((unsigned long)lsb[0]<<8) + (unsigned long)xsb[0] )>> (8-OSS));
 }
 
-short BMP085GetTemperature(uint16_t ut)
+short BMP085_GetTemperature(uint16_t ut)
 {
     x1 = (((long)ut - (long)ac6)*(long)ac5)>>15;
     x2 = ((long)mc <<11)/(x1 + md);
@@ -94,7 +82,7 @@ short BMP085GetTemperature(uint16_t ut)
     return ((b5 + 8)>>4);	
 }
 
-long BMP085GetPressure(uint32_t up)
+long BMP085_GetPressure(uint32_t up)
 {
     b6 = b5 - 4000;
     // Calculate B3

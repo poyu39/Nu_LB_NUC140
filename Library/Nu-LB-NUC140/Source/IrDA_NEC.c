@@ -154,16 +154,16 @@ void IrDA_NEC_TxRx_Init(void)
 
 	// PWM Clock setup
     PWM_ConfigOutputChannel(PWM0, PWM_CH0, 38000, 50);
-	  PWM_SET_DIVIDER(PWM0, 0, PWM_CLK_DIV_1);							//Set PWM0_CH0 Clock Source Divider    
-	  PWM_SET_DIVIDER(PWM0, 1, PWM_CLK_DIV_4);							//Set PWM0_CH1 Clock Source Divider
+	PWM_SET_DIVIDER(PWM0, 0, PWM_CLK_DIV_1);							//Set PWM0_CH0 Clock Source Divider    
+	PWM_SET_DIVIDER(PWM0, 1, PWM_CLK_DIV_4);							//Set PWM0_CH1 Clock Source Divider
     PWM_SET_PRESCALER(PWM0, 1, 2);	                      //Set PWM0_CH0 and PWM0_CH1 Prescaler
-	  PWM_SET_CNR(PWM0, 1, MaxValue);
+	PWM_SET_CNR(PWM0, 1, MaxValue);
     PWM_SET_CNR(PWM0, 0, ((120000000/3/38000+5)/10));
     PWM_SET_CMR(PWM0, 0, ((120000000/3/38000+5)/10)/2);
 
 	// PWM Capture setup
-	  PWM_EnableCapture(PWM0, PWM_CH_1_MASK);
+	PWM_EnableCapture(PWM0, PWM_CH_1_MASK);
     PWM_EnableCaptureInt(PWM0, 1, PWM_CAPTURE_INT_FALLING_LATCH);
     NVIC_EnableIRQ(PWM0_IRQn);
-	  PWM_Start(PWM0, PWM_CH_0_MASK | PWM_CH_1_MASK);     	
+	PWM_Start(PWM0, PWM_CH_0_MASK | PWM_CH_1_MASK);     	
 }

@@ -1,8 +1,7 @@
 //
 // BMP085 : Digital Pressure Sensor
 // 
-#define BMP085_I2C_PORT   I2C1
-#define BMP085_I2C_SLA    0xEE
+#define BMP085_devAddr    0x77
 
 #define BMP085_AC1        0xAA
 #define BMP085_AC2        0xAC
@@ -21,12 +20,12 @@
 #define BMP085_LSB        0xF7
 #define BMP085_XSB        0xF8
 
-extern void BMP085Calibration(void);
+extern void BMP085_Calibration(void);
 	
 extern uint16_t BMP085_ReadUT(void);
 
 extern uint32_t BMP085_ReadUP(void);
 	
-extern short BMP085GetTemperature(uint16_t ut);
+extern short BMP085_GetTemperature(uint16_t ut);
 
-extern long BMP085GetPressure(uint32_t up);
+extern long BMP085_GetPressure(uint32_t up);

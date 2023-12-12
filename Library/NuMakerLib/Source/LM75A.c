@@ -16,16 +16,16 @@
 #include "I2Cdev.h"
 #include "LM75A.h"
 
-uint8_t Read_LM75A_Config(void)
+uint8_t LM75A_ReadConfig(void)
 {
   uint8_t data[1];
-  I2C_readBytes(LM75A_I2C_PORT, LM75A_I2C_SLA, LM75A_CONF, 1, data);
+  I2C_readBytes(LM75A_devAddr, LM75A_CONF, 1, data);
   return (data[0]);
 }
 
-uint16_t Read_LM75A_Temp(void)
+uint16_t LM75A_ReadTemp(void)
 {
   uint8_t data[2];
-  I2C_readBytes(LM75A_I2C_PORT, LM75A_I2C_SLA, LM75A_TEMP, 2, data);
+  I2C_readBytes(LM75A_devAddr, LM75A_TEMP, 2, data);
   return (((data[0]<<8) + data[1])>>3);
 }

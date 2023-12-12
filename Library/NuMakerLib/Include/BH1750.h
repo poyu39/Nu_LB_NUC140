@@ -1,9 +1,8 @@
 //
 // BH1750 : Ambient Light Sensor
 // 
-#define BH1750_I2C_SLA          0xB8
-#define BH1750_I2C_PORT         I2C1
-
+#define BH1750_devAddr                  0x5C
+#define BH1750_I2C_PORT                 I2C1
 // Instruction Set 
 #define Power_Down                      0x00
 #define Power_On                        0x01
@@ -17,7 +16,7 @@
 #define ChangeMeasurementTime_H         0x40
 #define ChangeMeasurementTime_L         0x60
 
-extern void init_BH1750(void);
+extern void BH1750_Init(void);
 
 extern void BH1750_Write(uint8_t CODE);
 	

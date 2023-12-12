@@ -213,7 +213,6 @@ uint32_t PWM_ConfigOutputChannel(PWM_T *pwm,
     return(i);
 }
 
-
 /**
  * @brief Start PWM module
  * @param[in] pwm The pointer of the specified PWM module

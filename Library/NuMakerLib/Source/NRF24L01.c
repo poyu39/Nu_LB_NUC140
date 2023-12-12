@@ -177,7 +177,7 @@ void nRF_readRegister(uint8_t reg, uint8_t *value, uint8_t len)
 // Reads an array of bytes from the given start position in the MiRF registers.
 {
     nRF_CSN_Lo();
-		nRF_transfer((REGISTER_MASK & reg));    
+    nRF_transfer((REGISTER_MASK & reg));    
     nRF_transferSync(value,value,len);		
     nRF_CSN_Hi();
 }

@@ -43,6 +43,7 @@ extern "C"
 #define I2C_I2CON_STA               0x20UL /*!< I2CON setting for I2C control bits. It would set STA bit                  */
 #define I2C_I2CON_STO               0x10UL /*!< I2CON setting for I2C control bits. It would set STO bit                  */
 #define I2C_I2CON_AA                0x04UL /*!< I2CON setting for I2C control bits. It would set AA bit                   */
+#define I2C_I2CON_STA_STO_SI        0x38UL
 
 #define I2C_GCMODE_ENABLE           1      /*!< Enable  I2C GC Mode                                                       */
 #define I2C_GCMODE_DISABLE          0      /*!< Disable I2C GC Mode                                                       */
@@ -177,6 +178,7 @@ static __INLINE void I2C_STOP(I2C_T *i2c)
 void I2C_ClearTimeoutFlag(I2C_T *i2c);
 void I2C_Close(I2C_T *i2c);
 void I2C_Trigger(I2C_T *i2c, uint8_t u8Start, uint8_t u8Stop, uint8_t u8Si, uint8_t u8Ack);
+void I2C_Ctrl(I2C_T *i2c, uint8_t u8Start, uint8_t u8Stop, uint8_t u8Si, uint8_t u8Ack);
 void I2C_DisableInt(I2C_T *i2c);
 void I2C_EnableInt(I2C_T *i2c);
 uint32_t I2C_GetBusClockFreq(I2C_T *i2c);

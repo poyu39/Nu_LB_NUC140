@@ -1,19 +1,29 @@
 //
 // HTU21D : Digital Relative Humidity Sensor with Temperature Output
 // 
-#define HTU21D_I2C_PORT      I2C1
-#define HTU21D_I2C_SLA       0x80
+#include "NVT_I2C.h"
 
-#define HTU21D_TriggerTempHold    0xE3 // Hold I2C master
-#define HTU21D_TriggerHumidHold   0xE5 // Hold I2C mater
-#define HTU21D_TriggerTempnoHold  0xF3 // no Hold I2C master
-#define HTU21D_TriggerHumidnoHold 0xF5 // no Hold I2C master
-#define HTU21D_WriteUserregister  0xF6
-#define HTU21D_ReadUserregister   0xF7
-#define HTU21D_SoftReset          0xFE
+/** Default I2C address for the HTU21D. */
+#define HTU21DF_I2CADDR         (0x40)
 
-extern uint8_t  HTU21D_Init(void);
-extern uint8_t  HTU21D_ReadHumid(void);
-extern uint16_t HTU21D_ReadTemp(void);
-extern float    HTU21D_Humidity(void);
-extern float    HTU21D_Temperature(void);
+/** Read temperature register. */
+#define HTU21DF_READTEMP        (0xE3)
+
+/** Read humidity register. */
+#define HTU21DF_READHUM         (0xE5)
+
+/** Write register command. */
+#define HTU21DF_WRITEREG        (0xE6)
+
+/** Read register command. */
+#define HTU21DF_READREG         (0xE7)
+
+/** Reset command. */
+#define HTU21DF_RESET           (0xFE)
+
+extern bool  HTU21DF_begin(void);
+extern void  HTU21DF_reset(void);
+extern uint8_t  HTU21DF_ReadHumid(void);
+extern uint16_t HTU21DF_ReadTemp(void);
+extern float    HTU21DF_Humidity(void);
+extern float    HTU21DF_Temperature(void);

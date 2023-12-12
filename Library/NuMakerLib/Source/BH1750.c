@@ -52,8 +52,8 @@ uint16_t BH1750_Read(void)
   return ((HiByte<<8) | LoByte);
 }
 
-void Init_BH1750(void)
+void BH1750_Init(void)
 {
-	BH1750_Write(Power_On);
+  BH1750_Write(Power_On);
   BH1750_Write(Continuously_H_ResolutionMode);		
 }

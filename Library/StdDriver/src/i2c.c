@@ -123,6 +123,22 @@ void I2C_Trigger(I2C_T *i2c, uint8_t u8Start, uint8_t u8Stop, uint8_t u8Si, uint
     i2c->I2CON = (i2c->I2CON & ~0x3C) | u32Reg;
 }
 
+void I2C_Ctrl(I2C_T *i2c, uint8_t u8Start, uint8_t u8Stop, uint8_t u8Si, uint8_t u8Ack)
+{
+    uint32_t u32Reg = 0;
+
+    if(u8Start)
+        u32Reg |= I2C_I2CON_STA;
+    if(u8Stop)
+        u32Reg |= I2C_I2CON_STO;
+    if(u8Si)
+        u32Reg |= I2C_I2CON_SI;
+    if(u8Ack)
+        u32Reg |= I2C_I2CON_AA;
+
+    i2c->I2CON = (i2c->I2CON & ~0x3C) | u32Reg;
+}
+
 /**
   * @brief      Disable Interrupt of I2C Controller
   *
