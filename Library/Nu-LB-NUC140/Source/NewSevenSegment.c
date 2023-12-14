@@ -80,7 +80,7 @@ void clear_seg_buffer(void) {
 
 void TMR0_IRQHandler(void) {
     TIMER_ClearIntFlag(TIMER0);
-    if (SEG_LOOP & FALSE) return;
+    if (!SEG_LOOP) return;
     close_seg();
     show_one_seg(seg_index, seg_buffer[seg_index]);
     seg_index = (seg_index + 1) % 4;
