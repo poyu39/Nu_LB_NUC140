@@ -12,6 +12,11 @@
 
 volatile uint16_t play_time = 0;
 volatile uint8_t pwm_state = 0;
+volatile int16_t song_index = -1;
+volatile uint8_t song_len = 0;
+
+volatile uint16_t *song_freq;
+volatile uint16_t *song_t;
 
 void TMR1_IRQHandler(void) {
     TIMER_ClearIntFlag(TIMER1);
@@ -25,6 +30,14 @@ void TMR1_IRQHandler(void) {
     if (play_time == 0 && pwm_state) {
         PWM_DisableOutput(PWM1, PWM_CH_0_MASK);
         pwm_state = FALSE;
+        if (song_index >= 0) {
+            buzzer_play(song_freq[song_index], song_t[song_index]);
+            song_index++;
+            if (song_index >= song_len) {
+                song_index = -1;
+                song_len = 0;
+            }
+        }
     }
 }
 
@@ -47,9 +60,12 @@ void buzzer_play(uint16_t freq, uint16_t t) {
 }
 
 void buzzer_play_song(uint16_t *freq, uint16_t *t, uint8_t size) {
-    static uint8_t t_index = 0;
-    buzzer_play(freq[t_index], t[t_index]);
-    t_index = (t_index + 1) % size;
+    if (song_len != 0) return;
+    song_len = size;
+    song_index = 0;
+    song_freq = freq;
+    song_t = t;
+    buzzer_play(song_freq[song_index], song_t[song_index]);
 }
 
 void buzzer_stop(void) {
