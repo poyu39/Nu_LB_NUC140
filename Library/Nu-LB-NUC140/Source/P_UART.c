@@ -21,8 +21,9 @@ void p_send_int(int32_t num) {
             if (packet[i] != '-') break;
         }
     }
-    packet[i] = '\0';
-    UART_Write(UART0, packet, i + 1);
+    packet[i + 1] = '\n';
+    UART_Write(UART0, packet, i + 2);
+    CLK_SysTickDelay(1000);
 }
 
 int32_t get_rx_int(void) {
@@ -38,6 +39,7 @@ int32_t get_rx_int(void) {
         i++;
     }
     if (is_negative) num *= -1;
+    for (i = 0; i < RXDATABUFSIZE; i++) rx_buffer[i] = '\n';
     RX_FLAG = 0;
     return num;
 }
@@ -46,15 +48,17 @@ void UART02_IRQHandler(void) {
     uint8_t c;
     uint32_t u32IntSts = UART0->ISR;
 
-    if (u32IntSts & UART_IS_RX_READY(UART0)) {           // 檢查 ISR 是否為 RX 就緒
-        while (!(UART0->FSR & UART_FSR_RX_EMPTY_Msk)) {  // 檢查 RX 是否為空的
-            c = UART_READ(UART0);                        // 讀取 UART RX 資料
-            if (c != '\0') {
+    if (u32IntSts & UART_IS_RX_READY(UART0)) {              // 檢查 ISR 是否為 RX 就緒
+        while (!(UART0->FSR & UART_FSR_RX_EMPTY_Msk)) {     // 檢查 RX 是否為空的
+            c = UART_READ(UART0);                           // 讀取 UART RX 資料
+            if (RX_FLAG) continue;
+            if (c >= '0' && c <= '9') {
                 rx_buffer[rx_index] = c;
                 rx_index++;
-            } else {
-                RX_FLAG = 1;
+            } else if (c == '\n') {
+                rx_buffer[rx_index] = '\n';
                 rx_index = 0;
+                RX_FLAG = 1;
                 break;
             }
         }
