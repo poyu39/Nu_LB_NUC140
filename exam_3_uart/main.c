@@ -73,7 +73,7 @@ void TMR2_IRQHandler(void) {
     timer2_5ms = (timer2_5ms + 1) % INT32_MAX;
     if (timer2_5ms % 50 == 0) {
         timer2_1s = (timer2_1s + 1) % INT32_MAX;
-        if (state == 2 && !SLEEP) game_play_time = (game_play_time + 1) % 59;
+        if (state == 2) game_play_time = (game_play_time + 1) % 59;
     }
 }
 
