@@ -1,0 +1,37 @@
+// Define Clock source
+#define MCU_CLOCK_SOURCE
+#define MCU_CLOCK_SOURCE_HXT  // HXT, LXT, HIRC, LIRC
+#define MCU_CLOCK_FREQUENCY   50000000  //Hz
+
+// Define MCU Interfaces
+// SPI3 for LCD
+#define MCU_INTERFACE_SPI3
+#define SPI3_CLOCK_SOURCE_HCLK  // HCLK, PLL
+#define PIN_SPI3_SS0_PD8
+#define PIN_SPI3_SCLK_PD9
+#define PIN_SPI3_MISO0_PD10
+#define PIN_SPI3_MOSI0_PD11
+
+// Timer 0 for seven segment
+#define MCU_INTERFACE_TMR0
+#define TMR0_CLOCK_SOURCE_HXT  // HXT, LXT, HCLK, EXT, LIRC, HIRC
+
+// Timer 1 for buzzer
+#define MCU_INTERFACE_TMR1
+#define TMR0_CLOCK_SOURCE_HXT  // HXT, LXT, HCLK, EXT, LIRC, HIRC
+
+// Timer 2
+#define MCU_INTERFACE_TMR2
+#define TMR2_CLOCK_SOURCE_HXT  // HXT, LXT, HCLK, EXT, LIRC, HIRC
+
+// PWM1 for turn button
+#define MCU_INTERFACE_PWM1
+#define PWM1_CH01_CLOCK_SOURCE_HXT // HXT, LXT, HCLK, HIRC
+#define PWM1_CH23_CLOCK_SOURCE_HXT // HXT, LXT, HCLK, HIRC
+#define PIN_PWM1_CH0_PB11
+
+#define MCU_INTERFACE_ADC
+#define ADC_CLOCK_SOURCE_HXT  // HXT, LXT, PLL, HIRC, HCLK
+#define ADC_CLOCK_DIVIDER     1
+#define PIN_ADC7_PA7
+
