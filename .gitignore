@@ -10,3 +10,4 @@ lst/
 */KEIL/Nu-LB-NUC140.uvgui.poyu
 */KEIL/Nu-LB-NUC140.uvopt
 venv/
+.vscode/settings.json

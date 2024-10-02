@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "name": "Keil",
+            "compilerPath": "C:\\Keil_v5\\C51\\BIN\\Nuvoton_8051_Keil_uVision_Driver.dll",
+            "includePath": [
+                "${workspaceFolder}/Library/CMSIS/Include",
+                "${workspaceFolder}/Library/StdDriver/inc",
+                "${workspaceFolder}/Library/Device/Nuvoton/NUC100Series/Include",
+                "${workspaceFolder}/Library/Nu-LB-NUC140/Include",
+                "${workspaceFolder}/"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "__CC_ARM",
+                "pin=/**/",
+                "sfr=/**/",
+                "sfr16=/**/",
+                "idata=/**/",
+                "bdata=/**/",
+                "data=/**/",
+                "xdata=/**/",
+                "code=/**/",
+                "sbit=/**/",
+                "at=/**/",
+                "interrupt=/**/"
+            ],
+            "cStandard": "c99"
+        }
+    ],
+    "version": 4
+}
