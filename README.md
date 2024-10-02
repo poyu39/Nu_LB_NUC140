@@ -1,4 +1,6 @@
-# FCU-ARM_Microprocessor_Systems
+# Nu-LB-NUC140
+
+IECS213 微處理機系統 Nu-LB-NUC140 函式庫
 
 ## Tool
 
