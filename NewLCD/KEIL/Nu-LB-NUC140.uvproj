@@ -175,7 +175,7 @@
             <Capability>1</Capability>
             <DriverSelection>4106</DriverSelection>
           </Flash1>
-          <bUseTDR>0</bUseTDR>
+          <bUseTDR>1</bUseTDR>
           <Flash2>Bin\Nu_Link.dll</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
@@ -458,6 +458,11 @@
               <FileName>sys.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\Library\StdDriver\src\sys.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\Library\StdDriver\src\timer.c</FilePath>
             </File>
           </Files>
         </Group>

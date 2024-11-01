@@ -15,14 +15,14 @@
 #include "Font8x16.h"
 
 uint8_t lcd_buffer_hex[LCD_Xmax * (LCD_Ymax / 8)];
-uint8_t dynamic_update_flag = 0, auto_clear_flag = 0;
+uint8_t auto_clear_flag = 0;
 
-void init_SPI3(void) {
-    SPI_Open(SPI3, SPI_MASTER, SPI_MODE_0, 9, 1000000);
+void init_SPI3(uint32_t spi_clock_frequency) {
+    SPI_Open(SPI3, SPI_MASTER, SPI_MODE_0, 9, spi_clock_frequency);
     SPI_DisableAutoSS(SPI3);
 }
 
-void lcdWriteCommand(unsigned char temp) {
+void lcdWriteCommand(uint8_t temp) {
     SPI_SET_SS0_LOW(SPI3);
     SPI_WRITE_TX0(SPI3, temp);
     SPI_TRIGGER(SPI3);
@@ -38,28 +38,19 @@ void lcdWriteData(uint8_t temp) {
     SPI_SET_SS0_HIGH(SPI3);
 }
 
-uint16_t lcdReadData(void) {
-    uint16_t temp;
-    SPI_SET_SS0_LOW(SPI3);
-    temp = SPI_READ_RX0(SPI3);
-    while (SPI_IS_BUSY(SPI3));
-    SPI_SET_SS0_HIGH(SPI3);
-    return temp;
-}
-
 void lcdSetAddr(uint8_t PageAddr, uint8_t ColumnAddr) {
     SPI_SET_SS0_LOW(SPI3);
-    SPI_WRITE_TX0(SPI3, 0xB0 | PageAddr);
+    SPI_WRITE_TX0(SPI3, 0xB0 | PageAddr);                   // Set Page Address
     SPI_TRIGGER(SPI3);
     while (SPI_IS_BUSY(SPI3));
     SPI_SET_SS0_HIGH(SPI3);
     SPI_SET_SS0_LOW(SPI3);
-    SPI_WRITE_TX0(SPI3, 0x10 | (ColumnAddr >> 4) & 0xF);
+    SPI_WRITE_TX0(SPI3, 0x10 | (ColumnAddr >> 4) & 0xF);    // MSB: CA[7:4]
     SPI_TRIGGER(SPI3);
     while (SPI_IS_BUSY(SPI3));
     SPI_SET_SS0_HIGH(SPI3);
     SPI_SET_SS0_LOW(SPI3);
-    SPI_WRITE_TX0(SPI3, 0x00 | (ColumnAddr & 0xF));
+    SPI_WRITE_TX0(SPI3, 0x00 | (ColumnAddr & 0xF));         // LSB: CA[3:0]
     SPI_TRIGGER(SPI3);
     while (SPI_IS_BUSY(SPI3));
     SPI_SET_SS0_HIGH(SPI3);
@@ -80,23 +71,20 @@ void init_lcd_buffer() {
 }
 
 // 只清除 LCD，不會清除 buffer。
-void clear_lcd(void) {
+void clear_lcd() {
     int16_t i;
-    lcdSetAddr(0x0, 0x0);
-    for (i = 0; i < 132 * 8; i++) {
+    lcdSetAddr(0x00, 0x00);
+    for (i = 0; i < LCD_Xmax * LCD_Ymax / 8; i++) {
         lcdWriteData(0x00);
     }
-    lcdWriteData(0x0f);
 }
 
 /**
  * @brief 初始化 LCD
- * @param dynamic_update 是否啟用動態更新
  * @param auto_clear 是否每次 show_lcd_buffer 自動清除 buffer。
- * @note 如果啟用動態更新，則只有在 buffer 中該 index 改變時才會更新到 LCD 上。
 */
-void init_lcd(uint8_t dynamic_update, uint8_t auto_clear) {
-    init_SPI3();
+void init_lcd(uint8_t auto_clear, uint32_t spi_clock_frequency) {
+    init_SPI3(spi_clock_frequency);
     lcdWriteCommand(0xEB);
     lcdWriteCommand(0x81);
     lcdWriteCommand(0xA0);
@@ -104,29 +92,23 @@ void init_lcd(uint8_t dynamic_update, uint8_t auto_clear) {
     lcdWriteCommand(0xAF);
     init_lcd_buffer();
     clear_lcd();
-    dynamic_update_flag = dynamic_update;
     auto_clear_flag = auto_clear;
 }
 
 // 將 buffer 的內容顯示到 LCD 上
 void show_lcd_buffer() {
     uint8_t x, y;
-    for (x = 0; x < LCD_Xmax; x++) {
-        for (y = 0; y < (LCD_Ymax / 8); y++) {
-            lcdSetAddr(y, (LCD_Xmax + 1 - x));
-            if (dynamic_update_flag) {
-                if (lcdReadData() != lcd_buffer_hex[x + y * LCD_Xmax]) {
-                    lcdWriteData(lcd_buffer_hex[x + y * LCD_Xmax]);
-                }
-            } else {
-                lcdWriteData(lcd_buffer_hex[x + y * LCD_Xmax]);
-            }
+    for (y = 0; y < (LCD_Ymax / 8); y++) {
+        lcdSetAddr(y, 0x01);
+        for (x = 0; x < LCD_Xmax; x++) {
+            lcdWriteData(lcd_buffer_hex[(LCD_Xmax - 1 - x) + y * LCD_Xmax]);
         }
     }
     if (auto_clear_flag == 1) {
         clear_lcd_buffer();
     }
 }
+
 
 // 清除 buffer 的內容
 void clear_lcd_buffer() {
@@ -146,7 +128,7 @@ void draw_pixel_in_buffer(int16_t x, int16_t y, uint16_t color) {
     if (color == FG_COLOR)
         lcd_buffer_hex[x + y / 8 * LCD_Xmax] |= (0x01 << (y % 8));
     else if (color == BG_COLOR)
-        lcd_buffer_hex[x + y / 8 * LCD_Xmax] &= (0xFE << (y % 8));
+        lcd_buffer_hex[x + y / 8 * LCD_Xmax] |= ~(0x01 << (y % 8));
 }
 
 /**
@@ -160,6 +142,7 @@ void draw_pixel_in_buffer(int16_t x, int16_t y, uint16_t color) {
 */
 void draw_bitmap_in_buffer(uint8_t bitmap[], int16_t x, int16_t y, int16_t bitmap_x_size, int16_t bitmap_y_size, uint16_t color) {
     uint16_t t, i, j, k, kx, ky;
+    bitmap_y_size /= 8;
     for (i = 0; i < bitmap_y_size; i++) {
         for (j = 0; j < bitmap_x_size; j++) {
             kx = x + j;
@@ -185,7 +168,7 @@ void draw_line_in_buffer(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_
     int16_t dy = y2 - y1;
     int16_t dx = x2 - x1;
     int16_t stepx, stepy;
-
+    
     if (dy < 0) {
         dy = -dy;
         stepy = -1;
@@ -200,7 +183,7 @@ void draw_line_in_buffer(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_
     }
     dy <<= 1;  // dy is now 2*dy
     dx <<= 1;  // dx is now 2*dx
-
+    
     draw_pixel_in_buffer(x1, y1, color);
     if (dx > dy) {
         int fraction = dy - (dx >> 1);  // same as 2*dy - dx
@@ -344,7 +327,7 @@ void print_c_in_buffer(int16_t x, int16_t y, uint8_t size, unsigned char ascii_c
             for (j = 0; j < 8; j++) {
                 char_bitmap[j] = Font8x16[(ascii_code - 0x20) * 16 + i * 8 + j];
             }
-            draw_bitmap_in_buffer(char_bitmap, x, y + i * 8, 8, 1, color);
+            draw_bitmap_in_buffer(char_bitmap, x, y + i * 8, 8, 8, color);
         }
     } else if (size == 5) {
         if (x < (LCD_Xmax - 5) && y < (LCD_Ymax - 7)) {
@@ -357,7 +340,7 @@ void print_c_in_buffer(int16_t x, int16_t y, uint8_t size, unsigned char ascii_c
             for (i = 0; i < 5; i++) {
                 char_bitmap[i] = Font5x7[ascii_code * 5 + i];
             }
-            draw_bitmap_in_buffer(char_bitmap, x, y, 8, 1, color);
+            draw_bitmap_in_buffer(char_bitmap, x, y, 8, 8, color);
         }
     }
 }
