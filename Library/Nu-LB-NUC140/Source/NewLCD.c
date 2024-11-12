@@ -128,7 +128,7 @@ void draw_pixel_in_buffer(int16_t x, int16_t y, uint16_t color) {
     if (color == FG_COLOR)
         lcd_buffer_hex[x + y / 8 * LCD_Xmax] |= (0x01 << (y % 8));
     else if (color == BG_COLOR)
-        lcd_buffer_hex[x + y / 8 * LCD_Xmax] |= ~(0x01 << (y % 8));
+        lcd_buffer_hex[x + y / 8 * LCD_Xmax] &= ~(0x01 << (y % 8));
 }
 
 /**
