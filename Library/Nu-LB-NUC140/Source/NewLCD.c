@@ -340,7 +340,7 @@ void print_c_in_buffer(int16_t x, int16_t y, uint8_t size, unsigned char ascii_c
             for (i = 0; i < 5; i++) {
                 char_bitmap[i] = Font5x7[ascii_code * 5 + i];
             }
-            draw_bitmap_in_buffer(char_bitmap, x, y, 8, 8, color);
+            draw_bitmap_in_buffer(char_bitmap, x, y, 5, 8, color);
         }
     }
 }
