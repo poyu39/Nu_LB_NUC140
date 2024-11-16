@@ -23,14 +23,15 @@ void GPAB_IRQHandler(void) {
     if (PA->ISRC & BIT0) which_PA_INT = 0;
     if (PA->ISRC & BIT1) which_PA_INT = 1;
     if (PA->ISRC & BIT2) which_PA_INT = 2;
-
+    
     // 檢查是哪個按鈕被按下
     // 將所有 PA 腳位設為 1，接下來輪流將PA3~5設為 0，並檢查是否有按鈕被按下。
     PA0 = 1; PA1 = 1; PA2 = 1; PA3 = 1; PA4 = 1; PA5 = 1;
     for (i = 3; i <= 5; i++) {
-        CLK_SysTickDelay(5000);
         GPIO_PIN_DATA(0, i - 1) = 1;
+        while (GPIO_PIN_DATA(0, i - 1) != 1);
         GPIO_PIN_DATA(0, i) = 0;
+        while (GPIO_PIN_DATA(0, i) != 0);
         if (GPIO_PIN_DATA(0, which_PA_INT) == 0) {
             KEY_FLAG = (3 - which_PA_INT) + 3 * (i - 3);
             break;
