@@ -99,7 +99,7 @@ void init_lcd(uint8_t auto_clear, uint32_t spi_clock_frequency) {
 void show_lcd_buffer() {
     uint8_t x, y;
     for (y = 0; y < (LCD_Ymax / 8); y++) {
-        lcdSetAddr(y, 0x01);
+        lcdSetAddr(y, 0x02);
         for (x = 0; x < LCD_Xmax; x++) {
             lcdWriteData(lcd_buffer_hex[(LCD_Xmax - 1 - x) + y * LCD_Xmax]);
         }
