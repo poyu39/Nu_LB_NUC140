@@ -370,6 +370,7 @@ void printf_s_in_buffer(int16_t x, int16_t y, uint8_t size, const char *format, 
  * @param format 格式化字串
 */
 void printf_line_in_buffer(int8_t line, uint8_t size, const char *format, ...) {
+    uint8_t line_height = (size == 5) ? 8 : 16;
     int8_t i;
     char buffer[100];
     va_list args;
@@ -377,7 +378,7 @@ void printf_line_in_buffer(int8_t line, uint8_t size, const char *format, ...) {
     vsprintf(buffer, format, args);
     va_end(args);
     for (i = 0; i < strlen(buffer); i++)
-        print_c_in_buffer(i * 8, line * 16, size, buffer[i], FG_COLOR);
+        print_c_in_buffer(i * 8, line * line_height, size, buffer[i], FG_COLOR);
 }
 
 /**
