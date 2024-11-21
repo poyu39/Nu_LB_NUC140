@@ -1,0 +1,11 @@
+#define MCU_CLOCK_SOURCE
+#define MCU_CLOCK_SOURCE_HXT
+#define MCU_CLOCK_FREQUENCY     50000000
+
+
+#define MCU_INTERFACE_TMR0
+#define TMR0_CLOCK_SOURCE_HXT
+#define TMR0_CLOCK_DIVIDER    1
+#define TMR0_OPERATING_MODE   TIMER_TOGGLE_MODE
+#define TMR0_OPERATING_FREQ   10
+#define PIN_TM0_PB8             // Timer0 output pin is PB.8
